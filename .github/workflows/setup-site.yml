@@ -1,0 +1,108 @@
+name: Generate Math Course Structure
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch: # Allows manual triggering
+
+jobs:
+  build-structure:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Create Directory Structure
+        run: |
+          mkdir -p assets/css assets/js assets/images
+          mkdir -p chapters/01-sets
+          mkdir -p chapters/02-relations-functions
+          mkdir -p chapters/03-trigonometric-functions
+          mkdir -p chapters/04-complex-numbers
+          mkdir -p chapters/05-linear-inequalities
+          mkdir -p chapters/06-permutations-combinations
+          mkdir -p chapters/07-binomial-theorem
+          mkdir -p chapters/08-sequences-series
+          mkdir -p chapters/09-straight-lines
+          mkdir -p chapters/10-conic-sections
+          mkdir -p chapters/11-three-dimensional-geometry
+          mkdir -p chapters/12-limits-derivatives
+          mkdir -p chapters/13-statistics
+
+      - name: Generate Index Page
+        run: |
+          cat <<EOF > index.html
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>Class XI Mathematics - Master the Fundamentals</title>
+              <link rel="stylesheet" href="assets/css/style.css">
+          </head>
+          <body>
+              <h1>Class XI Mathematics Course Index</h1>
+              <nav>
+                  <ul>
+                      <li><a href="chapters/01-sets/">1. Sets</a></li>
+                      <li><a href="chapters/02-relations-functions/">2. Relations and Functions</a></li>
+                      <li><a href="chapters/03-trigonometric-functions/">3. Trigonometric Functions</a></li>
+                      <li><a href="chapters/04-complex-numbers/">4. Complex Numbers and Quadratic Equations</a></li>
+                      <li><a href="chapters/05-linear-inequalities/">5. Linear Inequalities</a></li>
+                      <li><a href="chapters/06-permutations-combinations/">6. Permutations and Combinations</a></li>
+                      <li><a href="chapters/07-binomial-theorem/">7. Binomial Theorem</a></li>
+                      <li><a href="chapters/08-sequences-series/">8. Sequences and Series</a></li>
+                      <li><a href="chapters/09-straight-lines/">9. Straight Lines</a></li>
+                      <li><a href="chapters/10-conic-sections/">10. Conic Sections</a></li>
+                      <li><a href="chapters/11-three-dimensional-geometry/">11. Introduction to Three Dimensional Geometry</a></li>
+                      <li><strong><a href="chapters/12-limits-derivatives/landing.html">12. Limits and Derivatives</a></strong></li>
+                      <li><a href="chapters/13-statistics/">13. Statistics</a></li>
+                  </ul>
+              </nav>
+          </body>
+          </html>
+          EOF
+
+      - name: Generate Limits Landing Page
+        run: |
+          cat <<EOF > chapters/12-limits-derivatives/landing.html
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>Level 0: The Speedometer Secret | Limits & Derivatives</title>
+          </head>
+          <body>
+              <header>
+                  <a href="../../index.html">← Back to Course Index</a>
+                  <h1>Chapter 12: Limits and Derivatives</h1>
+              </header>
+              <section>
+                  <h2>Level 0: The Speedometer Secret 🏎️</h2>
+                  <p>Welcome! [cite_start]Calculus is the study of change. [cite: 515, 1180]</p>
+                  <h3>The Big Question</h3>
+                  [cite_start]<p>How do we find velocity at a single instant? [cite: 527, 606]</p>
+                  
+
+[Image of instantaneous velocity graph]
+
+                  <ul>
+                      [cite_start]<li><strong>The Limit Lounge:</strong> Zoom in on a point. [cite: 5, 634]</li>
+                      [cite_start]<li><strong>Algebraic Shortcuts:</strong> Use standard formulas. [cite: 35, 992]</li>
+                      [cite_start]<li><strong>First Principle:</strong> The DNA of change. [cite: 43, 1261]</li>
+                  </ul>
+                  <button>Start Level 1</button>
+              </section>
+          </body>
+          </html>
+          EOF
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "Automated site structure generation" || echo "No changes to commit"
+          git push
