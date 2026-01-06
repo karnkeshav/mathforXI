@@ -140,3 +140,25 @@ footer {
   border-radius: 16px;
   text-align: center;
 }
+
+/* =========================================
+   Animated Formula Emphasis
+   ========================================= */
+
+.math {
+  font-size: 1.6rem;
+  font-weight: 600;
+  text-align: center;
+  margin: 1.5rem 0;
+  padding: 1rem 1.2rem;
+  border-radius: 12px;
+  background: linear-gradient(90deg, #eef2ff, #f8fafc, #eef2ff);
+  background-size: 200% 200%;
+  animation: mathGlow 4s ease-in-out infinite;
+}
+
+@keyframes mathGlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
