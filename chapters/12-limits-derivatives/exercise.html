@@ -76,8 +76,8 @@
             display: block;
             width: 100%;
             text-align: left;
-            background: #ffffff; /* Explicit background */
-            color: var(--text); /* Explicit text color */
+            background: #ffffff;
+            color: var(--text);
             border: 1px solid #e2e8f0;
             padding: 1.2rem;
             margin: 0.8rem 0;
@@ -132,7 +132,7 @@
             <p><strong>Q1.</strong> Evaluate the limit: $$\lim_{x \to 1} \frac{x^2 - 1}{x - 1}$$</p>
             <span class="ans-toggle" onclick="toggleAns('ans1')">Show Answer</span>
             <div id="ans1" class="subjective-ans">
-                <strong>Solution:</strong> $$\lim_{x \to 1} \frac{(x-1)(x+1)}{x-1} = \lim_{x \to 1} (x+1) = 1+1 = 2$$
+                <strong>Solution:</strong> $$\lim_{x \to 1} \frac{(x-1)(x+1)}{x-1} = \lim_{x \to 1} (x+1) = 2$$
             </div>
         </div>
 
@@ -140,7 +140,7 @@
             <p><strong>Q2.</strong> Find the derivative of $f(x) = x^2$ using First Principles.</p>
             <span class="ans-toggle" onclick="toggleAns('ans2')">Show Answer</span>
             <div id="ans2" class="subjective-ans">
-                <strong>Solution:</strong> $$f'(x) = \lim_{h \to 0} \frac{(x+h)^2 - x^2}{h} = \lim_{h \to 0} \frac{x^2+2xh+h^2-x^2}{h} = 2x$$
+                <strong>Solution:</strong> $$f'(x) = \lim_{h \to 0} \frac{(x+h)^2 - x^2}{h} = \lim_{h \to 0} \frac{2xh+h^2}{h} = 2x$$
             </div>
         </div>
 
@@ -148,7 +148,7 @@
             <p><strong>Q3.</strong> (Exemplar) Evaluate: $$\lim_{\theta \to 0} \frac{\sin \theta}{\theta}$$</p>
             <span class="ans-toggle" onclick="toggleAns('ans3')">Show Answer</span>
             <div id="ans3" class="subjective-ans">
-                <strong>Solution:</strong> This is a standard trigonometric limit theorem. The value is $1$.
+                <strong>Solution:</strong> Standard Identity. The value is $1$.
             </div>
         </div>
 
@@ -156,15 +156,15 @@
             <p><strong>Q4.</strong> Find the derivative of $f(x) = x^3$ using First Principles.</p>
             <span class="ans-toggle" onclick="toggleAns('ans4')">Show Answer</span>
             <div id="ans4" class="subjective-ans">
-                <strong>Solution:</strong> $$\lim_{h \to 0} \frac{(x+h)^3 - x^3}{h} = \lim_{h \to 0} \frac{x^3+3x^2h+3xh^2+h^3-x^3}{h} = 3x^2$$
+                <strong>Solution:</strong> $$\lim_{h \to 0} \frac{(x+h)^3 - x^3}{h} = \lim_{h \to 0} (3x^2+3xh+h^2) = 3x^2$$
             </div>
         </div>
 
         <div class="question-box" style="margin-bottom: 2.5rem;">
-            <p><strong>Q5.</strong> (Application) If displacement is $s = t^2$, find the velocity at time $t$.</p>
+            <p><strong>Q5.</strong> (Application) If displacement is $s = t^2$, find velocity at time $t$.</p>
             <span class="ans-toggle" onclick="toggleAns('ans5')">Show Answer</span>
             <div id="ans5" class="subjective-ans">
-                <strong>Solution:</strong> $v = \frac{ds}{dt} = \frac{d}{dt}(t^2) = 2t$.
+                <strong>Solution:</strong> $v = \frac{ds}{dt} = 2t$.
             </div>
         </div>
     </div>
@@ -177,23 +177,20 @@
 <div id="quiz-overlay">
     <div class="quiz-card">
         <button class="close-quiz" onclick="closeQuiz()">&times;</button>
-        
         <div id="quiz-body">
             <div class="step" id="quiz-progress"></div>
             <h3 id="quiz-question" style="margin: 1.5rem 0;"></h3>
             <div id="quiz-options"></div>
             <div id="quiz-feedback" class="think" style="display:none; margin-top:1.5rem;"></div>
-            
             <div class="quiz-nav">
                 <button id="prev-btn" class="nav-btn" style="background:var(--muted); color:white; border:none;" onclick="prevQuestion()">Previous</button>
                 <button id="next-btn" class="nav-btn" style="display:none; background:var(--primary); color:white; border:none;" onclick="nextQuestion()">Next Question</button>
             </div>
         </div>
-
         <div id="quiz-results" style="display:none; text-align:center;">
-            <h2>Quiz Complete!</h2>
+            <h2>Mastery Complete!</h2>
             <div class="math" id="final-score" style="font-size: 2.5rem; color:var(--primary); margin: 1.5rem 0;"></div>
-            <button class="primary-btn" onclick="location.reload()">Restart Mastery Practice</button>
+            <button class="primary-btn" onclick="location.reload()">Restart Practice</button>
         </div>
     </div>
 </div>
@@ -207,62 +204,46 @@ function toggleAns(id) {
 const questions = [
     { q: "Evaluate: $\\lim_{x \\to 3} (x^2 + 5)$", a: ["14", "8", "11", "15"], correct: 0, step: "Substitute $x=3$: $3^2 + 5 = 14$." },
     { q: "Evaluate: $\\lim_{x \\to 2} \\frac{x^4 - 16}{x - 2}$", a: ["16", "32", "8", "4"], correct: 1, step: "Use $\\lim_{x \\to a} \\frac{x^n-a^n}{x-a} = na^{n-1}$. Result: $4(2)^3 = 32$." },
-    { q: "Evaluate: $\\lim_{x \\to 0} \\frac{\\sin 5x}{x}$", a: ["1", "0", "5", "1/5"], correct: 2, step: "Standard limit: $\\lim_{x \\to 0} \\frac{\\sin ax}{x} = a$. Result = 5." },
-    { q: "Differentiate $x^n$ with respect to $x$:", a: ["$nx^n$", "$nx^{n-1}$", "$x^{n-1}$", "0"], correct: 1, step: "Power rule states $\\frac{d}{dx}(x^n) = nx^{n-1}$." },
-    { q: "What is $\\frac{d}{dx}(\\sin x)$?", a: ["$\\cos x$", "$-\\cos x$", "$\\tan x$", "$\\sec^2 x$"], correct: 0, step: "Standard derivative: $\\cos x$." },
-    { q: "Evaluate: $\\lim_{x \\to 0} \\cos x$", a: ["0", "1", "$\\infty$", "-1"], correct: 1, step: "Direct substitution: $\\cos(0) = 1$." },
-    { q: "Derivative of a constant $k$ is:", a: ["$k$", "1", "0", "$x$"], correct: 2, step: "Rate of change of a constant is always 0." },
-    { q: "Find $\\frac{d}{dx}(\\sqrt{x})$:", a: ["$2\\sqrt{x}$", "$\\frac{1}{\\sqrt{x}}$", "$\\frac{1}{2\\sqrt{x}}$", "1"], correct: 2, step: "Power rule on $x^{1/2}$ gives $\\frac{1}{2}x^{-1/2} = \\frac{1}{2\\sqrt{x}}$." },
-    { q: "Evaluate: $\\lim_{x \\to 1} \\frac{x^{15}-1}{x^{10}-1}$", a: ["1", "3/2", "2/3", "1.5"], correct: 1, step: "Result is $\\frac{15}{10} = 1.5$." },
-    { q: "What is $\\frac{d}{dx}(\\cos x)$?", a: ["$\\sin x$", "$-\\sin x$", "$\\cos x$", "$\\sec x$"], correct: 1, step: "Derivative of $\\cos x$ is $-\\sin x$." }
-    // ... Additional questions can be added here
+    { q: "Evaluate: $\\lim_{x \\to 0} \\frac{\\sin 5x}{x}$", a: ["1", "0", "5", "1/5"], correct: 2, step: "Using $\\lim_{x \\to 0} \\frac{\\sin ax}{x} = a$. Result = 5." },
+    { q: "Derivative of $x^{10}$ is:", a: ["$10x^{10}$", "$10x^9$", "$x^9$", "0"], correct: 1, step: "Power rule: $\\frac{d}{dx}(x^{10}) = 10x^9$." },
+    { q: "What is $\\frac{d}{dx}(\\sin x)$?", a: ["$\\cos x$", "$-\\cos x$", "$\\sin x$", "0"], correct: 0, step: "Standard derivative of sine is cosine." },
+    { q: "Value of $\\lim_{x \\to 0} \\cos x$ is:", a: ["0", "1", "-1", "$\\infty$"], correct: 1, step: "Direct substitution: $\\cos(0) = 1$." },
+    { q: "Derivative of a constant 1000 is:", a: ["1000", "1", "0", "$x$"], correct: 2, step: "Derivative of any constant is always 0." },
+    { q: "Find $\\frac{d}{dx}(\\sqrt{x})$:", a: ["$2\\sqrt{x}$", "$\\frac{1}{2\\sqrt{x}}$", "$\\frac{1}{\\sqrt{x}}$", "$x$"], correct: 1, step: "Power rule on $x^{1/2}$ gives $\\frac{1}{2}x^{-1/2}$." },
+    { q: "Evaluate: $\\lim_{x \\to 0} \\frac{\\tan x}{x}$", a: ["0", "$\\infty$", "1", "-1"], correct: 2, step: "Standard trigonometric limit result is 1." },
+    { q: "What is $\\frac{d}{dx}(\\cos x)$?", a: ["$\\sin x$", "$-\\sin x$", "$\\cos x$", "$-\\cos x$"], correct: 1, step: "Derivative of cosine is negative sine." },
+    { q: "Derivative of $x$ with respect to $x$ is:", a: ["0", "1", "$x$", "$x^2$"], correct: 1, step: "$\\frac{d}{dx}(x^1) = 1x^0 = 1$." },
+    { q: "$\\lim_{x \\to 2} (3x - 1)$ equals:", a: ["5", "6", "4", "2"], correct: 0, step: "Substitute $x=2$: $3(2)-1 = 5$." },
+    { q: "Find $\\frac{d}{dx}(5x^2)$:", a: ["$5x$", "$10x^2$", "$10x$", "5"], correct: 2, step: "Multiply coefficient by exponent: $5 \\times 2 = 10x$." },
+    { q: "What is $\\lim_{x \\to \\infty} \\frac{1}{x}$?", a: ["$\\infty$", "1", "0", "Undefined"], correct: 2, step: "As $x$ grows infinitely, $1/x$ approaches 0." },
+    { q: "Derivative of $x^2 + x$ is:", a: ["$2x$", "$2x + 1$", "$x + 1$", "3"], correct: 1, step: "Differentiate each term: $2x + 1$." },
+    { q: "Evaluate: $\\lim_{x \\to a} \\frac{x-a}{x-a}$", a: ["0", "$a$", "1", "$\\infty$"], correct: 2, step: "Terms cancel out to 1 before limit is applied." },
+    { q: "What is $\\frac{d}{dx}(x^{-1})$?", a: ["$x^0$", "$-1/x^2$", "$1/x^2$", "$-1/x$"], correct: 1, step: "Using power rule: $-1x^{-2} = -1/x^2$." },
+    { q: "The first principle formula is $\\lim_{h \\to 0} \\dots$", a: ["$\\frac{f(x+h)+f(x)}{h}$", "$\\frac{f(x+h)-f(x)}{h}$", "$\\frac{f(x)-f(x+h)}{h}$", "$f(x+h)$"], correct: 1, step: "Definition of derivative is $\\frac{f(x+h)-f(x)}{h}$." },
+    { q: "Derivative of $3x + 5$ is:", a: ["3", "5", "$3x$", "8"], correct: 0, step: "Slope of linear function $mx+c$ is $m$." },
+    { q: "Evaluate: $\\lim_{x \\to 1} (x^3 + x^2 + x + 1)$", a: ["1", "2", "3", "4"], correct: 3, step: "Substitute $x=1$: $1+1+1+1 = 4$." }
 ];
 
-let curIdx = 0;
-let score = 0;
-let userAnswers = new Array(questions.length).fill(null);
+let curIdx = 0; let score = 0; let userAnswers = new Array(questions.length).fill(null);
 
-function startQuiz() {
-    document.getElementById('quiz-overlay').style.display = 'block';
-    document.body.style.overflow = 'hidden';
-    showQuestion();
-}
-
-function closeQuiz() {
-    document.getElementById('quiz-overlay').style.display = 'none';
-    document.body.style.overflow = 'auto';
-}
+function startQuiz() { document.getElementById('quiz-overlay').style.display = 'block'; document.body.style.overflow = 'hidden'; showQuestion(); }
+function closeQuiz() { document.getElementById('quiz-overlay').style.display = 'none'; document.body.style.overflow = 'auto'; }
 
 function showQuestion() {
     const data = questions[curIdx];
-    document.getElementById('quiz-progress').innerText = `Question ${curIdx + 1} of ${questions.length}`;
+    document.getElementById('quiz-progress').innerText = `Question ${curIdx + 1} of 20`;
     document.getElementById('quiz-question').innerHTML = data.q;
     const optionsDiv = document.getElementById('quiz-options');
     optionsDiv.innerHTML = '';
-    
     document.getElementById('prev-btn').style.visibility = (curIdx === 0) ? 'hidden' : 'visible';
     document.getElementById('next-btn').style.display = (userAnswers[curIdx] !== null) ? 'block' : 'none';
-
     const feedback = document.getElementById('quiz-feedback');
-    if (userAnswers[curIdx] !== null) {
-        feedback.style.display = 'block';
-        feedback.innerHTML = `<strong>Explanation:</strong> ${data.step}`;
-    } else { feedback.style.display = 'none'; }
-
+    if (userAnswers[curIdx] !== null) { feedback.style.display = 'block'; feedback.innerHTML = `<strong>Explanation:</strong> ${data.step}`; } 
+    else { feedback.style.display = 'none'; }
     data.a.forEach((opt, i) => {
-        const btn = document.createElement('button');
-        btn.className = 'option-btn';
-        btn.innerHTML = opt;
-        if (userAnswers[curIdx] !== null) {
-            btn.disabled = true;
-            if (i === data.correct) btn.classList.add('correct');
-            if (i === userAnswers[curIdx] && i !== data.correct) btn.classList.add('wrong');
-        }
-        btn.onclick = () => {
-            userAnswers[curIdx] = i;
-            if (i === data.correct) score++;
-            showQuestion();
-        };
+        const btn = document.createElement('button'); btn.className = 'option-btn'; btn.innerHTML = opt;
+        if (userAnswers[curIdx] !== null) { btn.disabled = true; if (i === data.correct) btn.classList.add('correct'); if (i === userAnswers[curIdx] && i !== data.correct) btn.classList.add('wrong'); }
+        btn.onclick = () => { userAnswers[curIdx] = i; if (i === data.correct) score++; showQuestion(); };
         optionsDiv.appendChild(btn);
     });
     MathJax.typeset();
@@ -270,13 +251,8 @@ function showQuestion() {
 
 function nextQuestion() {
     if (curIdx < questions.length - 1) { curIdx++; showQuestion(); }
-    else { 
-        document.getElementById('quiz-body').style.display = 'none';
-        document.getElementById('quiz-results').style.display = 'block';
-        document.getElementById('final-score').innerText = `${score} / ${questions.length}`;
-    }
+    else { document.getElementById('quiz-body').style.display = 'none'; document.getElementById('quiz-results').style.display = 'block'; document.getElementById('final-score').innerText = `${score} / 20`; }
 }
-
 function prevQuestion() { if (curIdx > 0) { curIdx--; showQuestion(); } }
 </script>
 </body>
