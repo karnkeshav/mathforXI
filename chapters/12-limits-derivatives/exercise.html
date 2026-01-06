@@ -4,91 +4,78 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Exercises | Limits and Derivatives</title>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            },
+            options: {
+                renderActions: {
+                    addMenu: []
+                }
+            }
+        };
+    </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="stylesheet" href="../../assets/css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
-        /* Quiz Specific Enhancements */
+        .subjective-ans {
+            display: none;
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            border: 1px dashed var(--primary);
+            font-size: 1.1rem;
+        }
+        .ans-toggle {
+            display: inline-block;
+            margin-top: 10px;
+            color: var(--primary);
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+        /* Quiz Styles */
         #quiz-overlay {
             display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(30, 41, 59, 0.95);
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(30, 41, 59, 0.98);
             z-index: 1000;
             overflow-y: auto;
             padding: 20px;
         }
-
         .quiz-card {
             background: var(--card);
-            max-width: 750px;
+            max-width: 800px;
             margin: 2rem auto;
             padding: 2.5rem;
             border-radius: 20px;
             position: relative;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
         }
-
         .option-btn {
-            display: block;
-            width: 100%;
-            text-align: left;
-            background: var(--bg);
-            color: var(--text);
-            border: 1px solid #e2e8f0;
-            padding: 1rem;
-            margin: 0.8rem 0;
-            border-radius: 10px;
-            transition: all 0.2s ease;
+            display: block; width: 100%; text-align: left;
+            background: var(--bg); border: 1px solid #e2e8f0;
+            padding: 1rem; margin: 0.8rem 0; border-radius: 10px;
+            cursor: pointer; font-family: inherit; font-size: 1rem;
         }
-
-        .option-btn:hover:not(:disabled) {
-            border-color: var(--primary);
-            background: #eff6ff;
-        }
-
-        .correct { background: #dcfce7 !important; border-color: #22c55e !important; color: #166534; }
-        .wrong { background: #fee2e2 !important; border-color: #ef4444 !important; color: #991b1b; }
-
-        .quiz-nav-btns {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 1.5rem;
-            gap: 10px;
-        }
-
-        .ans-toggle {
-            color: var(--primary);
-            cursor: pointer;
-            font-size: 0.9rem;
-            font-weight: 600;
-            display: block;
-            margin-top: 10px;
-        }
-
-        .subjective-ans {
-            display: none;
-            background: #f8fafc;
-            padding: 1rem;
-            border-radius: 8px;
-            margin-top: 10px;
-            border: 1px dashed var(--primary);
-        }
+        .correct { background: #dcfce7 !important; border-color: #22c55e !important; }
+        .wrong { background: #fee2e2 !important; border-color: #ef4444 !important; }
+        .quiz-nav { display: flex; justify-content: space-between; margin-top: 2rem; }
     </style>
 </head>
 <body>
 
 <header>
     <h1>Chapter 12: Practice Exercises</h1>
-    <p>NCERT Standards & Fundamentals Practice</p>
 </header>
 
 <nav>
-    <a href="landing.html">← Back to Overview</a>
+    <a href="landing.html">← Back</a>
     <a href="chapter.html">Concepts</a>
     <a href="exercise.html" style="border-bottom: 2px solid var(--primary);">Exercises</a>
 </nav>
@@ -98,175 +85,147 @@
         <div class="step">NCERT Basic Practice</div>
         <h2>Subjective Questions</h2>
         
-        <div class="think">
-            Solve these on paper first. Click "Show Answer" to verify your steps.
-        </div>
-
-        <div class="question-box" style="margin-bottom: 2rem;">
+        <div class="question-box" style="margin-bottom: 2.5rem;">
             <p><strong>Q1.</strong> Evaluate the limit: $$\lim_{x \to 1} \frac{x^2 - 1}{x - 1}$$</p>
             <span class="ans-toggle" onclick="toggleAns('ans1')">Show Answer</span>
             <div id="ans1" class="subjective-ans">
-                <strong>Solution:</strong> $\frac{x^2 - 1}{x - 1} = \frac{(x-1)(x+1)}{x-1} = x+1$.<br>
-                Applying limit: $1 + 1 = 2$.
+                <strong>Solution:</strong> 
+                $$\lim_{x \to 1} \frac{(x-1)(x+1)}{x-1} = \lim_{x \to 1} (x+1) = 1+1 = 2$$
             </div>
         </div>
 
-        <div class="question-box" style="margin-bottom: 2rem;">
-            <p><strong>Q2.</strong> Find the derivative of $f(x) = x^2$ using <strong>First Principles</strong>.</p>
+        <div class="question-box" style="margin-bottom: 2.5rem;">
+            <p><strong>Q2.</strong> Find the derivative of $f(x) = x^2$ using First Principles.</p>
             <span class="ans-toggle" onclick="toggleAns('ans2')">Show Answer</span>
             <div id="ans2" class="subjective-ans">
-                <strong>Solution:</strong> $f'(x) = \lim_{h \to 0} \frac{(x+h)^2 - x^2}{h} = \lim_{h \to 0} \frac{x^2+2xh+h^2-x^2}{h} = \lim_{h \to 0} (2x+h) = 2x$.
+                <strong>Solution:</strong>
+                $$f'(x) = \lim_{h \to 0} \frac{(x+h)^2 - x^2}{h} = \lim_{h \to 0} \frac{x^2+2xh+h^2-x^2}{h}$$
+                $$= \lim_{h \to 0} \frac{h(2x+h)}{h} = 2x$$
             </div>
         </div>
 
-        <div class="question-box" style="margin-bottom: 2rem;">
-            <p><strong>Q3.</strong> (Exemplar) Evaluate: $$\lim_{\theta \to 0} \frac{\sin \theta}{\theta}$$</p>
-            <span class="ans-toggle" onclick="toggleAns('ans3')">Show Answer</span>
-            <div id="ans3" class="subjective-ans">
-                <strong>Solution:</strong> This is a standard trigonometric limit theorem. The value is $1$.
-            </div>
-        </div>
-
-        <div class="question-box" style="margin-bottom: 2rem;">
+        <div class="question-box" style="margin-bottom: 2.5rem;">
             <p><strong>Q4.</strong> Find the derivative of $f(x) = x^3$ using first principles.</p>
             <span class="ans-toggle" onclick="toggleAns('ans4')">Show Answer</span>
             <div id="ans4" class="subjective-ans">
-                <strong>Solution:</strong> Using $(x+h)^3$ expansion: $\lim_{h \to 0} \frac{x^3+3x^2h+3xh^2+h^3-x^3}{h} = \lim_{h \to 0} (3x^2+3xh+h^2) = 3x^2$.
-            </div>
-        </div>
-
-        <div class="question-box" style="margin-bottom: 2rem;">
-            <p><strong>Q5.</strong> (Application) If displacement is $s = t^2$, find the velocity at time $t$.</p>
-            <span class="ans-toggle" onclick="toggleAns('ans5')">Show Answer</span>
-            <div id="ans5" class="subjective-ans">
-                <strong>Solution:</strong> Velocity $v = \frac{ds}{dt}$. Since $s = t^2$, $v = \frac{d}{dt}(t^2) = 2t$.
+                <strong>Solution:</strong>
+                $$\lim_{h \to 0} \frac{(x+h)^3 - x^3}{h} = \lim_{h \to 0} \frac{x^3+3x^2h+3xh^2+h^3-x^3}{h}$$
+                $$= \lim_{h \to 0} \frac{h(3x^2+3xh+h^2)}{h} = 3x^2$$
             </div>
         </div>
     </div>
 
-    <div class="take-test-container" style="text-align: center; margin-top: 3rem; background: #f1f5f9; padding: 2rem; border-radius: 16px;">
-        <h3>Fundamental Mastery Test</h3>
-        <p>Cover 20 essential questions. Use "Previous" to review your steps!</p>
-        <button class="primary-btn" onclick="startQuiz()">Take a Test Now</button>
+    <div style="text-align: center; margin-top: 3rem;">
+        <button class="primary-btn" style="padding: 1rem 2.5rem;" onclick="startQuiz()">Take Mastery Test</button>
     </div>
 </section>
 
 <div id="quiz-overlay">
     <div class="quiz-card">
-        <button class="close-quiz" style="border:none; cursor:pointer;" onclick="closeQuiz()">&times;</button>
-        
+        <button class="close-quiz" style="float:right; border:none; background:none; font-size:1.5rem; cursor:pointer;" onclick="closeQuiz()">&times;</button>
         <div id="quiz-body">
-            <div class="step" id="quiz-progress">Question 1 of 20</div>
-            <h3 id="quiz-question" style="margin: 1rem 0;"></h3>
+            <div class="step" id="quiz-progress"></div>
+            <h3 id="quiz-question" style="margin: 1.5rem 0;"></h3>
             <div id="quiz-options"></div>
-            
-            <div id="quiz-feedback" class="think" style="display: none; margin-top: 1.5rem;"></div>
-            
-            <div class="quiz-nav-btns">
-                <button id="prev-btn" style="background: var(--muted);" onclick="prevQuestion()">Previous</button>
-                <button id="next-btn" style="display: none;" onclick="nextQuestion()">Next Question</button>
+            <div id="quiz-feedback" class="think" style="display:none; margin-top:1.5rem;"></div>
+            <div class="quiz-nav">
+                <button id="prev-btn" style="background:var(--muted);" onclick="prevQuestion()">Previous</button>
+                <button id="next-btn" style="display:none;" onclick="nextQuestion()">Next Question</button>
             </div>
         </div>
-
-        <div id="quiz-results" style="display: none; text-align: center;">
-            <h2 style="color: var(--primary);">Results Complete!</h2>
-            <div class="math" id="final-score"></div>
-            <button class="primary-btn" onclick="location.reload()">Restart Practice</button>
+        <div id="quiz-results" style="display:none; text-align:center;">
+            <h2>Quiz Complete!</h2>
+            <div class="math" id="final-score" style="font-size: 2rem; color:var(--primary);"></div>
+            <button class="primary-btn" onclick="location.reload()">Restart</button>
         </div>
     </div>
 </div>
 
-<footer>
-    <p>Ready4Exam | Keshav Karn & Family</p>
-</footer>
-
 <script>
-// Toggle Answer for Subjective Section
 function toggleAns(id) {
     const el = document.getElementById(id);
     el.style.display = (el.style.display === 'block') ? 'none' : 'block';
 }
 
 const questions = [
-    { q: "Evaluate \\(\\lim_{x \\to 3} (x^2 + 5)\\)", a: ["14", "8", "11", "15"], correct: 0, step: "Substitute \\(x=3\\): \\(3^2 + 5 = 14\\)." },
-    { q: "Evaluate \\(\\lim_{x \\to 2} \\frac{x^4 - 16}{x - 2}\\)", a: ["16", "32", "8", "4"], correct: 1, step: "Formula \\(na^{n-1}\\): \\(4(2)^3 = 32\\)." },
-    { q: "Evaluate \\(\\lim_{x \\to 0} \\frac{\\sin 5x}{x}\\)", a: ["1", "0", "5", "1/5"], correct: 2, step: "Result is 5 since \\(\\lim_{x \\to 0} \\frac{\\sin ax}{x} = a\\)." },
-    // ... add all 20 questions here following the same structure
+    { q: "Evaluate: $\\lim_{x \\to 3} (x^2 + 5)$", a: ["14", "8", "11", "15"], correct: 0, step: "Substitute $x=3$: $3^2 + 5 = 14$." },
+    { q: "Evaluate: $\\lim_{x \\to 2} \\frac{x^4 - 16}{x - 2}$", a: ["16", "32", "8", "4"], correct: 1, step: "Use $\\lim_{x \\to a} \\frac{x^n-a^n}{x-a} = na^{n-1}$. Here $4(2)^3 = 32$." },
+    { q: "Evaluate: $\\lim_{x \\to 0} \\frac{\\sin 5x}{x}$", a: ["1", "0", "5", "1/5"], correct: 2, step: "Multiply/Divide by 5 to get $5 \\times \\frac{\\sin 5x}{5x} = 5(1) = 5$." },
+    { q: "Derivative of $x^n$ is:", a: ["$nx^n$", "$nx^{n-1}$", "$x^{n-1}$", "$n^x$"], correct: 1, step: "This is the Power Rule of differentiation." },
+    { q: "What is $\\frac{d}{dx}(\\sin x)$?", a: ["$\\cos x$", "$-\\cos x$", "$\\sin x$", "$\\tan x$"], correct: 0, step: "Standard derivative from NCERT." },
+    { q: "Value of $\\lim_{x \\to 0} \\frac{\\tan x}{x}$ is:", a: ["0", "$\\infty$", "1", "$-1$"], correct: 2, step: "Standard trigonometric limit identity." },
+    { q: "Derivative of a constant is:", a: ["1", "0", "The constant", "Undefined"], correct: 1, step: "Constants do not change, so their rate of change is 0." },
+    { q: "Evaluate: $\\lim_{x \\to 1} \\frac{x^{15}-1}{x^{10}-1}$", a: ["1", "3/2", "2/3", "15/10"], correct: 1, step: "Divide numerator and denominator by $(x-1)$ to apply formula: $\\frac{15}{10} = 1.5$." },
+    { q: "Find $\\frac{d}{dx}(\\sqrt{x})$", a: ["$\\frac{1}{\\sqrt{x}}$", "$\\frac{1}{2\\sqrt{x}}$", "$2\\sqrt{x}$", "$\\frac{1}{2}x$"], correct: 1, step: "Use power rule on $x^{1/2}$." },
+    { q: "What is $\\frac{d}{dx}(\\cos x)$?", a: ["$\\sin x$", "$-\\sin x$", "$\\cos x$", "$\\sec^2 x$"], correct: 1, step: "Standard derivative result." },
+    { q: "Derivative of $2x + 3$ is:", a: ["2", "3", "5", "$2x$"], correct: 0, step: "$\\frac{d}{dx}(2x) = 2$ and $\\frac{d}{dx}(3) = 0$." },
+    { q: "Evaluate: $\\lim_{x \\to 0} \\cos x$", a: ["0", "1", "-1", "Not defined"], correct: 1, step: "Direct substitution: $\\cos(0) = 1$." },
+    { q: "Derivative of $x^3$ at $x=1$ is:", a: ["1", "2", "3", "0"], correct: 2, step: "Derivative is $3x^2$. At $x=1$, $3(1)^2 = 3$." },
+    { q: "Which is the correct Product Rule?", a: ["$(uv)' = u'v'$ ", "$(uv)' = uv' + vu'$", "$(uv)' = uv' - vu'$", "$(uv)' = u/v$"], correct: 1, step: "Standard Leibniz rule." },
+    { q: "$\\lim_{x \\to a} \\frac{x-a}{x-a}$ is:", a: ["0", "$a$", "1", "$\\infty$"], correct: 2, step: "Terms cancel out to 1 before limit is applied." },
+    { q: "Find $\\frac{d}{dx}(\\frac{1}{x})$", a: ["$\\log x$", "$1/x^2$", "$-1/x^2$", "$-1/x$"], correct: 2, step: "Power rule on $x^{-1}$ gives $-1x^{-2}$." },
+    { q: "Derivative of $x$ with respect to $x$ is:", a: ["0", "1", "$x$", "$x^2$"], correct: 1, step: "Rate of change of $x$ with $x$ is always 1." },
+    { q: "Evaluate: $\\lim_{x \\to 0} \\frac{e^x - 1}{x}$", a: ["0", "$e$", "1", "$\\log e$"], correct: 2, step: "Standard exponential limit." },
+    { q: "What is $\\frac{d}{dx}(\\tan x)$?", a: ["$\\sec x$", "$\\sec^2 x$", "$\\cos^2 x$", "$\\cot x$"], correct: 1, step: "Standard derivative from NCERT." },
+    { q: "Find $\\lim_{h \\to 0} \\frac{f(x+h)-f(x)}{h}$ for $f(x)=x$", a: ["$x$", "$h$", "0", "1"], correct: 3, step: "This is the definition of the derivative of $x$, which is 1." }
 ];
 
-let currentIndex = 0;
+let curIdx = 0;
 let score = 0;
-let answersGiven = new Array(questions.length).fill(null);
+let userAnswers = new Array(questions.length).fill(null);
 
 function startQuiz() {
     document.getElementById('quiz-overlay').style.display = 'block';
     showQuestion();
 }
 
-function closeQuiz() {
-    document.getElementById('quiz-overlay').style.display = 'none';
-}
+function closeQuiz() { document.getElementById('quiz-overlay').style.display = 'none'; }
 
 function showQuestion() {
-    const qData = questions[currentIndex];
-    document.getElementById('quiz-progress').innerText = `Question ${currentIndex + 1} of 20`;
-    document.getElementById('quiz-question').innerHTML = qData.q;
-    
+    const data = questions[curIdx];
+    document.getElementById('quiz-progress').innerText = `Question ${curIdx + 1} of 20`;
+    document.getElementById('quiz-question').innerHTML = data.q;
     const optionsDiv = document.getElementById('quiz-options');
     optionsDiv.innerHTML = '';
     
-    document.getElementById('prev-btn').style.visibility = currentIndex === 0 ? 'hidden' : 'visible';
-    document.getElementById('next-btn').style.display = answersGiven[currentIndex] !== null ? 'block' : 'none';
-    
-    const feedback = document.getElementById('quiz-feedback');
-    if (answersGiven[currentIndex] !== null) {
-        feedback.style.display = 'block';
-        feedback.innerHTML = `<strong>Step:</strong> ${qData.step}`;
-    } else {
-        feedback.style.display = 'none';
-    }
+    document.getElementById('prev-btn').style.visibility = (curIdx === 0) ? 'hidden' : 'visible';
+    document.getElementById('next-btn').style.display = (userAnswers[curIdx] !== null) ? 'block' : 'none';
 
-    qData.a.forEach((opt, i) => {
+    const feedback = document.getElementById('quiz-feedback');
+    if (userAnswers[curIdx] !== null) {
+        feedback.style.display = 'block';
+        feedback.innerHTML = `<strong>Explanation:</strong> ${data.step}`;
+    } else { feedback.style.display = 'none'; }
+
+    data.a.forEach((opt, i) => {
         const btn = document.createElement('button');
         btn.className = 'option-btn';
         btn.innerHTML = opt;
-        if (answersGiven[currentIndex] !== null) {
+        if (userAnswers[curIdx] !== null) {
             btn.disabled = true;
-            if (i === qData.correct) btn.classList.add('correct');
-            if (i === answersGiven[currentIndex] && i !== qData.correct) btn.classList.add('wrong');
+            if (i === data.correct) btn.classList.add('correct');
+            if (i === userAnswers[curIdx] && i !== data.correct) btn.classList.add('wrong');
         }
-        btn.onclick = () => checkAnswer(i, btn);
+        btn.onclick = () => {
+            userAnswers[curIdx] = i;
+            if (i === data.correct) score++;
+            showQuestion();
+        };
         optionsDiv.appendChild(btn);
     });
-    
-    // Rerender Math in Quiz
     MathJax.typeset();
 }
 
-function checkAnswer(selected, btn) {
-    const qData = questions[currentIndex];
-    answersGiven[currentIndex] = selected;
-    if (selected === qData.correct) score++;
-    showQuestion();
-}
-
 function nextQuestion() {
-    if (currentIndex < questions.length - 1) {
-        currentIndex++;
-        showQuestion();
-    } else {
+    if (curIdx < questions.length - 1) { curIdx++; showQuestion(); }
+    else { 
         document.getElementById('quiz-body').style.display = 'none';
         document.getElementById('quiz-results').style.display = 'block';
-        document.getElementById('final-score').innerText = `Score: ${score} / ${questions.length}`;
+        document.getElementById('final-score').innerText = `${score} / 20`;
     }
 }
 
-function prevQuestion() {
-    if (currentIndex > 0) {
-        currentIndex--;
-        showQuestion();
-    }
-}
+function prevQuestion() { if (curIdx > 0) { curIdx--; showQuestion(); } }
 </script>
 </body>
 </html>
