@@ -1,371 +1,199 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Limits and Derivatives | Chapter 12</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Limits and Derivatives | Chapter 12</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-
-<style>
-:root{
-  --primary:#2563eb;
-  --secondary:#7c3aed;
-  --bg:#f8fafc;
-  --card:#ffffff;
-  --text:#1e293b;
-  --muted:#64748b;
-}
-
-body{
-  margin:0;
-  font-family:'Poppins',sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  line-height:1.8;
-}
-
-header{
-  padding:3rem 2rem;
-  background:linear-gradient(135deg,var(--primary),var(--secondary));
-  color:white;
-  text-align:center;
-}
-
-nav{
-  position:sticky;
-  top:0;
-  background:white;
-  border-bottom:1px solid #e5e7eb;
-  padding:0.6rem 1rem;
-  display:flex;
-  gap:1rem;
-  overflow-x:auto;
-  z-index:10;
-}
-
-nav a{
-  text-decoration:none;
-  color:var(--primary);
-  font-weight:500;
-  white-space:nowrap;
-}
-
-section{
-  max-width:900px;
-  margin:3rem auto;
-  padding:0 1.5rem;
-}
-
-.concept{
-  background:var(--card);
-  padding:2rem;
-  border-radius:16px;
-  box-shadow:0 6px 15px rgba(0,0,0,0.05);
-}
-
-.step{
-  font-size:0.85rem;
-  color:var(--muted);
-  margin-bottom:0.4rem;
-}
-
-.think{
-  background:#f1f5f9;
-  border-left:5px solid var(--primary);
-  padding:1rem;
-  margin-top:1.5rem;
-  font-style:italic;
-}
-
-.math{
-  font-size:1.25rem;
-  text-align:center;
-  font-weight:600;
-  margin:1rem 0;
-}
-
-table{
-  border-collapse:collapse;
-  margin-top:1rem;
-}
-
-th,td{
-  border:1px solid #e2e8f0;
-  padding:0.5rem 0.8rem;
-  text-align:center;
-}
-
-th{ background:#f1f5f9; }
-
-button{
-  background:var(--primary);
-  color:white;
-  border:none;
-  padding:0.45rem 1rem;
-  margin:0.3rem 0.3rem 0 0;
-  border-radius:6px;
-  cursor:pointer;
-}
-
-button:hover{ background:#1d4ed8; }
-
-.locked{
-  opacity:0.35;
-  pointer-events:none;
-}
-
-footer{
-  max-width:900px;
-  margin:4rem auto;
-  padding:2rem;
-  background:#eef2ff;
-  border-radius:16px;
-  text-align:center;
-}
-</style>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/style.css">
 </head>
 
 <body>
 
 <header>
-<h1>Limits and Derivatives</h1>
-<p>From motion → patterns → symbols → calculus</p>
+  <h1>Limits and Derivatives</h1>
+  <p>From motion → patterns → symbols → calculus</p>
 </header>
 
 <nav>
-<a href="#why">Why</a>
-<a href="#approach">Approach</a>
-<a href="#limits">Limits</a>
-<a href="#trig">Trig</a>
-<a href="#derivative">Derivative</a>
-<a href="#first">First Principles</a>
-<a href="#examples">Examples</a>
+  <a href="#why">Why</a>
+  <a href="#approach">Approach</a>
+  <a href="#limits">Limits</a>
+  <a href="#trig">Trig</a>
+  <a href="#derivative">Derivative</a>
+  <a href="#first">First Principles</a>
+  <a href="#examples">Examples</a>
 </nav>
 
 <!-- WHY -->
 <section id="why">
-<div class="concept">
-<div class="step">Intuition</div>
-<h2>Why Calculus Exists</h2>
+  <div class="concept">
+    <div class="step">Intuition</div>
+    <h2>Why Calculus Exists</h2>
 
-<p>Cars move. Prices change. Populations grow.</p>
-<p>Algebra can compute totals and averages.</p>
+    <p>Cars move. Prices change. Populations grow.</p>
+    <p>Algebra can compute totals and averages.</p>
 
-<p><strong>But the real question is:</strong></p>
-<p><em>What is happening right now?</em></p>
+    <p><strong>The real question is:</strong></p>
+    <p><em>What is happening right now?</em></p>
 
-<svg width="100%" height="170" viewBox="0 0 500 170">
-<path d="M50 130 Q200 20 350 90 T450 50"
-      fill="none" stroke="#2563eb" stroke-width="3"/>
-<text x="270" y="25" fill="#2563eb">Distance vs Time</text>
-</svg>
+    <svg width="100%" height="170" viewBox="0 0 500 170">
+      <path d="M50 130 Q200 20 350 90 T450 50"
+            fill="none" stroke="#2563eb" stroke-width="3"/>
+      <text x="270" y="25" fill="#2563eb">Distance vs Time</text>
+    </svg>
 
-<div class="think">
-✔ Calculus studies instantaneous change  
-✔ This chapter builds that idea step by step
-</div>
-</div>
+    <div class="think">
+      ✔ Calculus studies instantaneous change  
+      ✔ This chapter builds that idea step by step
+    </div>
+  </div>
 </section>
 
 <!-- APPROACH -->
 <section id="approach">
-<div class="concept">
-<div class="step">Pattern</div>
-<h2>Approaching a Value</h2>
+  <div class="concept">
+    <div class="step">Pattern</div>
+    <h2>Approaching a Value</h2>
 
-<p>Let <strong>f(x) = 2x</strong>.</p>
+    <p>Let <strong>f(x) = 2x</strong>.</p>
 
-<table>
-<tr><th>x</th><th>f(x)</th></tr>
-<tr><td>1.9</td><td>3.8</td></tr>
-<tr><td>1.99</td><td>3.98</td></tr>
-<tr><td>2.01</td><td>4.02</td></tr>
-</table>
+    <table>
+      <tr><th>x</th><th>f(x)</th></tr>
+      <tr><td>1.9</td><td>3.8</td></tr>
+      <tr><td>1.99</td><td>3.98</td></tr>
+      <tr><td>2.01</td><td>4.02</td></tr>
+    </table>
 
-<p>The value is not yet 4, but it is clearly heading there.</p>
+    <p>The value is not yet 4, but it is clearly heading there.</p>
 
-<div class="think">
-Key idea: limits study <strong>behaviour near a point</strong>
-</div>
-</div>
+    <div class="think">
+      Key idea: limits study <strong>behaviour near a point</strong>
+    </div>
+  </div>
 </section>
 
-<!-- CHECKPOINT STAGE 1 -->
+<!-- CHECKPOINT 1 -->
 <section>
-<div class="concept">
-<h3>Checkpoint 1</h3>
+  <div class="concept">
+    <h3>Checkpoint</h3>
+    <p>As x → 2, f(x) → ?</p>
 
-<p>As x → 2, f(x) → ?</p>
-<button onclick="checkStage1(true)">4</button>
-<button onclick="checkStage1(false)">2</button>
-<p id="c1"></p>
-</div>
+    <button onclick="checkStage1(true)">4</button>
+    <button onclick="checkStage1(false)">2</button>
+
+    <p id="c1"></p>
+  </div>
 </section>
 
 <!-- LIMITS -->
 <section id="limits" class="locked">
-<div class="concept">
-<div class="step">Symbol</div>
-<h2>The Limit Notation</h2>
+  <div class="concept">
+    <div class="step">Symbol</div>
+    <h2>The Limit Notation</h2>
 
-<p>All previous ideas are written as:</p>
+    <p>All the above ideas are written as:</p>
+    <div class="math">lim (x → 2) f(x) = 4</div>
 
-<div class="math">lim (x → 2) f(x) = 4</div>
-
-<div class="think">
-✔ Symbol = shorthand for observed behaviour
-</div>
-</div>
+    <div class="think">
+      ✔ Symbols compress ideas you already understand
+    </div>
+  </div>
 </section>
 
 <!-- TRIG -->
 <section id="trig" class="locked">
-<div class="concept">
-<div class="step">Visual Trigonometry</div>
-<h2>Trigonometric Limit</h2>
+  <div class="concept">
+    <div class="step">Visual Trigonometry</div>
+    <h2>Trigonometric Limit</h2>
 
-<svg width="100%" height="190" viewBox="0 0 200 200">
-<circle cx="100" cy="100" r="80" fill="none" stroke="#94a3b8"/>
-<line x1="100" y1="100" x2="180" y2="100" stroke="#2563eb"/>
-<line x1="100" y1="100" x2="170" y2="85" stroke="#ef4444"/>
-<text x="140" y="80">θ</text>
-</svg>
+    <svg width="100%" height="190" viewBox="0 0 200 200">
+      <circle cx="100" cy="100" r="80" fill="none" stroke="#94a3b8"/>
+      <line x1="100" y1="100" x2="180" y2="100" stroke="#2563eb"/>
+      <line x1="100" y1="100" x2="170" y2="85" stroke="#ef4444"/>
+      <text x="140" y="80">θ</text>
+    </svg>
 
-<p>For very small angles:</p>
-<div class="math">sin θ ≈ θ</div>
+    <div class="math">lim (θ → 0) sinθ / θ = 1</div>
 
-<div class="math">lim (θ → 0) sinθ / θ = 1</div>
-
-<div class="think">
-✔ This single limit powers most of calculus
-</div>
-</div>
+    <div class="think">
+      ✔ This is the foundation of calculus
+    </div>
+  </div>
 </section>
 
 <!-- DERIVATIVE -->
 <section id="derivative" class="locked">
-<div class="concept">
-<div class="step">Motion → Slope</div>
-<h2>Derivative as Instantaneous Change</h2>
+  <div class="concept">
+    <div class="step">Motion → Slope</div>
+    <h2>Derivative</h2>
 
-<svg width="100%" height="190" viewBox="0 0 500 200">
-<path d="M50 150 Q250 30 450 120"
-      fill="none" stroke="#2563eb" stroke-width="3"/>
-<line x1="200" y1="110" x2="350" y2="70" stroke="#ef4444"/>
-<text x="300" y="60">Tangent</text>
-</svg>
+    <svg width="100%" height="190" viewBox="0 0 500 200">
+      <path d="M50 150 Q250 30 450 120"
+            fill="none" stroke="#2563eb" stroke-width="3"/>
+      <line x1="200" y1="110" x2="350" y2="70" stroke="#ef4444"/>
+      <text x="300" y="60">Tangent</text>
+    </svg>
 
-<ul>
-<li>Speed is derivative of distance</li>
-<li>Slope is derivative of a curve</li>
-</ul>
+    <ul>
+      <li>Speed = derivative of distance</li>
+      <li>Slope = derivative of curve</li>
+    </ul>
 
-<div class="think">
-✔ Derivative = limit of average change
-</div>
-</div>
-</section>
-
-<!-- CHECKPOINT STAGE 2 -->
-<section class="locked" id="cp2">
-<div class="concept">
-<h3>Checkpoint 2</h3>
-
-<p>Derivative measures:</p>
-<button onclick="checkStage2(true)">Instantaneous change</button>
-<button onclick="checkStage2(false)">Total value</button>
-<p id="c2"></p>
-</div>
+    <div class="think">
+      ✔ Derivative = limit of average change
+    </div>
+  </div>
 </section>
 
 <!-- FIRST PRINCIPLES -->
 <section id="first" class="locked">
-<div class="concept">
-<div class="step">Definition</div>
-<h2>Derivative from First Principles</h2>
+  <div class="concept">
+    <div class="step">Definition</div>
+    <h2>Derivative from First Principles</h2>
 
-<div class="math">
-Average change = [ f(x+h) − f(x) ] / h
-</div>
+    <div class="math">Average change = [ f(x+h) − f(x) ] / h</div>
+    <div class="math">Derivative = lim (h → 0) [ f(x+h) − f(x) ] / h</div>
 
-<p>Letting h → 0 converts average change into instant change:</p>
-
-<div class="math">
-Derivative = lim (h → 0) [ f(x+h) − f(x) ] / h
-</div>
-
-<div class="think">
-✔ This is the foundation of all derivative formulas
-</div>
-</div>
+    <div class="think">
+      ✔ All derivative formulas come from this definition
+    </div>
+  </div>
 </section>
 
 <!-- EXAMPLES -->
 <section id="examples" class="locked">
-<div class="concept">
-<h2>Worked Examples</h2>
+  <div class="concept">
+    <h2>Worked Examples</h2>
 
-<p><strong>Example 1:</strong> Derivative of x²</p>
-<div class="math">= 2x</div>
+    <p><strong>Derivative of x²</strong> → 2x</p>
+    <p><strong>Derivative of x³</strong> → 3x²</p>
+    <p><strong>lim (x → 1) (x²−1)/(x−1)</strong> → 2</p>
 
-<p><strong>Example 2:</strong> Derivative of x³</p>
-<div class="math">= 3x²</div>
-
-<p><strong>Example 3:</strong> lim (x → 1) (x²−1)/(x−1)</p>
-<div class="math">= 2</div>
-
-<div class="think">
-✔ You can now solve NCERT-level problems
-</div>
-</div>
+    <div class="think">
+      ✔ You can now solve NCERT-level problems
+    </div>
+  </div>
 </section>
 
 <footer>
-<h3>You are now ready to practice</h3>
-<p>
-You understand limits, trigonometric limits, and derivatives from first principles.
-</p>
-<a href="exercise.html">
-<button>Go to Practice Exercises →</button>
-</a>
+  <h3>You are ready to practice</h3>
+  <p>Proceed to exercises for mastery.</p>
+  <a href="exercise.html"><button>Go to Exercises →</button></a>
 </footer>
 
 <script>
-let stage1=false, stage2=false;
-
 function checkStage1(correct){
-  const el=document.getElementById("c1");
+  const el = document.getElementById("c1");
   if(correct){
-    el.innerHTML="✔ Correct";
-    el.style.color="green";
-    stage1=true;
-    unlock("#limits");
-  }else{
-    el.innerHTML="❌ Observe the table again";
-    el.style.color="red";
+    el.innerHTML = "✔ Correct";
+    el.style.color = "green";
+    document.querySelectorAll(".locked").forEach(s => s.classList.remove("locked"));
+  } else {
+    el.innerHTML = "❌ Look at the table again";
+    el.style.color = "red";
   }
-}
-
-function checkStage2(correct){
-  const el=document.getElementById("c2");
-  if(correct){
-    el.innerHTML="✔ Correct";
-    el.style.color="green";
-    stage2=true;
-    unlock("#first,#examples");
-  }else{
-    el.innerHTML="❌ Think about slope and speed";
-    el.style.color="red";
-  }
-}
-
-function unlock(selectors){
-  document.querySelectorAll(selectors)
-    .forEach(s=>s.classList.remove("locked"));
-  document.querySelector("#trig").classList.remove("locked");
-  document.querySelector("#derivative").classList.remove("locked");
-  document.querySelector("#cp2").classList.remove("locked");
 }
 </script>
 
