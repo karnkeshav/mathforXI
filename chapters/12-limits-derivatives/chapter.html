@@ -45,7 +45,7 @@
     </svg>
 
     <div class="think">
-      ✔ Calculus studies instantaneous change  
+      ✔ Calculus studies instantaneous change<br>
       ✔ This chapter builds that idea step by step
     </div>
   </div>
@@ -74,7 +74,7 @@
   </div>
 </section>
 
-<!-- CHECKPOINT 1 -->
+<!-- CHECKPOINT -->
 <section>
   <div class="concept">
     <h3>Checkpoint</h3>
@@ -93,8 +93,9 @@
     <div class="step">Symbol</div>
     <h2>The Limit Notation</h2>
 
-    <p>All the above ideas are written as:</p>
-    <div class="math">lim (x → 2) f(x) = 4</div>
+    <div class="math limit-anim">
+      lim <span>(x → 2)</span> f(x) = 4
+    </div>
 
     <div class="think">
       ✔ Symbols compress ideas you already understand
@@ -132,7 +133,8 @@
     <svg width="100%" height="190" viewBox="0 0 500 200">
       <path d="M50 150 Q250 30 450 120"
             fill="none" stroke="#2563eb" stroke-width="3"/>
-      <line x1="200" y1="110" x2="350" y2="70" stroke="#ef4444"/>
+      <line id="tangent" x1="200" y1="110" x2="350" y2="70"
+            stroke="#ef4444" stroke-width="3"/>
       <text x="300" y="60">Tangent</text>
     </svg>
 
@@ -153,8 +155,14 @@
     <div class="step">Definition</div>
     <h2>Derivative from First Principles</h2>
 
-    <div class="math">Average change = [ f(x+h) − f(x) ] / h</div>
-    <div class="math">Derivative = lim (h → 0) [ f(x+h) − f(x) ] / h</div>
+    <div class="math">
+      Average change = [ f(x+h) − f(x) ] / h
+    </div>
+
+    <div class="math">
+      Derivative = lim <span class="h-zero">(h → 0)</span>
+      [ f(x+h) − f(x) ] / h
+    </div>
 
     <div class="think">
       ✔ All derivative formulas come from this definition
@@ -169,7 +177,7 @@
 
     <p><strong>Derivative of x²</strong> → 2x</p>
     <p><strong>Derivative of x³</strong> → 3x²</p>
-    <p><strong>lim (x → 1) (x²−1)/(x−1)</strong> → 2</p>
+    <p><strong>lim (x → 1) (x² − 1)/(x − 1)</strong> → 2</p>
 
     <div class="think">
       ✔ You can now solve NCERT-level problems
@@ -189,7 +197,8 @@ function checkStage1(correct){
   if(correct){
     el.innerHTML = "✔ Correct";
     el.style.color = "green";
-    document.querySelectorAll(".locked").forEach(s => s.classList.remove("locked"));
+    document.querySelectorAll(".locked")
+      .forEach(s => s.classList.remove("locked"));
   } else {
     el.innerHTML = "❌ Look at the table again";
     el.style.color = "red";
