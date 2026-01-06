@@ -19,7 +19,7 @@ body {
   line-height: 1.8;
 }
 
-/* ===== HEADER ===== */
+/* ================= HEADER ================= */
 
 header {
   padding: 3rem 2rem;
@@ -28,7 +28,7 @@ header {
   text-align: center;
 }
 
-/* ===== NAV ===== */
+/* ================= NAV ================= */
 
 nav {
   position: sticky;
@@ -49,7 +49,7 @@ nav a {
   white-space: nowrap;
 }
 
-/* ===== LAYOUT ===== */
+/* ================= LAYOUT ================= */
 
 section {
   max-width: 900px;
@@ -70,7 +70,7 @@ section {
   margin-bottom: 0.4rem;
 }
 
-/* ===== HIGHLIGHT BOX ===== */
+/* ================= THINK BOX ================= */
 
 .think {
   background: #f1f5f9;
@@ -80,70 +80,7 @@ section {
   font-style: italic;
 }
 
-/* ===== MATH ===== */
-
-.math {
-  font-size: 1.25rem;
-  text-align: center;
-  font-weight: 600;
-  margin: 1rem 0;
-}
-
-/* ===== TABLE ===== */
-
-table {
-  border-collapse: collapse;
-  margin-top: 1rem;
-}
-
-th,
-td {
-  border: 1px solid #e2e8f0;
-  padding: 0.5rem 0.8rem;
-  text-align: center;
-}
-
-th {
-  background: #f1f5f9;
-}
-
-/* ===== BUTTON ===== */
-
-button {
-  background: var(--primary);
-  color: white;
-  border: none;
-  padding: 0.45rem 1rem;
-  margin: 0.3rem 0.3rem 0 0;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-button:hover {
-  background: #1d4ed8;
-}
-
-/* ===== LOCKED SECTIONS ===== */
-
-.locked {
-  opacity: 0.35;
-  pointer-events: none;
-}
-
-/* ===== FOOTER ===== */
-
-footer {
-  max-width: 900px;
-  margin: 4rem auto;
-  padding: 2rem;
-  background: #eef2ff;
-  border-radius: 16px;
-  text-align: center;
-}
-
-/* =========================================
-   Animated Formula Emphasis
-   ========================================= */
+/* ================= MATH (BASE + ANIMATION) ================= */
 
 .math {
   font-size: 1.6rem;
@@ -161,4 +98,97 @@ footer {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
+}
+
+/* ---- Limit motion ---- */
+
+.limit-anim span {
+  display: inline-block;
+  animation: slideIn 2s ease-in-out infinite;
+  color: var(--primary);
+}
+
+@keyframes slideIn {
+  0% { transform: translateX(-6px); opacity: 0.6; }
+  50% { transform: translateX(6px); opacity: 1; }
+  100% { transform: translateX(-6px); opacity: 0.6; }
+}
+
+/* ---- h → 0 pulse ---- */
+
+.h-zero {
+  color: #ef4444;
+  font-weight: 700;
+  display: inline-block;
+  animation: pulse 1.8s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.15); opacity: 0.75; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* ================= TABLE ================= */
+
+table {
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+th, td {
+  border: 1px solid #e2e8f0;
+  padding: 0.5rem 0.8rem;
+  text-align: center;
+}
+
+th {
+  background: #f1f5f9;
+}
+
+/* ================= BUTTON ================= */
+
+button {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 0.45rem 1rem;
+  margin: 0.3rem 0.3rem 0 0;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #1d4ed8;
+}
+
+/* ================= LOCKED SECTIONS ================= */
+
+.locked {
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+/* ================= FOOTER ================= */
+
+footer {
+  max-width: 900px;
+  margin: 4rem auto;
+  padding: 2rem;
+  background: #eef2ff;
+  border-radius: 16px;
+  text-align: center;
+}
+
+/* ================= SVG TANGENT ANIMATION ================= */
+
+#tangent {
+  animation: tilt 2.5s ease-in-out infinite;
+  transform-origin: center;
+}
+
+@keyframes tilt {
+  0% { transform: rotate(-2deg); }
+  50% { transform: rotate(2deg); }
+  100% { transform: rotate(-2deg); }
 }
