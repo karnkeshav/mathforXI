@@ -3,27 +3,196 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Level 0: The Speedometer Secret | Limits & Derivatives</title>
+    <title>Limits and Derivatives | Class XI Mathematics</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #7c3aed;
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --text: #1e293b;
+            --muted: #64748b;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            border-bottom-left-radius: 50px;
+            border-bottom-right-radius: 50px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.6rem;
+        }
+
+        header p {
+            max-width: 700px;
+            margin: 1rem auto 0;
+            font-weight: 300;
+            opacity: 0.95;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: -2rem auto 4rem;
+            padding: 0 1.5rem;
+        }
+
+        .card {
+            background: var(--card);
+            border-radius: 18px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+            border: 1px solid #e2e8f0;
+        }
+
+        .card h2 {
+            margin-top: 0;
+            color: var(--primary);
+        }
+
+        .card p {
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .topic {
+            background: #f1f5f9;
+            padding: 1.5rem;
+            border-radius: 14px;
+            border-left: 5px solid var(--primary);
+        }
+
+        .topic h3 {
+            margin-top: 0;
+        }
+
+        .start {
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .start a {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 0.9rem 2rem;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .start a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <a href="../../index.html">← Back to Course Index</a>
-        <h1>Chapter 12: Limits and Derivatives</h1>
-    </header>
-    <section>
-        <h2>Level 0: The Speedometer Secret 🏎️</h2>
-        <p>Welcome! [cite_start]Calculus is the study of change. [cite: 515, 1180]</p>
-        <h3>The Big Question</h3>
-        [cite_start]<p>How do we find velocity at a single instant? [cite: 527, 606]</p>
-        
 
+<header>
+    <h1>Limits and Derivatives</h1>
+    <p>
+        The chapter where mathematics learns how to describe
+        <strong>change, motion, and a single instant in time</strong>.
+        This is the beginning of calculus.
+    </p>
+</header>
 
-        <ul>
-            [cite_start]<li><strong>The Limit Lounge:</strong> Zoom in on a point. [cite: 5, 634]</li>
-            [cite_start]<li><strong>Algebraic Shortcuts:</strong> Use standard formulas. [cite: 35, 992]</li>
-            [cite_start]<li><strong>First Principle:</strong> The DNA of change. [cite: 43, 1261]</li>
-        </ul>
-        <button>Start Level 1</button>
-    </section>
+<div class="container">
+
+    <div class="card">
+        <h2>Why This Chapter Matters</h2>
+        <p>
+            Before this chapter, mathematics could describe totals, averages,
+            and fixed values.
+        </p>
+        <p>
+            But the real world is not static.
+            Cars move, populations grow, prices fluctuate, and machines accelerate.
+        </p>
+        <p>
+            <strong>Limits and derivatives were invented to answer one question:</strong><br>
+            <em>“What is happening right now?”</em>
+        </p>
+    </div>
+
+    <div class="card">
+        <h2>What You Will Learn</h2>
+
+        <div class="grid">
+            <div class="topic">
+                <h3>Intuitive Idea of Derivatives</h3>
+                <p>
+                    Understand speed, slope, and rate of change
+                    without formulas.
+                </p>
+            </div>
+
+            <div class="topic">
+                <h3>Limits</h3>
+                <p>
+                    Learn how values behave as we move closer and closer
+                    to a point.
+                </p>
+            </div>
+
+            <div class="topic">
+                <h3>Trigonometric Limits</h3>
+                <p>
+                    Discover why certain limits are fundamental
+                    to all of calculus.
+                </p>
+            </div>
+
+            <div class="topic">
+                <h3>Derivatives</h3>
+                <p>
+                    Learn how instant change is calculated
+                    and why it works.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>How This Chapter Is Taught Here</h2>
+        <p>
+            ✔ No memorisation first<br>
+            ✔ Visual and intuitive explanations<br>
+            ✔ Real-world motivation before formulas<br>
+            ✔ NCERT-aligned, exam-safe progression
+        </p>
+    </div>
+
+    <div class="start">
+        <a href="01-why-calculus.html">
+            Begin the Journey →
+        </a>
+    </div>
+
+</div>
+
 </body>
 </html>
