@@ -1,60 +1,253 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Limits and Derivatives – Exercises</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercises | Limits and Derivatives</title>
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* Quiz Specific Enhancements that complement style.css */
+        #quiz-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(30, 41, 59, 0.95); /* Deep slate to match your --text color */
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 20px;
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+        .quiz-card {
+            background: var(--card);
+            max-width: 700px;
+            margin: 2rem auto;
+            padding: 2.5rem;
+            border-radius: 20px;
+            position: relative;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+        }
 
-<style>
-body {
-  font-family: 'Poppins', sans-serif;
-  background: #f8fafc;
-  margin: 0;
-  padding: 2rem;
-}
+        .option-btn {
+            display: block;
+            width: 100%;
+            text-align: left;
+            background: var(--bg);
+            color: var(--text);
+            border: 1px solid #e2e8f0;
+            padding: 1rem;
+            margin: 0.8rem 0;
+            border-radius: 10px;
+            transition: all 0.2s ease;
+        }
 
-h1 { color: #2563eb; }
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--primary);
+            background: #eff6ff;
+            transform: translateX(5px);
+        }
 
-.question {
-  background: white;
-  padding: 1.5rem;
-  margin-bottom: 1.5rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-}
-</style>
+        .correct { background: #dcfce7 !important; border-color: #22c55e !important; color: #166534; }
+        .wrong { background: #fee2e2 !important; border-color: #ef4444 !important; color: #991b1b; }
+
+        .close-quiz {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            color: var(--muted);
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .take-test-container {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 2rem;
+            background: #f1f5f9;
+            border-radius: 16px;
+        }
+
+        .primary-btn {
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+        }
+    </style>
 </head>
-
 <body>
 
-<h1>Chapter 12: Limits and Derivatives – Exercises</h1>
+<header>
+    <h1>Chapter 12: Practice Exercises</h1>
+    <p>Mastering Limits & Derivatives through NCERT Standards</p>
+</header>
 
-<div class="question">
-  <strong>Q1 (NCERT):</strong><br>
-  Find lim (x → 1) (x² − 1)/(x − 1)
+<nav>
+    <a href="landing.html">← Back to Overview</a>
+    <a href="chapter.html">Concepts</a>
+    <a href="exercise.html" style="border-bottom: 2px solid var(--primary);">Exercises</a>
+</nav>
+
+<section>
+    <div class="concept">
+        <div class="step">NCERT Basic Practice</div>
+        <h2>Subjective Questions</h2>
+        
+        <div class="think">
+            Solve these on paper first to build your derivation logic.
+        </div>
+
+        <div class="question-box">
+            <p><strong>Q1.</strong> Evaluate the limit: <span class="math">\lim_{x \to 1} \frac{x^2 - 1}{x - 1}</span></p>
+        </div>
+
+        <div class="question-box">
+            <p><strong>Q2.</strong> Find the derivative of $f(x) = x^2$ using <strong>First Principles</strong>.</p>
+        </div>
+
+        <div class="question-box">
+            <p><strong>Q3.</strong> (Exemplar) Evaluate: <span class="math">\lim_{\theta \to 0} \frac{\sin \theta}{\theta}</span></p>
+        </div>
+
+        <div class="question-box">
+            <p><strong>Q4.</strong> Find the derivative of $f(x) = x^3$ using first principles.</p>
+        </div>
+
+        <div class="question-box">
+            <p><strong>Q5.</strong> (Application) If displacement is $s = t^2$, find the instantaneous velocity at time $t$ using derivatives.</p>
+        </div>
+    </div>
+
+    <div class="take-test-container">
+        <h3>Fundamental Mastery Test</h3>
+        <p>This MCQ test covers 20 essential questions from NCERT and Exemplar. Aim to finish this 5 times to perfect your basics!</p>
+        <button class="primary-btn" onclick="startQuiz()">Take a Test Now</button>
+    </div>
+</section>
+
+<div id="quiz-overlay">
+    <div class="quiz-card">
+        <button class="close-quiz" onclick="closeQuiz()">&times;</button>
+        
+        <div id="quiz-body">
+            <div class="step" id="quiz-progress">Question 1 of 20</div>
+            <h3 id="quiz-question" style="margin: 1rem 0;"></h3>
+            <div id="quiz-options"></div>
+            
+            <div id="quiz-feedback" class="think" style="display: none; margin-top: 1.5rem;">
+                </div>
+            
+            <button id="next-btn" style="display: none; margin-top: 1.5rem; width: 100%;" onclick="nextQuestion()">
+                Next Question
+            </button>
+        </div>
+
+        <div id="quiz-results" style="display: none; text-align: center;">
+            <h2 style="color: var(--primary);">Results Complete!</h2>
+            <div class="math" id="final-score"></div>
+            <p>Repetition is key. Try this again to improve your speed!</p>
+            <button class="primary-btn" onclick="location.reload()">Restart Practice</button>
+        </div>
+    </div>
 </div>
 
-<div class="question">
-  <strong>Q2 (NCERT):</strong><br>
-  Find the derivative of f(x) = x² from first principles.
-</div>
+<footer>
+    <p>Ready4Exam | Focused Learning for Class XI Mathematics</p>
+</footer>
 
-<div class="question">
-  <strong>Q3 (Exemplar):</strong><br>
-  Find lim (θ → 0) sinθ / θ
-</div>
+<script>
+const questions = [
+    { q: "Evaluate lim(x→3) [x² + 5]", a: ["14", "8", "11", "15"], correct: 0, step: "Direct Substitution: Replace x with 3. 3² + 5 = 9 + 5 = 14." },
+    { q: "Evaluate lim(x→2) [(x⁴ - 16)/(x - 2)]", a: ["16", "32", "8", "4"], correct: 1, step: "Formula lim(x→a) (xⁿ-aⁿ)/(x-a) = naⁿ⁻¹. Here n=4, a=2. Result = 4(2)³ = 32." },
+    { q: "Find lim(x→0) [sin(5x)/x]", a: ["1", "0", "5", "1/5"], correct: 2, step: "Multiply & divide by 5: 5 * [sin(5x)/5x]. Since lim sinθ/θ = 1, we get 5(1) = 5." },
+    { q: "Evaluate lim(x→1) [(x² - 1)/(x - 1)]", a: ["1", "0", "2", "Undefined"], correct: 2, step: "Factorize: (x-1)(x+1)/(x-1) = x+1. Putting x=1 gives 1+1=2." },
+    { q: "Differentiate x¹⁰ with respect to x.", a: ["10x¹⁰", "10x⁹", "x⁹", "9x¹⁰"], correct: 1, step: "Power Rule: d/dx(xⁿ) = nxⁿ⁻¹. Thus, 10x⁹." },
+    { q: "Derivative of a constant (e.g., d/dx 500) is:", a: ["500", "1", "0", "x"], correct: 2, step: "A constant does not change, so its rate of change is zero." },
+    { q: "Differentiate 5x + 7.", a: ["5x", "7", "5", "12"], correct: 2, step: "d/dx(5x) = 5 and d/dx(7) = 0. Total = 5." },
+    { q: "What is d/dx (sin x)?", a: ["cos x", "-cos x", "tan x", "sec²x"], correct: 0, step: "Standard NCERT Identity: The derivative of sin(x) is cos(x)." },
+    { q: "Find d/dx(√x).", a: ["1/√x", "1/(2√x)", "2√x", "1/2"], correct: 1, step: "Write √x as x¹/². Derivative = (1/2)x⁻¹/² = 1/(2√x)." },
+    { q: "Evaluate lim(x→0) [cos x].", a: ["0", "1", "-1", "Infinity"], correct: 1, step: "Substitution: cos(0) = 1." },
+    { q: "Differentiate 1/x.", a: ["-1/x²", "1/x²", "log x", "1"], correct: 0, step: "x⁻¹ derivative is -1x⁻² = -1/x²." },
+    { q: "Find lim(x→∞) [1/x].", a: ["∞", "1", "0", "Undefined"], correct: 2, step: "As x becomes extremely large, the fraction 1/x approaches zero." },
+    { q: "Differentiate 3x² + 2x + 1.", a: ["6x + 2", "3x + 2", "6x", "5"], correct: 0, step: "Use power rule: 3(2x) + 2(1) + 0 = 6x + 2." },
+    { q: "lim(x→0) [tan x / x] equals:", a: ["0", "Infinity", "1", "Undefined"], correct: 2, step: "This is a standard trigonometric limit result = 1." },
+    { q: "Differentiate ax² + bx + c.", a: ["ax + b", "2ax + b", "2x + b", "a + b"], correct: 1, step: "Differentiate each term: 2ax + b(1) + 0." },
+    { q: "Formula for First Principle of Derivatives:", a: ["lim(h→0) [f(x+h)-f(x)]/h", "lim(x→0) f(x)/x", "f(x+h)-f(x)", "d/dx"], correct: 0, step: "This limit defines the slope of the tangent line." },
+    { q: "What is d/dx (cos x)?", a: ["sin x", "-sin x", "-cos x", "tan x"], correct: 1, step: "Standard identity: d/dx(cos x) = -sin x." },
+    { q: "Differentiate x * sin x (Product Rule).", a: ["cos x", "x cos x", "x cos x + sin x", "sin x"], correct: 2, step: "Using (uv)' = uv' + vu': x(cos x) + sin x(1)." },
+    { q: "Evaluate lim(x→2) [(x-2)/(x²-4)].", a: ["1/4", "4", "0", "1/2"], correct: 0, step: "Factorize: (x-2)/[(x-2)(x+2)] = 1/(x+2). Result = 1/(2+2) = 1/4." },
+    { q: "Derivative of x⁻³ is:", a: ["-3x⁻²", "-3x⁻⁴", "3x²", "-1/x³"], correct: 1, step: "Power rule: -3x⁻³⁻¹ = -3x⁻⁴." }
+];
 
-<div class="question">
-  <strong>Q4 (Mixed):</strong><br>
-  Find the derivative of f(x) = x³ using first principles.
-</div>
+let currentIndex = 0;
+let score = 0;
 
-<div class="question">
-  <strong>Q5 (Mixed Application):</strong><br>
-  If distance s = t², find velocity at time t using first principles.
-</div>
+function startQuiz() {
+    document.getElementById('quiz-overlay').style.display = 'block';
+    document.body.style.overflow = 'hidden';
+    showQuestion();
+}
+
+function closeQuiz() {
+    document.getElementById('quiz-overlay').style.display = 'none';
+    document.body.style.overflow = 'auto';
+}
+
+function showQuestion() {
+    const qData = questions[currentIndex];
+    document.getElementById('quiz-progress').innerText = `Question ${currentIndex + 1} of 20`;
+    document.getElementById('quiz-question').innerText = qData.q;
+    
+    const optionsDiv = document.getElementById('quiz-options');
+    optionsDiv.innerHTML = '';
+    
+    document.getElementById('next-btn').style.display = 'none';
+    document.getElementById('quiz-feedback').style.display = 'none';
+
+    qData.a.forEach((opt, i) => {
+        const btn = document.createElement('button');
+        btn.className = 'option-btn';
+        btn.innerText = opt;
+        btn.onclick = () => checkAnswer(i, btn);
+        optionsDiv.appendChild(btn);
+    });
+}
+
+function checkAnswer(selected, btn) {
+    const qData = questions[currentIndex];
+    const allBtns = document.querySelectorAll('.option-btn');
+    const feedback = document.getElementById('quiz-feedback');
+    
+    allBtns.forEach(b => b.disabled = true);
+
+    if (selected === qData.correct) {
+        btn.classList.add('correct');
+        score++;
+    } else {
+        btn.classList.add('wrong');
+        allBtns[qData.correct].classList.add('correct');
+    }
+
+    feedback.style.display = 'block';
+    feedback.innerHTML = `<strong>Explanation:</strong> ${qData.step}`;
+    document.getElementById('next-btn').style.display = 'block';
+}
+
+function nextQuestion() {
+    currentIndex++;
+    if (currentIndex < questions.length) {
+        showQuestion();
+    } else {
+        document.getElementById('quiz-body').style.display = 'none';
+        document.getElementById('quiz-results').style.display = 'block';
+        document.getElementById('final-score').innerText = `Score: ${score} / 20`;
+    }
+}
+</script>
 
 </body>
 </html>
