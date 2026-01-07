@@ -17,46 +17,41 @@ window.MathJax = {
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../assets/css/style.css">
+
+<style>
+.subjective-ans {
+  display:none;
+  background:#f8fafc;
+  padding:1.5rem;
+  margin-top:1rem;
+  border-left:5px solid var(--primary);
+  border-radius:8px;
+}
+.lab-btn { margin-top:1rem; background:var(--secondary); }
+</style>
 </head>
 
 <body>
 
 <header>
-  <h1>Limits and Derivatives</h1>
-  <p>Visual intuition → symbols → formulas → problems</p>
+<h1>Limits and Derivatives</h1>
+<p>Concept → Formula → Application → Mastery</p>
 </header>
 
 <nav>
-  <a href="#approach">Approach</a>
-  <a href="#limits">Limits</a>
-  <a href="#trig">Trig</a>
-  <a href="#derivative">Derivative</a>
-  <a href="#first">First Principles</a>
+<a href="#approach">Approach</a>
+<a href="#limits">Limits</a>
+<a href="#trig">Trig</a>
+<a href="#derivative">Derivative</a>
+<a href="#first">First Principles</a>
 </nav>
 
 <script>
-function show(section, i) {
-  const slides = document.querySelectorAll(`#${section} .slide`);
-  slides.forEach(s => s.style.display = "none");
-  slides[i].style.display = "block";
-  document.getElementById(section + "-i").value = i;
+function toggleLab(id){
+  const el=document.getElementById(id);
+  el.style.display=el.style.display==="block"?"none":"block";
 }
-function next(section) {
-  const i = +document.getElementById(section + "-i").value;
-  const slides = document.querySelectorAll(`#${section} .slide`);
-  if (i < slides.length - 1) show(section, i + 1);
-}
-function prev(section) {
-  const i = +document.getElementById(section + "-i").value;
-  if (i > 0) show(section, i - 1);
-}
-function unlock(id) {
-  document.getElementById(id).classList.remove("locked");
-}
-function toggleLab(id) {
-  const el = document.getElementById(id);
-  el.style.display = el.style.display === "block" ? "none" : "block";
-}
+function unlock(id){ document.getElementById(id).classList.remove("locked"); }
 </script>
 
 <!-- ================================================= -->
@@ -64,39 +59,42 @@ function toggleLab(id) {
 <!-- ================================================= -->
 <section id="approach">
 <div class="concept">
-<h2>Approach: Getting Close to a Value</h2>
-
-<input type="hidden" id="approach-i" value="0">
-
-<div class="slide">Example 1: $f(x)=2x$, as $x \\to 2$ → value → 4</div>
-<div class="slide" style="display:none">Example 2: $f(x)=x^2$, as $x \\to 3$ → value → 9</div>
-<div class="slide" style="display:none">Example 3: $f(x)=5x$, as $x \\to 1$ → 5</div>
-<div class="slide" style="display:none">Example 4: $f(x)=x^3$, as $x \\to 2$ → 8</div>
-<div class="slide" style="display:none">Example 5: Approach does NOT require substitution</div>
-
-<button onclick="prev('approach')">← Back</button>
-<button onclick="next('approach')">Next →</button>
+<h2>Approach (Before Formal Limits)</h2>
 
 <div class="math">
-<strong>Formulas (Approach)</strong><br>
-If $f(x)=ax+b$, then as $x \\to c$, value → $ac+b$
+<strong>All Formulas (Approach)</strong><br>
+If $f(x)=ax+b$, then as $x\\to c$, value → $ac+b$<br>
+If $f(x)=x^n$, then as $x\\to a$, value → $a^n$<br>
+Approach depends on values near the point, not at the point
 </div>
 
-<h3>Where to use (Problem Lab)</h3>
-<button onclick="toggleLab('approach-lab')">Show Lab</button>
+<button class="lab-btn" onclick="toggleLab('approach-lab')">
+Where to use – Problem Lab (5 Solved)
+</button>
+
 <div id="approach-lab" class="subjective-ans">
-<p><strong>Q:</strong> Find value of $3x+2$ as $x \\to 4$</p>
-<p><strong>Step 1:</strong> Identify function $f(x)=3x+2$</p>
-<p><strong>Step 2:</strong> Substitute $x=4$</p>
-<p><strong>Answer:</strong> $3(4)+2=14$</p>
+
+<p><strong>1.</strong> Find value of $2x+3$ as $x\\to4$</p>
+<p>Formula: $ax+b$</p>
+<p>Solution: $2(4)+3=11$</p>
+
+<p><strong>2.</strong> Find value of $x^2$ as $x\\to5$</p>
+<p>Formula: $x^n$</p>
+<p>Solution: $5^2=25$</p>
+
+<p><strong>3.</strong> Find value of $3x^2$ as $x\\to2$</p>
+<p>Solution: $3(2)^2=12$</p>
+
+<p><strong>4.</strong> Find value of $1/x$ as $x\\to2$</p>
+<p>Solution: $1/2$</p>
+
+<p><strong>5.</strong> Does approach require simplification?</p>
+<p>No. Direct substitution is allowed.</p>
+
 </div>
 
-<h3>Checkpoints</h3>
-<p>1️⃣ As $x \\to 2$, $5x \\to$ <button onclick="unlock('limits')">10 ✔</button></p>
-<p>2️⃣ As $x \\to 1$, $x^2 \\to$ <button>1</button></p>
-<p>3️⃣ As $x \\to 0$, $7x \\to$ <button>0</button></p>
-<p>4️⃣ As $x \\to 3$, $x^3 \\to$ <button>27</button></p>
-<p>5️⃣ Approach depends on values near point ✔</p>
+<h3>Checkpoint</h3>
+<button onclick="unlock('limits')">Approach understood ✔</button>
 
 </div>
 </section>
@@ -106,40 +104,41 @@ If $f(x)=ax+b$, then as $x \\to c$, value → $ac+b$
 <!-- ================================================= -->
 <section id="limits" class="locked">
 <div class="concept">
-<h2>Limits: Algebraic Simplification</h2>
-
-<input type="hidden" id="limits-i" value="0">
-
-<div class="slide">$(x^2-4)/(x-2) \\to 4$</div>
-<div class="slide" style="display:none">$(x^2-9)/(x-3) \\to 6$</div>
-<div class="slide" style="display:none">$(x^3-1)/(x-1) \\to 3$</div>
-<div class="slide" style="display:none">$(x^2-a^2)/(x-a) \\to 2a$</div>
-<div class="slide" style="display:none">Cancellation decides existence</div>
-
-<button onclick="prev('limits')">← Back</button>
-<button onclick="next('limits')">Next →</button>
+<h2>Limits – Algebraic Techniques</h2>
 
 <div class="math">
-<strong>Formulas (Limits)</strong><br>
-$$\\lim_{x \\to a} \\frac{x^n-a^n}{x-a}=na^{n-1}$$
+<strong>All Formulas (Limits)</strong><br>
+$$\lim_{x\\to a}(f(x)\\pm g(x)) = \lim f(x) \\pm \lim g(x)$$
+$$\lim_{x\\to a}f(x)g(x) = (\lim f)(\lim g)$$
+$$\lim_{x\\to a}\\frac{f(x)}{g(x)} = \\frac{\lim f}{\lim g}$$
+$$\lim_{x\\to a}\\frac{x^n-a^n}{x-a}=na^{n-1}$$
+Rationalization: multiply numerator & denominator by conjugate
 </div>
 
-<h3>Problem Lab</h3>
-<button onclick="toggleLab('limits-lab')">Show Lab</button>
+<button class="lab-btn" onclick="toggleLab('limits-lab')">
+Where to use – Problem Lab (5 Solved)
+</button>
+
 <div id="limits-lab" class="subjective-ans">
-<p><strong>Q:</strong> $\\lim_{x \\to 1} \\frac{x^3-1}{x-1}$</p>
-<p>Step 1: Factor → $(x-1)(x^2+x+1)$</p>
-<p>Step 2: Cancel $(x-1)$</p>
-<p>Step 3: Substitute $x=1$</p>
-<p><strong>Answer:</strong> $3$</p>
+
+<p><strong>1.</strong> $\lim_{x\\to2}\\frac{x^2-4}{x-2}$</p>
+<p>Factor → cancel → substitute → Answer = 4</p>
+
+<p><strong>2.</strong> $\lim_{x\\to3}\\frac{x^2-9}{x-3}$</p>
+<p>Answer = 6</p>
+
+<p><strong>3.</strong> $\lim_{x\\to1}\\frac{x^3-1}{x-1}$</p>
+<p>Factor → cancel → Answer = 3</p>
+
+<p><strong>4.</strong> $\lim_{x\\to0}\\frac{\sqrt{1+x}-1}{x}$</p>
+<p>Rationalize → Answer = 1/2</p>
+
+<p><strong>5.</strong> $\lim_{x\\to1}\\frac{x^{10}-1}{x^5-1}$</p>
+<p>Use power rule → Answer = 2</p>
+
 </div>
 
-<h3>Checkpoints</h3>
-<p>1️⃣ $\\lim_{x \\to 2} \\frac{x^2-4}{x-2}$ <button onclick="unlock('trig')">4 ✔</button></p>
-<p>2️⃣ $\\lim_{x \\to 3} \\frac{x^2-9}{x-3}$ <button>6</button></p>
-<p>3️⃣ $\\lim_{x \\to 1} \\frac{x^2-1}{x-1}$ <button>2</button></p>
-<p>4️⃣ $\\lim_{x \\to a} \\frac{x^2-a^2}{x-a}$ <button>2a</button></p>
-<p>5️⃣ Cancellation required ✔</p>
+<button onclick="unlock('trig')">Limits mastered ✔</button>
 
 </div>
 </section>
@@ -151,37 +150,39 @@ $$\\lim_{x \\to a} \\frac{x^n-a^n}{x-a}=na^{n-1}$$
 <div class="concept">
 <h2>Trigonometric Limits</h2>
 
-<input type="hidden" id="trig-i" value="0">
-
-<div class="slide">$\\sin x/x \\to 1$</div>
-<div class="slide" style="display:none">$\\tan x/x \\to 1$</div>
-<div class="slide" style="display:none">$\\sin 2x/x \\to 2$</div>
-<div class="slide" style="display:none">$\\sin 5x/x \\to 5$</div>
-<div class="slide" style="display:none">$(1-\\cos x)/x \\to 0$</div>
-
-<button onclick="prev('trig')">← Back</button>
-<button onclick="next('trig')">Next →</button>
-
 <div class="math">
-<strong>Formulas (Trig Limits)</strong><br>
-$$\\lim_{x \\to 0} \\frac{\\sin x}{x}=1$$
+<strong>All Formulas (Trig Limits)</strong><br>
+$$\lim_{x\\to0}\\frac{\sin x}{x}=1$$
+$$\lim_{x\\to0}\\frac{\tan x}{x}=1$$
+$$\lim_{x\\to0}\\frac{1-\cos x}{x}=0$$
+$$\lim_{x\\to0}\\frac{\sin ax}{x}=a$$
+$$\lim_{x\\to0}\\frac{e^x-1}{x}=1$$
 </div>
 
-<h3>Problem Lab</h3>
-<button onclick="toggleLab('trig-lab')">Show Lab</button>
+<button class="lab-btn" onclick="toggleLab('trig-lab')">
+Where to use – Problem Lab (5 Solved)
+</button>
+
 <div id="trig-lab" class="subjective-ans">
-<p><strong>Q:</strong> $\\lim_{x \\to 0} \\frac{\\sin 3x}{x}$</p>
-<p>Step 1: Write as $3 \\cdot \\frac{\\sin 3x}{3x}$</p>
-<p>Step 2: Use standard limit</p>
-<p><strong>Answer:</strong> $3$</p>
+
+<p><strong>1.</strong> $\lim_{x\\to0}\\frac{\sin3x}{x}$</p>
+<p>Multiply & divide → Answer = 3</p>
+
+<p><strong>2.</strong> $\lim_{x\\to0}\\frac{\sin5x}{x}$</p>
+<p>Answer = 5</p>
+
+<p><strong>3.</strong> $\lim_{x\\to0}\\frac{1-\cos x}{x^2}$</p>
+<p>Identity → Answer = 1/2</p>
+
+<p><strong>4.</strong> $\lim_{x\\to0}\\frac{\tan2x}{x}$</p>
+<p>Answer = 2</p>
+
+<p><strong>5.</strong> $\lim_{x\\to0}\\frac{e^{\sin x}-1}{x}$</p>
+<p>Chain limit → Answer = 1</p>
+
 </div>
 
-<h3>Checkpoints</h3>
-<p>1️⃣ $\\lim_{x \\to 0} \\sin x/x$ <button onclick="unlock('derivative')">1 ✔</button></p>
-<p>2️⃣ $\\lim_{x \\to 0} \\sin 2x/x$ <button>2</button></p>
-<p>3️⃣ $\\lim_{x \\to 0} \\tan x/x$ <button>1</button></p>
-<p>4️⃣ $\\lim_{x \\to 0} (1-\\cos x)/x$ <button>0</button></p>
-<p>5️⃣ Use trig identities ✔</p>
+<button onclick="unlock('derivative')">Trig limits done ✔</button>
 
 </div>
 </section>
@@ -193,36 +194,31 @@ $$\\lim_{x \\to 0} \\frac{\\sin x}{x}=1$$
 <div class="concept">
 <h2>Derivatives</h2>
 
-<input type="hidden" id="derivative-i" value="0">
-
-<div class="slide">$d/dx(x^2)=2x$</div>
-<div class="slide" style="display:none">$d/dx(x^3)=3x^2$</div>
-<div class="slide" style="display:none">$d/dx(5x)=5$</div>
-<div class="slide" style="display:none">$d/dx(c)=0$</div>
-<div class="slide" style="display:none">Slope = rate of change</div>
-
-<button onclick="prev('derivative')">← Back</button>
-<button onclick="next('derivative')">Next →</button>
-
 <div class="math">
-<strong>Formulas (Derivatives)</strong><br>
+<strong>All Formulas (Derivatives)</strong><br>
 $$\\frac{d}{dx}(x^n)=nx^{n-1}$$
+$$\\frac{d}{dx}(c)=0$$
+$$\\frac{d}{dx}(u+v)=u'+v'$$
+$$\\frac{d}{dx}(uv)=u'v+uv'$$
+$$\\frac{d}{dx}\\frac{u}{v}=\\frac{vu'-uv'}{v^2}$$
+$$\\frac{d}{dx}(\sin x)=\cos x$$
 </div>
 
-<h3>Problem Lab</h3>
-<button onclick="toggleLab('deriv-lab')">Show Lab</button>
+<button class="lab-btn" onclick="toggleLab('deriv-lab')">
+Where to use – Problem Lab (5 Solved)
+</button>
+
 <div id="deriv-lab" class="subjective-ans">
-<p><strong>Q:</strong> Differentiate $x^3+5x$</p>
-<p>Step 1: Apply power rule</p>
-<p>Step 2: $3x^2+5$</p>
+
+<p><strong>1.</strong> Differentiate $x^4$ → $4x^3$</p>
+<p><strong>2.</strong> Differentiate $5x^2$ → $10x$</p>
+<p><strong>3.</strong> Differentiate $x\sin x$ → Product rule</p>
+<p><strong>4.</strong> Differentiate $\frac{x}{x+1}$ → Quotient rule</p>
+<p><strong>5.</strong> Differentiate $\sin x+\cos x$</p>
+
 </div>
 
-<h3>Checkpoints</h3>
-<p>1️⃣ $d/dx(x^4)$ <button onclick="unlock('first')">4x^3 ✔</button></p>
-<p>2️⃣ $d/dx(7)$ <button>0</button></p>
-<p>3️⃣ $d/dx(2x)$ <button>2</button></p>
-<p>4️⃣ $d/dx(x)$ <button>1</button></p>
-<p>5️⃣ Power rule used ✔</p>
+<button onclick="unlock('first')">Derivatives clear ✔</button>
 
 </div>
 </section>
@@ -234,31 +230,35 @@ $$\\frac{d}{dx}(x^n)=nx^{n-1}$$
 <div class="concept">
 <h2>First Principles</h2>
 
-<input type="hidden" id="first-i" value="0">
-
-<div class="slide">$[f(x+h)-f(x)]/h$</div>
-<div class="slide" style="display:none">$h \\to 0$</div>
-<div class="slide" style="display:none">$f(x)=x^2$</div>
-<div class="slide" style="display:none">$f(x)=x$</div>
-<div class="slide" style="display:none">Foundation of calculus</div>
-
-<button onclick="prev('first')">← Back</button>
-<button onclick="next('first')">Next →</button>
-
 <div class="math">
-<strong>Formulas (First Principles)</strong><br>
-$$\\lim_{h \\to 0} \\frac{f(x+h)-f(x)}{h}$$
+<strong>All Formulas (First Principles)</strong><br>
+$$\\frac{dy}{dx} = \\lim_{h\\to0}\\frac{f(x+h)-f(x)}{h}$$
+Derived results:<br>
+$f(x)=x^2 \\Rightarrow 2x$<br>
+$f(x)=x^3 \\Rightarrow 3x^2$
 </div>
 
-<h3>Problem Lab</h3>
-<button onclick="toggleLab('first-lab')">Show Lab</button>
+<button class="lab-btn" onclick="toggleLab('first-lab')">
+Where to use – Problem Lab (5 Solved)
+</button>
+
 <div id="first-lab" class="subjective-ans">
-<p><strong>Q:</strong> Derivative of $x^2$</p>
-<p>Step 1: $(x+h)^2-x^2$</p>
-<p>Step 2: $2xh+h^2$</p>
-<p>Step 3: Divide by $h$</p>
-<p>Step 4: Limit $h \\to 0$</p>
-<p><strong>Answer:</strong> $2x$</p>
+
+<p><strong>1.</strong> Derivative of $x^2$ (step-by-step)</p>
+<p>Expand → simplify → limit → $2x$</p>
+
+<p><strong>2.</strong> Derivative of $x^3$</p>
+<p>Answer = $3x^2$</p>
+
+<p><strong>3.</strong> Derivative of $3x$</p>
+<p>Answer = 3</p>
+
+<p><strong>4.</strong> Derivative of constant</p>
+<p>Answer = 0</p>
+
+<p><strong>5.</strong> Why first principles matter?</p>
+<p>All formulas come from it.</p>
+
 </div>
 
 </div>
@@ -269,30 +269,38 @@ $$\\lim_{h \\to 0} \\frac{f(x+h)-f(x)}{h}$$
 <!-- ================================================= -->
 <section>
 <div class="concept">
-<h2>Master List – Step-by-Step</h2>
+<h2>Master List – Multi-Formula Problems</h2>
 
-<p><strong>Problem:</strong> $\\lim_{x \\to 0} \\frac{\\sin 2x}{x}$</p>
-<p>Step 1: Write as $2 \\cdot \\frac{\\sin 2x}{2x}$</p>
-<p>Step 2: Use $\\lim \\sin t/t=1$</p>
-<p><strong>Answer:</strong> $2$</p>
+<div class="math">
+<strong>Remaining / Mixed Formulas</strong><br>
+Limits + Trig + Derivatives combined
+</div>
+
+<p><strong>Problem 1:</strong> $\lim_{x\\to0}\\frac{\sin2x}{x}$</p>
+<p>Step 1: Rewrite → $2\\cdot\\frac{\sin2x}{2x}$</p>
+<p>Step 2: Use trig limit → Answer = 2</p>
 
 <hr>
 
-<p><strong>Problem:</strong> $\\frac{d}{dx}(x^3)$</p>
-<p>Step 1: Apply power rule</p>
-<p><strong>Answer:</strong> $3x^2$</p>
+<p><strong>Problem 2:</strong> $\frac{d}{dx}\\left(\\frac{x^2-1}{x-1}\\right)$</p>
+<p>Step 1: Simplify limit expression</p>
+<p>Step 2: Differentiate result</p>
+<p>Answer = 2</p>
+
+<hr>
+
+<p><strong>Problem 3:</strong> $\lim_{h\\to0}\\frac{\sin(x+h)-\sin x}{h}$</p>
+<p>Step 1: Trig identity</p>
+<p>Step 2: First principles</p>
+<p>Answer = $\cos x$</p>
 
 </div>
 </section>
 
 <footer>
-<p>You are now ready for exercises.</p>
+<p>Chapter completed. Proceed to exercises.</p>
 <a href="exercise.html"><button>Go to Exercises →</button></a>
 </footer>
-
-<script>
-["approach","limits","trig","derivative","first"].forEach(id=>show(id,0));
-</script>
 
 </body>
 </html>
