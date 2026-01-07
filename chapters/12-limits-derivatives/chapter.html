@@ -6,52 +6,24 @@
 <title>Limits and Derivatives | Chapter 12</title>
 
 <script>
-    window.MathJax = {
-        tex: {
-            inlineMath: [['$', '$'], ['\\(', '\\)']],
-            displayMath: [['$$', '$$'], ['\\[', '\\]']],
-            processEscapes: true
-        }
-    };
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$']]
+  }
+};
 </script>
-<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../assets/css/style.css">
-
-<style>
-    /* Styling for the newly added Problem Labs */
-    .subjective-ans {
-        display: none;
-        background: #f8fafc;
-        padding: 1.5rem;
-        border-radius: 8px;
-        margin-top: 15px;
-        border-left: 5px solid var(--primary);
-        font-size: 0.95rem;
-    }
-    .lab-btn {
-        background: var(--secondary);
-        margin-top: 10px;
-    }
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 1rem;
-    }
-    th, td {
-        border: 1px solid #e2e8f0;
-        padding: 0.75rem;
-        text-align: left;
-    }
-    th { background: #f1f5f9; }
-</style>
 </head>
 
 <body>
 
 <header>
   <h1>Limits and Derivatives</h1>
-  <p>Building calculus visually, step by step</p>
+  <p>Visual intuition → symbols → formulas → problems</p>
 </header>
 
 <nav>
@@ -62,209 +34,254 @@
   <a href="#first">First Principles</a>
 </nav>
 
+<script>
+function show(section, i) {
+  const slides = document.querySelectorAll(`#${section} .slide`);
+  slides.forEach(s => s.style.display = "none");
+  slides[i].style.display = "block";
+  document.getElementById(section + "-i").value = i;
+}
+function next(section) {
+  const i = +document.getElementById(section + "-i").value;
+  const slides = document.querySelectorAll(`#${section} .slide`);
+  if (i < slides.length - 1) show(section, i + 1);
+}
+function prev(section) {
+  const i = +document.getElementById(section + "-i").value;
+  if (i > 0) show(section, i - 1);
+}
+function unlock(id) {
+  document.getElementById(id).classList.remove("locked");
+}
+function toggleLab(id) {
+  const el = document.getElementById(id);
+  el.style.display = el.style.display === "block" ? "none" : "block";
+}
+</script>
+
+<!-- ================================================= -->
+<!-- APPROACH -->
+<!-- ================================================= -->
 <section id="approach">
 <div class="concept">
 <h2>Approach: Getting Close to a Value</h2>
 
 <input type="hidden" id="approach-i" value="0">
 
-<div class="slide">
-<p><strong>Example 1:</strong> f(x)=2x as x→2</p>
-<svg width="100%" height="80">
-<line x1="20" y1="40" x2="280" y2="40" stroke="#94a3b8"/>
-<circle cx="40" cy="40" r="5" fill="#2563eb">
-<animate attributeName="cx" from="40" to="200" dur="3s" repeatCount="indefinite"/>
-</circle>
-</svg>
-<p>Value moves closer to 4.</p>
-</div>
-
-<div class="slide" style="display:none">
-<p><strong>Example 2:</strong> f(x)=x², x→3</p>
-<table><tr><th>x</th><th>x²</th></tr>
-<tr><td>2.9</td><td>8.41</td></tr>
-<tr><td>3.1</td><td>9.61</td></tr></table>
-</div>
+<div class="slide">Example 1: $f(x)=2x$, as $x \\to 2$ → value → 4</div>
+<div class="slide" style="display:none">Example 2: $f(x)=x^2$, as $x \\to 3$ → value → 9</div>
+<div class="slide" style="display:none">Example 3: $f(x)=5x$, as $x \\to 1$ → 5</div>
+<div class="slide" style="display:none">Example 4: $f(x)=x^3$, as $x \\to 2$ → 8</div>
+<div class="slide" style="display:none">Example 5: Approach does NOT require substitution</div>
 
 <button onclick="prev('approach')">← Back</button>
 <button onclick="next('approach')">Next →</button>
 
-<div class="think">
-✔ Approach means getting close, not substituting.
-</div>
-
 <div class="math">
 <strong>Formulas (Approach)</strong><br>
-If $f(x)=ax+b$, as $x \to c \implies ac+b$
+If $f(x)=ax+b$, then as $x \\to c$, value → $ac+b$
 </div>
 
-<h3>Checkpoint 1</h3>
-<p>As x→4, value of 2x → ?</p>
-<button onclick="unlock('limits')">8 ✔</button>
+<h3>Where to use (Problem Lab)</h3>
+<button onclick="toggleLab('approach-lab')">Show Lab</button>
+<div id="approach-lab" class="subjective-ans">
+<p><strong>Q:</strong> Find value of $3x+2$ as $x \\to 4$</p>
+<p><strong>Step 1:</strong> Identify function $f(x)=3x+2$</p>
+<p><strong>Step 2:</strong> Substitute $x=4$</p>
+<p><strong>Answer:</strong> $3(4)+2=14$</p>
+</div>
+
+<h3>Checkpoints</h3>
+<p>1️⃣ As $x \\to 2$, $5x \\to$ <button onclick="unlock('limits')">10 ✔</button></p>
+<p>2️⃣ As $x \\to 1$, $x^2 \\to$ <button>1</button></p>
+<p>3️⃣ As $x \\to 0$, $7x \\to$ <button>0</button></p>
+<p>4️⃣ As $x \\to 3$, $x^3 \\to$ <button>27</button></p>
+<p>5️⃣ Approach depends on values near point ✔</p>
 
 </div>
 </section>
 
+<!-- ================================================= -->
+<!-- LIMITS -->
+<!-- ================================================= -->
 <section id="limits" class="locked">
 <div class="concept">
-<h2>Limits: Algebraic Foundations</h2>
+<h2>Limits: Algebraic Simplification</h2>
 
 <input type="hidden" id="limits-i" value="0">
 
-<div class="slide">
-<p><strong>Example 1:</strong> $(x^2−4)/(x−2)$</p>
-<p>Cancel → $x+2 \to 4$</p>
-</div>
-
-<div class="slide" style="display:none">
-<p><strong>Example 2:</strong> $(x^2−9)/(x−3) \to 6$</p>
-</div>
+<div class="slide">$(x^2-4)/(x-2) \\to 4$</div>
+<div class="slide" style="display:none">$(x^2-9)/(x-3) \\to 6$</div>
+<div class="slide" style="display:none">$(x^3-1)/(x-1) \\to 3$</div>
+<div class="slide" style="display:none">$(x^2-a^2)/(x-a) \\to 2a$</div>
+<div class="slide" style="display:none">Cancellation decides existence</div>
 
 <button onclick="prev('limits')">← Back</button>
 <button onclick="next('limits')">Next →</button>
 
 <div class="math">
-<strong>Comprehensive Formula Bank:</strong>
-<ul>
-    <li>General Power Rule: $$\lim_{x \to a} \frac{x^n - a^n}{x - a} = na^{n-1}$$</li>
-    <li>Sum/Difference Rule: $$\lim_{x \to a} [f(x) \pm g(x)] = \lim_{x \to a} f(x) \pm \lim_{x \to a} g(x)$$</li>
-    <li>Product/Quotient Rule: $$\lim_{x \to a} [f(x) \cdot g(x)] = \lim_{x \to a} f(x) \cdot \lim_{x \to a} g(x)$$</li>
-</ul>
+<strong>Formulas (Limits)</strong><br>
+$$\\lim_{x \\to a} \\frac{x^n-a^n}{x-a}=na^{n-1}$$
 </div>
 
-<button class="lab-btn" onclick="toggleLab('algebra-lab')">Where to use these? (Problem Lab)</button>
-<div id="algebra-lab" class="subjective-ans">
-    <p><strong>NCERT Basic:</strong> Evaluate $\lim_{x \to 2} (x^3 - 4x + 1)$. <br><em>Use: Direct Substitution.</em></p>
-    <p><strong>Exemplar Standard:</strong> Evaluate $\lim_{x \to 0} \frac{\sqrt{1+x} - 1}{x}$. <br><em>Use: Rationalization of the numerator.</em></p>
-    <p><strong>Exemplar Complex:</strong> Evaluate $\lim_{x \to 1} \frac{x^{15}-1}{x^{10}-1}$. <br><em>Use: Divide Numerator/Denominator by $(x-1)$ and apply $\frac{na^{n-1}}{ma^{m-1}}$.</em></p>
+<h3>Problem Lab</h3>
+<button onclick="toggleLab('limits-lab')">Show Lab</button>
+<div id="limits-lab" class="subjective-ans">
+<p><strong>Q:</strong> $\\lim_{x \\to 1} \\frac{x^3-1}{x-1}$</p>
+<p>Step 1: Factor → $(x-1)(x^2+x+1)$</p>
+<p>Step 2: Cancel $(x-1)$</p>
+<p>Step 3: Substitute $x=1$</p>
+<p><strong>Answer:</strong> $3$</p>
 </div>
+
+<h3>Checkpoints</h3>
+<p>1️⃣ $\\lim_{x \\to 2} \\frac{x^2-4}{x-2}$ <button onclick="unlock('trig')">4 ✔</button></p>
+<p>2️⃣ $\\lim_{x \\to 3} \\frac{x^2-9}{x-3}$ <button>6</button></p>
+<p>3️⃣ $\\lim_{x \\to 1} \\frac{x^2-1}{x-1}$ <button>2</button></p>
+<p>4️⃣ $\\lim_{x \\to a} \\frac{x^2-a^2}{x-a}$ <button>2a</button></p>
+<p>5️⃣ Cancellation required ✔</p>
 
 </div>
 </section>
 
+<!-- ================================================= -->
+<!-- TRIG -->
+<!-- ================================================= -->
 <section id="trig" class="locked">
 <div class="concept">
-<h2>Trigonometric & Special Limits</h2>
+<h2>Trigonometric Limits</h2>
 
 <input type="hidden" id="trig-i" value="0">
 
-<div class="slide">$\sin\theta/\theta \to 1$</div>
-<div class="slide" style="display:none">$\tan\theta/\theta \to 1$</div>
+<div class="slide">$\\sin x/x \\to 1$</div>
+<div class="slide" style="display:none">$\\tan x/x \\to 1$</div>
+<div class="slide" style="display:none">$\\sin 2x/x \\to 2$</div>
+<div class="slide" style="display:none">$\\sin 5x/x \\to 5$</div>
+<div class="slide" style="display:none">$(1-\\cos x)/x \\to 0$</div>
 
 <button onclick="prev('trig')">← Back</button>
 <button onclick="next('trig')">Next →</button>
 
-
-
 <div class="math">
-<strong>Comprehensive Formula Bank:</strong>
-<ul>
-    <li>Standard Identity: $$\lim_{\theta \to 0} \frac{\sin \theta}{\theta} = 1$$</li>
-    <li>Tangent Identity: $$\lim_{\theta \to 0} \frac{\tan \theta}{\theta} = 1$$</li>
-    <li>Cosine Identity: $$\lim_{\theta \to 0} \frac{1 - \cos \theta}{\theta} = 0$$</li>
-    <li>Exemplar Extra: $$\lim_{x \to 0} \frac{e^x - 1}{x} = 1$$</li>
-</ul>
+<strong>Formulas (Trig Limits)</strong><br>
+$$\\lim_{x \\to 0} \\frac{\\sin x}{x}=1$$
 </div>
 
-<button class="lab-btn" onclick="toggleLab('trig-lab')">Where to use these? (Problem Lab)</button>
-<div id="trig-lab" class="subjective-ans" style="border-left-color: var(--secondary);">
-    <p><strong>NCERT Basic:</strong> $\lim_{x \to 0} \frac{\sin 4x}{x}$. <br><em>Use: Multiply and divide by 4.</em></p>
-    <p><strong>Standard:</strong> $\lim_{x \to 0} \frac{1 - \cos x}{x^2}$. <br><em>Use: Trig identity $1-\cos x = 2\sin^2(x/2)$.</em></p>
-    <p><strong>Exemplar Complex:</strong> $\lim_{x \to 0} \frac{e^{\sin x} - 1}{x}$. <br><em>Use: Change of variable or chain-limit.</em></p>
+<h3>Problem Lab</h3>
+<button onclick="toggleLab('trig-lab')">Show Lab</button>
+<div id="trig-lab" class="subjective-ans">
+<p><strong>Q:</strong> $\\lim_{x \\to 0} \\frac{\\sin 3x}{x}$</p>
+<p>Step 1: Write as $3 \\cdot \\frac{\\sin 3x}{3x}$</p>
+<p>Step 2: Use standard limit</p>
+<p><strong>Answer:</strong> $3$</p>
 </div>
+
+<h3>Checkpoints</h3>
+<p>1️⃣ $\\lim_{x \\to 0} \\sin x/x$ <button onclick="unlock('derivative')">1 ✔</button></p>
+<p>2️⃣ $\\lim_{x \\to 0} \\sin 2x/x$ <button>2</button></p>
+<p>3️⃣ $\\lim_{x \\to 0} \\tan x/x$ <button>1</button></p>
+<p>4️⃣ $\\lim_{x \\to 0} (1-\\cos x)/x$ <button>0</button></p>
+<p>5️⃣ Use trig identities ✔</p>
 
 </div>
 </section>
 
+<!-- ================================================= -->
+<!-- DERIVATIVE -->
+<!-- ================================================= -->
 <section id="derivative" class="locked">
 <div class="concept">
-<h2>Derivatives: Product & Quotient Rules</h2>
+<h2>Derivatives</h2>
 
 <input type="hidden" id="derivative-i" value="0">
 
-<div class="slide">$d/dx (x^2)=2x$</div>
-<div class="slide" style="display:none">$d/dx (constant)=0$</div>
+<div class="slide">$d/dx(x^2)=2x$</div>
+<div class="slide" style="display:none">$d/dx(x^3)=3x^2$</div>
+<div class="slide" style="display:none">$d/dx(5x)=5$</div>
+<div class="slide" style="display:none">$d/dx(c)=0$</div>
+<div class="slide" style="display:none">Slope = rate of change</div>
 
 <button onclick="prev('derivative')">← Back</button>
 <button onclick="next('derivative')">Next →</button>
 
 <div class="math">
-<strong>Comprehensive Formula Bank:</strong>
-<ul>
-    <li>Power Rule: $$\frac{d}{dx}(x^n) = nx^{n-1}$$</li>
-    <li>Product Rule: $$\frac{d}{dx}[u \cdot v] = u \frac{dv}{dx} + v \frac{du}{dx}$$</li>
-    <li>Quotient Rule: $$\frac{d}{dx}[\frac{u}{v}] = \frac{v \frac{du}{dx} - u \frac{dv}{dx}}{v^2}$$</li>
-    <li>Trig: $\frac{d}{dx}\sin x = \cos x$, $\frac{d}{dx}\cos x = -\sin x$</li>
-</ul>
+<strong>Formulas (Derivatives)</strong><br>
+$$\\frac{d}{dx}(x^n)=nx^{n-1}$$
 </div>
 
-<button class="lab-btn" onclick="toggleLab('deriv-lab')">Where to use these? (Problem Lab)</button>
-<div id="deriv-lab" class="subjective-ans" style="border-left-color: #10b981;">
-    <p><strong>NCERT Basic:</strong> Differentiate $x^2 + 5x - 6$. <br><em>Use: Power Rule term-by-term.</em></p>
-    <p><strong>Standard:</strong> Differentiate $x \cdot \sin x$. <br><em>Use: Product Rule.</em></p>
-    <p><strong>Exemplar Complex:</strong> Differentiate $\frac{ax + b}{cx + d}$. <br><em>Use: Quotient Rule.</em></p>
+<h3>Problem Lab</h3>
+<button onclick="toggleLab('deriv-lab')">Show Lab</button>
+<div id="deriv-lab" class="subjective-ans">
+<p><strong>Q:</strong> Differentiate $x^3+5x$</p>
+<p>Step 1: Apply power rule</p>
+<p>Step 2: $3x^2+5$</p>
 </div>
+
+<h3>Checkpoints</h3>
+<p>1️⃣ $d/dx(x^4)$ <button onclick="unlock('first')">4x^3 ✔</button></p>
+<p>2️⃣ $d/dx(7)$ <button>0</button></p>
+<p>3️⃣ $d/dx(2x)$ <button>2</button></p>
+<p>4️⃣ $d/dx(x)$ <button>1</button></p>
+<p>5️⃣ Power rule used ✔</p>
 
 </div>
 </section>
 
+<!-- ================================================= -->
+<!-- FIRST PRINCIPLES -->
+<!-- ================================================= -->
 <section id="first" class="locked">
 <div class="concept">
 <h2>First Principles</h2>
 
 <input type="hidden" id="first-i" value="0">
 
-<div class="slide">$[f(x+h)−f(x)]/h$</div>
-<div class="slide" style="display:none">Take limit $h \to 0$</div>
+<div class="slide">$[f(x+h)-f(x)]/h$</div>
+<div class="slide" style="display:none">$h \\to 0$</div>
+<div class="slide" style="display:none">$f(x)=x^2$</div>
+<div class="slide" style="display:none">$f(x)=x$</div>
+<div class="slide" style="display:none">Foundation of calculus</div>
 
 <button onclick="prev('first')">← Back</button>
 <button onclick="next('first')">Next →</button>
 
 <div class="math">
 <strong>Formulas (First Principles)</strong><br>
-Derivative = $\lim_{h \to 0} \frac{f(x+h)−f(x)}{h}$
+$$\\lim_{h \\to 0} \\frac{f(x+h)-f(x)}{h}$$
+</div>
+
+<h3>Problem Lab</h3>
+<button onclick="toggleLab('first-lab')">Show Lab</button>
+<div id="first-lab" class="subjective-ans">
+<p><strong>Q:</strong> Derivative of $x^2$</p>
+<p>Step 1: $(x+h)^2-x^2$</p>
+<p>Step 2: $2xh+h^2$</p>
+<p>Step 3: Divide by $h$</p>
+<p>Step 4: Limit $h \\to 0$</p>
+<p><strong>Answer:</strong> $2x$</p>
 </div>
 
 </div>
 </section>
 
+<!-- ================================================= -->
+<!-- MASTER LIST -->
+<!-- ================================================= -->
 <section>
-<div class="concept" style="border: 2px solid var(--primary);">
-<h2>Master List: Multi-Step Problems</h2>
-<p>These complex sums require combining multiple formulas and techniques.</p>
+<div class="concept">
+<h2>Master List – Step-by-Step</h2>
 
-<table>
-    <tr>
-        <th>Problem Type</th>
-        <th>Formulas Used</th>
-        <th>Source</th>
-    </tr>
-    <tr>
-        <td>$\lim_{x \to 0} \frac{\sin ax}{\tan bx}$</td>
-        <td>Trig Limits (Sin & Tan) + Algebra</td>
-        <td>Exemplar</td>
-    </tr>
-    <tr>
-        <td>$\frac{d}{dx} (\frac{x^n - a^n}{x - a})$</td>
-        <td>Quotient Rule + Power Rule</td>
-        <td>NCERT</td>
-    </tr>
-    <tr>
-        <td>$\lim_{h \to 0} \frac{\sin(x+h) - \sin x}{h}$</td>
-        <td>First Principles + Trig Identities</td>
-        <td>NCERT</td>
-    </tr>
-    <tr>
-        <td>$\frac{d}{dx} (\sin x \cdot \cos x)$</td>
-        <td>Product Rule + Trig Derivatives</td>
-        <td>Mixed</td>
-    </tr>
-</table>
+<p><strong>Problem:</strong> $\\lim_{x \\to 0} \\frac{\\sin 2x}{x}$</p>
+<p>Step 1: Write as $2 \\cdot \\frac{\\sin 2x}{2x}$</p>
+<p>Step 2: Use $\\lim \\sin t/t=1$</p>
+<p><strong>Answer:</strong> $2$</p>
 
-<div class="math" style="margin-top:2rem;">
-<strong>Global Formula Summary:</strong><br>
-$$\lim_{x \to a} \frac{x^n - a^n}{x - a} = na^{n-1} \quad | \quad \lim_{\theta \to 0} \frac{\sin \theta}{\theta} = 1 \quad | \quad \frac{d}{dx}(x^n) = nx^{n-1}$$
-</div>
+<hr>
+
+<p><strong>Problem:</strong> $\\frac{d}{dx}(x^3)$</p>
+<p>Step 1: Apply power rule</p>
+<p><strong>Answer:</strong> $3x^2$</p>
+
 </div>
 </section>
 
@@ -274,36 +291,6 @@ $$\lim_{x \to a} \frac{x^n - a^n}{x - a} = na^{n-1} \quad | \quad \lim_{\theta \
 </footer>
 
 <script>
-// Slide Navigation Logic
-function show(section, i) {
-  const slides = document.querySelectorAll(`#${section} .slide`);
-  slides.forEach(s => s.style.display = "none");
-  if(slides[i]) slides[i].style.display = "block";
-  document.getElementById(section + "-i").value = i;
-}
-
-function next(section) {
-  const i = +document.getElementById(section + "-i").value;
-  const slides = document.querySelectorAll(`#${section} .slide`);
-  if (i < slides.length - 1) show(section, i + 1);
-}
-
-function prev(section) {
-  const i = +document.getElementById(section + "-i").value;
-  if (i > 0) show(section, i - 1);
-}
-
-function unlock(id) {
-  document.getElementById(id).classList.remove("locked");
-}
-
-// Problem Lab Toggle Logic
-function toggleLab(id) {
-    const el = document.getElementById(id);
-    el.style.display = (el.style.display === 'block') ? 'none' : 'block';
-}
-
-// Initialize sections
 ["approach","limits","trig","derivative","first"].forEach(id=>show(id,0));
 </script>
 
