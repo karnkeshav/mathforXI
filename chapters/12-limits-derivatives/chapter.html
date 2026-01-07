@@ -37,16 +37,6 @@ window.MathJax = {
 .mcq button { margin-right:0.5rem; }
 .mcq .correct { color:green; font-weight:600; }
 .math { overflow-x:auto; }
-
-/* Grid for side-by-side sections */
-.grid-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-}
-@media (max-width: 900px) {
-  .grid-container { grid-template-columns: 1fr; }
-}
 </style>
 </head>
 
@@ -62,7 +52,7 @@ window.MathJax = {
 <a href="#limits">Limits</a>
 <a href="#trig">Trig</a>
 <a href="#derivative">Derivative</a>
-<a href="#first">First Principles & Tricks</a>
+<a href="#first">First Principles</a>
 </nav>
 
 <script>
@@ -95,6 +85,7 @@ function toggleLab(id){
 <section id="approach">
 <div class="concept">
 <h2>Approach</h2>
+
 <input type="hidden" id="approach-i" value="0">
 
 <div class="slide">
@@ -110,7 +101,11 @@ function toggleLab(id){
 
 <div class="slide">
 <p><strong>Example 2:</strong> $f(x)=x^2$, $x\to3$</p>
-<table><tr><th>x</th><th>x²</th></tr><tr><td>2.9</td><td>8.41</td></tr><tr><td>3.1</td><td>9.61</td></tr></table>
+<table>
+<tr><th>x</th><th>x²</th></tr>
+<tr><td>2.9</td><td>8.41</td></tr>
+<tr><td>3.1</td><td>9.61</td></tr>
+</table>
 </div>
 
 <div class="slide"><p><strong>Example 3:</strong> $f(x)=5x$, $x\to1$ → 5</p></div>
@@ -123,145 +118,391 @@ function toggleLab(id){
 <div class="math">
 <strong>All Formulas (Approach)</strong><br>
 If $f(x)=ax+b$, then as $x\to c$, value → $ac+b$<br>
-If $f(x)=x^n$, then as $x\to a$, value → $a^n$
+If $f(x)=x^n$, then as $x\to a$, value → $a^n$<br>
+Approach depends on values near the point, not at the point
 </div>
 
 <button class="lab-btn" onclick="toggleLab('approach-lab')">Where to use – Problem Lab</button>
 <div id="approach-lab" class="subjective-ans">
-<p><strong>Solving via Direct Substitution:</strong></p>
-<p>1. Check if the function is a simple polynomial or rational function.</p>
-<p>2. Ensure the denominator does not become zero at the approach point.</p>
-<p>3. Substitute the value of $x$ directly into the expression to find the limit.</p>
+<p><strong>How to Solve using Direct Substitution:</strong></p>
+<p><strong>Step 1:</strong> Check if the function is defined at the approach point (no $0/0$).</p>
+<p><strong>Step 2:</strong> Substitute the value directly into the variable.</p>
+<hr>
+<p><strong>1. $5x+1$ as $x\to2$:</strong> Substitute $x=2 \implies 5(2)+1 = 11$.</p>
+<p><strong>2. $x^2$ as $x\to4$:</strong> Substitute $x=4 \implies 4^2 = 16$.</p>
+<p><strong>3. $3x^2$ as $x\to1$:</strong> Substitute $x=1 \implies 3(1)^2 = 3$.</p>
+<p><strong>4. $1/x$ as $x\to5$:</strong> Substitute $x=5 \implies 1/5$.</p>
+<p><strong>5. Continuity:</strong> Use this method for polynomials and simple rational functions where the denominator is non-zero.</p>
 </div>
 
 <h3>Checkpoints</h3>
 <div class="mcq">
-<p>1. $2x$ as $x\to3$ = <button onclick="tick(this,'limits')">6</button><button>5</button></p>
-<p>2. $x^2$ as $x\to2$ = <button onclick="tick(this)">4</button><button>2</button></p>
+<p>1. $2x$ as $x\to3$ =<br>
+<button onclick="tick(this,'limits')">6</button>
+<button>5</button></p>
+
+<p>2. $x^2$ as $x\to2$ =<br>
+<button onclick="tick(this)">4</button>
+<button>2</button></p>
+
+<p>3. $5x$ as $x\to0$ =<br>
+<button onclick="tick(this)">0</button>
+<button>5</button></p>
+
+<p>4. $x^3$ as $x\to1$ =<br>
+<button onclick="tick(this)">1</button>
+<button>3</button></p>
+
+<p>5. Approach uses nearby values =<br>
+<button onclick="tick(this)">True</button>
+<button>False</button></p>
 </div>
+
 </div>
 </section>
 
 <section id="limits" class="locked">
 <div class="concept">
 <h2>Limits</h2>
+
 <input type="hidden" id="limits-i" value="0">
 
 <div class="slide">$(x^2-4)/(x-2)$ → cancel → 4</div>
 <div class="slide">$(x^2-9)/(x-3)$ → 6</div>
 <div class="slide">$(x^3-1)/(x-1)$ → 3</div>
+<div class="slide">$(x^2-a^2)/(x-a)$ → $2a$</div>
+<div class="slide">Limit exists if cancellation possible</div>
 
 <button onclick="prev('limits')">← Back</button>
 <button onclick="next('limits')">Next →</button>
 
 <div class="math">
-<strong>All Formulas (Limits)</strong>
+<strong>All Formulas (Limits)</strong><br>
+$$\lim_{x\to a}(f(x)\pm g(x)) = \lim f(x) \pm \lim g(x)$$
+$$\lim_{x\to a}f(x)g(x) = (\lim f)(\lim g)$$
+$$\lim_{x\to a}\frac{f(x)}{g(x)} = \frac{\lim f}{\lim g}$$
 $$\lim_{x\to a}\frac{x^n-a^n}{x-a}=na^{n-1}$$
+Rationalization: multiply numerator & denominator by conjugate
 </div>
 
 <button class="lab-btn" onclick="toggleLab('limits-lab')">Where to use – Problem Lab</button>
 <div id="limits-lab" class="subjective-ans">
-<p><strong>Tackling $0/0$ Forms:</strong></p>
-<p>1. <strong>Factorization:</strong> If you see a polynomial, factor it to cancel terms like $(x-a)$.</p>
-<p>2. <strong>Rationalization:</strong> If there are square roots, multiply by the conjugate.</p>
-<p>3. <strong>Standard Formula:</strong> Identify if the problem matches $\frac{x^n-a^n}{x-a}$.</p>
+<p><strong>Solving Indeterminate Forms ($0/0$):</strong></p>
+<p><strong>Strategy A: Factoring.</strong> Break down polynomials to cancel the term causing $0/0$.</p>
+<p><strong>Strategy B: Rationalization.</strong> Used when square roots are present.</p>
+<p><strong>Strategy C: Power Formula.</strong> Apply $\lim \frac{x^n-a^n}{x-a}$ when powers are high.</p>
+<hr>
+<p><strong>1. $\frac{x^2-4}{x-2}$ at 2:</strong> Factor $x^2-4$ into $(x-2)(x+2)$. Cancel $(x-2)$. Remaining: $x+2$. Substitute $x=2 \implies 4$.</p>
+<p><strong>2. $\frac{\sqrt{1+x}-1}{x}$ at 0:</strong> Multiply top and bottom by $(\sqrt{1+x}+1)$. Numerator becomes $(1+x)-1 = x$. Cancel $x$. Substitute $x=0 \implies 1/(\sqrt{1}+1) = 1/2$.</p>
+<p><strong>3. $\frac{x^{10}-1}{x^5-1}$ at 1:</strong> Use the formula twice or divide top/bottom by $(x-1)$. Result: $\frac{10(1)^9}{5(1)^4} = 2$.</p>
 </div>
+
+<h3>Checkpoints</h3>
+<div class="mcq">
+<p>1. $\frac{x^2-4}{x-2}$ at 2 =<br>
+<button onclick="tick(this,'trig')">4</button>
+<button>2</button></p>
+
+<p>2. $\frac{x^2-9}{x-3}$ =<br>
+<button onclick="tick(this)">6</button>
+<button>3</button></p>
+
+<p>3. $\frac{x^3-1}{x-1}$ =<br>
+<button onclick="tick(this)">3</button>
+<button>1</button></p>
+
+<p>4. $\frac{x^2-a^2}{x-a}$ =<br>
+<button onclick="tick(this)">2a</button>
+<button>a</button></p>
+
+<p>5. Cancellation required =<br>
+<button onclick="tick(this)">Yes</button>
+<button>No</button></p>
+</div>
+
 </div>
 </section>
 
 <section id="trig" class="locked">
 <div class="concept">
 <h2>Trigonometric Limits</h2>
+
 <input type="hidden" id="trig-i" value="0">
 
 <div class="slide">$\frac{\sin x}{x}\to1$</div>
+<div class="slide">$\frac{\tan x}{x}\to1$</div>
+<div class="slide">$\frac{\sin2x}{x}\to2$</div>
 <div class="slide">$\frac{1-\cos x}{x}\to0$</div>
+<div class="slide">Standard trig limits form base of calculus</div>
 
 <button onclick="prev('trig')">← Back</button>
 <button onclick="next('trig')">Next →</button>
 
-
-
 <div class="math">
-<strong>All Formulas (Trig Limits)</strong>
-$$\lim_{x\to0}\frac{\sin x}{x}=1 \quad | \quad \lim_{x\to0}\frac{\tan x}{x}=1 \quad | \quad \lim_{x\to0}\frac{1-\cos x}{x}=0$$
+<strong>All Formulas (Trig Limits)</strong><br>
+$$\lim_{x\to0}\frac{\sin x}{x}=1$$
+$$\lim_{x\to0}\frac{\tan x}{x}=1$$
+$$\lim_{x\to0}\frac{1-\cos x}{x}=0$$
+$$\lim_{x\to0}\frac{\sin ax}{x}=a$$
+$$\lim_{x\to0}\frac{e^x-1}{x}=1$$
 </div>
 
 <button class="lab-btn" onclick="toggleLab('trig-lab')">Where to use – Problem Lab</button>
 <div id="trig-lab" class="subjective-ans">
-<p><strong>Mastering Trig Limits:</strong></p>
-<p>1. <strong>Angle Matching:</strong> Ensure the angle in $\sin(kx)$ matches the denominator $kx$.</p>
-<p>2. <strong>Simplification:</strong> Use trig identities (like $1-\cos 2x = 2\sin^2 x$) to convert problems into standard sine limits.</p>
+<p><strong>Mastering Trig Transformations:</strong></p>
+<p><strong>Rule:</strong> The angle in the function must match exactly with the denominator.</p>
+<hr>
+<p><strong>1. $\frac{\sin4x}{x}$:</strong> We need $4x$ in denominator. Multiply and divide by 4: $4 \times \frac{\sin4x}{4x}$. As $x \to 0$, $\frac{\sin4x}{4x} \to 1$. Result: $4(1) = 4$.</p>
+<p><strong>2. $\frac{1-\cos x}{x^2}$:</strong> Use trig identity $1-\cos x = 2\sin^2(x/2)$. Expression becomes $\frac{2\sin^2(x/2)}{x^2}$. Adjust denominator to $(x/2)^2$ by multiplying/dividing by 4. Result: $2 \times \frac{1}{4} = 1/2$.</p>
+<p><strong>3. $\frac{e^{\sin x}-1}{x}$:</strong> Write as $\frac{e^{\sin x}-1}{\sin x} \times \frac{\sin x}{x}$. Both parts approach 1. Result: $1 \times 1 = 1$.</p>
 </div>
+
+<h3>Checkpoints</h3>
+<div class="mcq">
+<p>1. $\frac{\sin x}{x}$ =<br>
+<button onclick="tick(this,'derivative')">1</button>
+<button>0</button></p>
+
+<p>2. $\frac{\sin2x}{x}$ =<br>
+<button onclick="tick(this)">2</button>
+<button>1</button></p>
+
+<p>3. $\frac{1-\cos x}{x}$ =<br>
+<button onclick="tick(this)">0</button>
+<button>1</button></p>
+
+<p>4. $\frac{\tan x}{x}$ =<br>
+<button onclick="tick(this)">1</button>
+<button>0</button></p>
+
+<p>5. Trig limits used near zero =<br>
+<button onclick="tick(this)">True</button>
+<button>False</button></p>
+</div>
+
 </div>
 </section>
 
 <section id="derivative" class="locked">
 <div class="concept">
 <h2>Derivatives</h2>
+
 <input type="hidden" id="derivative-i" value="0">
 
 <div class="slide">$d/dx(x^2)=2x$</div>
-<div class="slide">$d/dx(constant)=0$</div>
+<div class="slide">$d/dx(x^3)=3x^2$</div>
+<div class="slide">$d/dx(5x)=5$</div>
+<div class="slide">$d/dx(c)=0$</div>
+<div class="slide">Derivative gives rate of change</div>
 
 <button onclick="prev('derivative')">← Back</button>
 <button onclick="next('derivative')">Next →</button>
 
 <div class="math">
-<strong>All Formulas (Derivatives)</strong>
-$$\frac{d}{dx}(x^n)=nx^{n-1} \quad | \quad (uv)' = u'v + uv' \quad | \quad (\frac{u}{v})' = \frac{vu' - uv'}{v^2}$$
+<strong>All Formulas (Derivatives)</strong><br>
+$$\frac{d}{dx}(x^n)=nx^{n-1}$$
+$$\frac{d}{dx}(c)=0$$
+$$\frac{d}{dx}(u+v)=u'+v'$$
+$$\frac{d}{dx}(uv)=u'v+uv'$$
+$$\frac{d}{dx}\left(\frac{u}{v}\right)=\frac{vu'-uv'}{v^2}$$
+$$\frac{d}{dx}(\sin x)=\cos x$$
 </div>
 
 <button class="lab-btn" onclick="toggleLab('deriv-lab')">Where to use – Problem Lab</button>
 <div id="deriv-lab" class="subjective-ans">
-<p><strong>Applying Derivative Rules:</strong></p>
-<p>1. <strong>Product Rule:</strong> Use when two distinct functions of $x$ are multiplied (e.g., $x \cdot \sin x$).</p>
-<p>2. <strong>Quotient Rule:</strong> Use for rational functions where $x$ is in both numerator and denominator.</p>
+<p><strong>Rules of Engagement:</strong></p>
+<p><strong>1. Power Rule:</strong> Use for $x^n$. Step: Bring $n$ forward, subtract 1 from power.</p>
+<p><strong>2. Product Rule (uv):</strong> Use when two functions multiply. Step: (First $\times$ deriv of Second) + (Second $\times$ deriv of First).</p>
+<p><strong>3. Quotient Rule (u/v):</strong> Use for fractions. Step: (Bottom $\times$ deriv of Top - Top $\times$ deriv of Bottom) / (Bottom squared).</p>
+<hr>
+<p><strong>1. $x\sin x$:</strong> Let $u=x, v=\sin x$. $u'=1, v'=\cos x$. Result: $(x)(\cos x) + (\sin x)(1) = x\cos x + \sin x$.</p>
+<p><strong>2. $\frac{x}{x+1}$:</strong> $u=x, v=x+1$. $u'=1, v'=1$. Result: $\frac{(x+1)(1) - (x)(1)}{(x+1)^2} = \frac{1}{(x+1)^2}$.</p>
 </div>
+
+<h3>Checkpoints</h3>
+<div class="mcq">
+<p>1. $d/dx(x^4)$ =<br>
+<button onclick="tick(this,'first')">4x^3</button>
+<button>x^3</button></p>
+
+<p>2. $d/dx(7)$ =<br>
+<button onclick="tick(this)">0</button>
+<button>7</button></p>
+
+<p>3. $d/dx(2x)$ =<br>
+<button onclick="tick(this)">2</button>
+<button>1</button></p>
+
+<p>4. $d/dx(x)$ =<br>
+<button onclick="tick(this)">1</button>
+<button>0</button></p>
+
+<p>5. Power rule applies =<br>
+<button onclick="tick(this)">Yes</button>
+<button>No</button></p>
+</div>
+
 </div>
 </section>
 
 <section id="first" class="locked">
-<div class="grid-container">
-  
-  <div class="concept">
-    <h2>First Principles</h2>
-    <input type="hidden" id="first-i" value="0">
-    <div class="slide">$[f(x+h)-f(x)]/h$</div>
-    <button onclick="prev('first')">← Back</button>
-    <button onclick="next('first')">Next →</button>
-    <div class="math">
-      $$f'(x)=\lim_{h\to0}\frac{f(x+h)-f(x)}{h}$$
-    </div>
-    <button class="lab-btn" onclick="toggleLab('first-lab')">Step-by-Step Guide</button>
-    <div id="first-lab" class="subjective-ans">
-      <p>1. Write the expression for $f(x+h)$.</p>
-      <p>2. Substitute $f(x+h)$ and $f(x)$ into the definition formula.</p>
-      <p>3. Simplify the numerator to factor out $h$.</p>
-      <p>4. Cancel $h$ and apply the limit $h \to 0$.</p>
-    </div>
-  </div>
+<div class="concept">
+<h2>First Principles</h2>
 
-  <div class="concept" style="border-left: 5px solid #10b981;">
-    <h2>Tips & Tricks</h2>
-    <p class="step">For Complex Problems (NCERT Exemplar/Competitive)</p>
-    <div class="math" style="text-align: left; font-size: 0.95rem;">
-      <strong>1. Factor Detection:</strong> If a limit results in $0/0$, $(x-a)$ is a guaranteed factor of both top and bottom.<br><br>
-      <strong>2. Conjugate Rule:</strong> For limits involving $\sqrt{a} - \sqrt{b}$, rationalizing the numerator is almost always the first step.<br><br>
-      <strong>3. Trig Substitution:</strong> Convert $\tan x$, $\sec x$, or $\csc x$ into $\sin x$ and $\cos x$ immediately to simplify trigonometric limits.<br><br>
-      <strong>4. L'Hôpital's Shortcut:</strong> For MCQs, if you get $0/0$, differentiate numerator and denominator separately until the $0/0$ is gone.<br><br>
-      <strong>5. Product Rule Hack:</strong> $\frac{d}{dx}[c \cdot f(x)]$ is just $c \cdot f'(x)$. Do not waste time using the full product rule on constants.
-    </div>
-    <button class="lab-btn" style="background: #10b981;" onclick="toggleLab('tricks-lab')">Exam Shortcuts</button>
-    <div id="tricks-lab" class="subjective-ans" style="border-left-color: #10b981;">
-      <p><strong>Shortcut 1:</strong> $\lim_{x \to 0} \frac{1-\cos ax}{x^2} = \frac{a^2}{2}$. Very common in NCERT Exemplar.</p>
-      <p><strong>Shortcut 2:</strong> If $f(x) = \frac{1}{x^n}$, then $f'(x) = \frac{-n}{x^{n+1}}$.</p>
-      <p><strong>Shortcut 3:</strong> $\lim_{x \to a} \frac{x^n - a^n}{x^m - a^m} = \frac{n}{m} a^{n-m}$.</p>
-    </div>
-  </div>
+<input type="hidden" id="first-i" value="0">
+
+<div class="slide">$[f(x+h)-f(x)]/h$</div>
+<div class="slide">$h\to0$</div>
+<div class="slide">$f(x)=x^2$</div>
+<div class="slide">$f(x)=x^3$</div>
+<div class="slide">Foundation of derivatives</div>
+
+<button onclick="prev('first')">← Back</button>
+<button onclick="next('first')">Next →</button>
+
+<div class="math">
+<strong>All Formulas (First Principles)</strong><br>
+$$\frac{dy}{dx}=\lim_{h\to0}\frac{f(x+h)-f(x)}{h}$$
+$f(x)=x^2\Rightarrow2x$<br>
+$f(x)=x^3\Rightarrow3x^2$
+</div>
+
+<button class="lab-btn" onclick="toggleLab('first-lab')">Where to use – Problem Lab</button>
+<div id="first-lab" class="subjective-ans">
+<p><strong>Step-by-Step Derivation for $f(x)=x^2$:</strong></p>
+<p><strong>Step 1:</strong> Identify $f(x+h) = (x+h)^2 = x^2 + 2xh + h^2$.</p>
+<p><strong>Step 2:</strong> Find the difference $f(x+h) - f(x) = (x^2 + 2xh + h^2) - x^2 = 2xh + h^2$.</p>
+<p><strong>Step 3:</strong> Divide by $h \implies \frac{2xh+h^2}{h} = 2x + h$.</p>
+<p><strong>Step 4:</strong> Apply limit $h \to 0$. Result: $2x$.</p>
+<hr>
+<p><strong>Use this whenever a question asks: "Find derivative from definition" or "from first principles".</strong></p>
+</div>
 
 </div>
 </section>
+<section id="tips" class="locked">
+<div class="concept">
+<h2>Tips & Tricks – Limits & Derivatives (Universal)</h2>
+
+<input type="hidden" id="tips-i" value="0">
+
+<div class="slide">
+<p><strong>Golden Rule – Limits:</strong></p>
+<ul>
+<li>Always try <strong>direct substitution first</strong>.</li>
+<li>If value is finite → that is the answer.</li>
+<li>If result is $0/0$ → algebraic manipulation is compulsory.</li>
+</ul>
+</div>
+
+<div class="slide">
+<p><strong>When you get $0/0$:</strong></p>
+<ul>
+<li>Factor polynomials fully.</li>
+<li>Cancel the common factor.</li>
+<li>Only after cancellation, substitute the value.</li>
+</ul>
+</div>
+
+<div class="slide">
+<p><strong>Rationalization Trick:</strong></p>
+<ul>
+<li>Whenever square roots are present.</li>
+<li>Multiply numerator & denominator by conjugate.</li>
+<li>Used for expressions like $\sqrt{x+a}-\sqrt{a}$.</li>
+</ul>
+</div>
+
+<div class="slide">
+<p><strong>Power Formula Shortcut:</strong></p>
+<p>
+$$\lim_{x\to a}\frac{x^n-a^n}{x-a}=na^{n-1}$$
+</p>
+<ul>
+<li>Saves time in higher powers.</li>
+<li>Applicable only when denominator is $(x-a)$.</li>
+</ul>
+</div>
+
+<div class="slide">
+<p><strong>Trigonometric Limits – Survival Kit:</strong></p>
+<ul>
+<li>Angle must be in <strong>radians</strong>.</li>
+<li>Match numerator angle with denominator.</li>
+<li>Adjust using multiplication/division.</li>
+</ul>
+</div>
+
+<div class="slide">
+<p><strong>Standard Trig Conversions:</strong></p>
+<ul>
+<li>$1-\cos x = 2\sin^2(x/2)$</li>
+<li>$\tan x = \frac{\sin x}{\cos x}$</li>
+<li>Convert everything into sine/cosine when stuck.</li>
+</ul>
+</div>
+
+<div class="slide">
+<p><strong>Derivative Recognition:</strong></p>
+<ul>
+<li>Power present → Power Rule.</li>
+<li>Multiplication → Product Rule.</li>
+<li>Division → Quotient Rule.</li>
+<li>Trigonometric → Recall standard derivatives.</li>
+</ul>
+</div>
+
+<div class="slide">
+<p><strong>Derivative Speed Tricks:</strong></p>
+<ul>
+<li>$d/dx(ax^n)=a·n·x^{n-1}$</li>
+<li>Constant multiple comes outside.</li>
+<li>Derivative of constant is zero.</li>
+</ul>
+</div>
+
+<div class="slide">
+<p><strong>First Principles – When to Use:</strong></p>
+<ul>
+<li>If question explicitly says “from definition”.</li>
+<li>If derivative formula is not allowed.</li>
+<li>Base concept for proofs.</li>
+</ul>
+</div>
+
+<div class="slide">
+<p><strong>Common Exam Traps:</strong></p>
+<ul>
+<li>Substituting before simplification.</li>
+<li>Forgetting to cancel $h$ in first principles.</li>
+<li>Using trig limits away from zero.</li>
+</ul>
+</div>
+
+<div class="slide">
+<p><strong>Universal Strategy (Any Book):</strong></p>
+<ol>
+<li>Identify topic (Limit / Trig / Derivative).</li>
+<li>Apply the fastest applicable rule.</li>
+<li>Simplify fully.</li>
+<li>Substitute at the end.</li>
+</ol>
+</div>
+
+<button onclick="prev('tips')">← Back</button>
+<button onclick="next('tips')">Next →</button>
+
+<div class="math">
+<strong>One-Line Master Rule:</strong><br>
+Simplify first → Cancel → Match angles → Apply formula → Substitute last
+</div>
+
+</div>
+</section>
+
+<script>
+show("tips",0);
+</script>
 
 <footer>
 <p>Proceed to exercises.</p>
