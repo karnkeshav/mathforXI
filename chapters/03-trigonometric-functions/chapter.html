@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trigonometric Functions | Chapter 03</title>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<link rel="stylesheet" href="../../assets/css/style.css">
+<style>
+.slide { display:none; }
+.subjective-ans { display:none; margin-top:1rem; padding:1.5rem; background:#f8fafc; border-left:5px solid var(--primary); border-radius:8px; }
+.lab-btn { background:var(--secondary); margin-top:1rem; }
+.mcq .correct { color:green; font-weight:600; }
+</style>
+</head>
+<body>
+
+<header>
+<h1>Trigonometric Functions</h1>
+<p>Unit Circle → Identities → Periodicity → Mastery</p>
+</header>
+
+<nav>
+<a href="#angles">Angles</a>
+<a href="#quadrants">Quadrants</a>
+<a href="#identities">Identities</a>
+<a href="#equations">Equations</a>
+</nav>
+
+<section id="angles">
+<div class="concept">
+<h2>Angle Measurement</h2>
+<input type="hidden" id="angles-i" value="0">
+[cite_start]<div class="slide"><p><strong>Degree Measure:</strong> 1 rotation = $360^\circ$[cite: 1978]. [cite_start]$1^\circ = 60'$ and $1' = 60''$[cite: 2827].</p></div>
+[cite_start]<div class="slide"><p><strong>Radian Measure:</strong> Angle subtended by arc length equal to radius[cite: 1982]. [cite_start]1 rotation = $2\pi$ rad[cite: 2885].</p></div>
+[cite_start]<div class="slide"><p><strong>Conversion:</strong> $\pi \text{ radians} = 180^\circ$[cite: 1990]. [cite_start]$1 \text{ rad} \approx 57^\circ 16'$[cite: 2917].</p></div>
+<button onclick="prev('angles')">← Back</button><button onclick="next('angles')">Next →</button>
+[cite_start]<div class="math">$\text{Radian measure} = \frac{\pi}{180} \times \text{Degree measure}$ [cite: 2933]</div>
+</div>
+</section>
+
+<section id="quadrants" class="locked">
+<div class="concept">
+<h2>Signs in Quadrants</h2>
+<input type="hidden" id="quadrants-i" value="0">
+[cite_start]<div class="slide"><p><strong>Quadrant I:</strong> All functions are positive[cite: 2001].</p></div>
+[cite_start]<div class="slide"><p><strong>Quadrant II:</strong> Only $\sin x$ and $\csc x$ are positive[cite: 2001].</p></div>
+[cite_start]<div class="slide"><p><strong>Quadrant III:</strong> Only $\tan x$ and $\cot x$ are positive[cite: 2001].</p></div>
+[cite_start]<div class="slide"><p><strong>Quadrant IV:</strong> Only $\cos x$ and $\sec x$ are positive[cite: 2001].</p></div>
+<button onclick="prev('quadrants')">← Back</button><button onclick="next('quadrants')">Next →</button>
+<div class="math">"Add Sugar To Coffee" (All, Sin, Tan, Cos)</div>
+<h3>Checkpoint</h3>
+<div class="mcq"><p>$\cos x$ in Quadrant III is:<br><button onclick="tick(this,'identities')">Negative</button><button>Positive</button></p></div>
+</div>
+</section>
+
+<section id="identities" class="locked">
+<div class="concept">
+<h2>Core Identities</h2>
+<div class="math">
+[cite_start]$$\sin(A \pm B) = \sin A \cos B \pm \cos A \sin B$$ [cite: 2025]
+[cite_start]$$\cos(A \pm B) = \cos A \cos B \mp \sin A \sin B$$ [cite: 2027]
+[cite_start]$$\sin 2A = 2 \sin A \cos A$$ [cite: 2036]
+[cite_start]$$\cos 2A = 2 \cos^2 A - 1 = 1 - 2 \sin^2 A$$ [cite: 2038]
+</div>
+<button class="lab-btn" onclick="toggleLab('id-lab')">Formula Lab</button>
+<div id="id-lab" class="subjective-ans">
+<p><strong>Example: $\sin 15^\circ$</strong></p>
+[cite_start]<p>Use $\sin(45^\circ - 30^\circ) = \sin 45^\circ \cos 30^\circ - \cos 45^\circ \sin 30^\circ = \frac{\sqrt{3}-1}{2\sqrt{2}}$[cite: 3529].</p>
+</div>
+<button onclick="tick(this,'equations')">Unlock Equations</button>
+</div>
+</section>
+
+<section id="equations" class="locked">
+<div class="concept">
+<h2>General Solutions</h2>
+<div class="math">
+[cite_start]$\sin \theta = \sin \alpha \Rightarrow \theta = n\pi + (-1)^n \alpha$ [cite: 2112]<br>
+[cite_start]$\cos \theta = \cos \alpha \Rightarrow \theta = 2n\pi \pm \alpha$ [cite: 2118]<br>
+[cite_start]$\tan \theta = \tan \alpha \Rightarrow \theta = n\pi + \alpha$ [cite: 2120]
+</div>
+</div>
+</section>
+
+<script>
+function show(section,i){
+  const slides=document.querySelectorAll(`#${section} .slide`);
+  slides.forEach(s=>s.style.display="none");
+  if(slides[i]) slides[i].style.display="block";
+  document.getElementById(section+"-i").value=i;
+}
+function next(section){ let i=+document.getElementById(section+"-i").value; const slides=document.querySelectorAll(`#${section} .slide`); if(i<slides.length-1) show(section,i+1); }
+function prev(section){ let i=+document.getElementById(section+"-i").value; if(i>0) show(section,i-1); }
+function tick(btn,unlockId){ btn.innerHTML="✔ Correct"; btn.classList.add("correct"); if(unlockId) document.getElementById(unlockId).classList.remove("locked"); }
+function toggleLab(id){ const el=document.getElementById(id); el.style.display = el.style.display==="block" ? "none" : "block"; }
+["angles","quadrants"].forEach(id=>show(id,0));
+</script>
+</body>
+</html>
