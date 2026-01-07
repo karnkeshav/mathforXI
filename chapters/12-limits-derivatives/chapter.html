@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Limits and Derivatives | Chapter 12</title>
 
-<!-- MathJax (Improved Rendering – NO formula changes) -->
 <script>
 window.MathJax = {
   tex: {
@@ -84,7 +83,7 @@ function toggleLab(id){
 </script>
 
 <!-- ================================================= -->
-<!-- APPROACH -->
+<!-- APPROACH (UNCHANGED) -->
 <!-- ================================================= -->
 <section id="approach">
 <div class="concept">
@@ -92,7 +91,6 @@ function toggleLab(id){
 
 <input type="hidden" id="approach-i" value="0">
 
-<!-- 5 EXAMPLES (UNCHANGED FORMAT) -->
 <div class="slide">
 <p><strong>Example 1:</strong> $f(x)=2x$, $x\to2$</p>
 <svg width="100%" height="80">
@@ -120,7 +118,6 @@ function toggleLab(id){
 <button onclick="prev('approach')">← Back</button>
 <button onclick="next('approach')">Next →</button>
 
-<!-- FORMULAS (UNCHANGED) -->
 <div class="math">
 <strong>All Formulas (Approach)</strong><br>
 If $f(x)=ax+b$, then as $x\to c$, value → $ac+b$<br>
@@ -128,7 +125,6 @@ If $f(x)=x^n$, then as $x\to a$, value → $a^n$<br>
 Approach depends on values near the point, not at the point
 </div>
 
-<!-- PROBLEM LAB -->
 <button class="lab-btn" onclick="toggleLab('approach-lab')">Where to use – Problem Lab</button>
 <div id="approach-lab" class="subjective-ans">
 <p><strong>1.</strong> $5x+1$ as $x\to2$ → $11$</p>
@@ -138,7 +134,6 @@ Approach depends on values near the point, not at the point
 <p><strong>5.</strong> Direct substitution allowed (continuity)</p>
 </div>
 
-<!-- CHECKPOINTS (UNCHANGED) -->
 <h3>Checkpoints</h3>
 <div class="mcq">
 <p>1. $2x$ as $x\to3$ =
@@ -166,7 +161,7 @@ Approach depends on values near the point, not at the point
 </section>
 
 <!-- ================================================= -->
-<!-- LIMITS -->
+<!-- LIMITS (UNCHANGED) -->
 <!-- ================================================= -->
 <section id="limits" class="locked">
 <div class="concept">
@@ -227,14 +222,167 @@ Rationalization: multiply numerator & denominator by conjugate
 </div>
 </section>
 
-<!-- NOTE:
-Trig, Derivative, First Principles follow IDENTICAL structure,
-with:
-✔ 5 slides
-✔ formulas unchanged
-✔ 5 problem lab sums
-✔ 5 MCQs unlocking next section
--->
+<!-- ================================================= -->
+<!-- TRIG (EXTENDED – SAME FORMAT) -->
+<!-- ================================================= -->
+<section id="trig" class="locked">
+<div class="concept">
+<h2>Trigonometric Limits</h2>
+
+<input type="hidden" id="trig-i" value="0">
+
+<div class="slide">$\frac{\sin x}{x}\to1$</div>
+<div class="slide">$\frac{\tan x}{x}\to1$</div>
+<div class="slide">$\frac{\sin2x}{x}\to2$</div>
+<div class="slide">$\frac{1-\cos x}{x}\to0$</div>
+<div class="slide">Standard trig limits form base of calculus</div>
+
+<button onclick="prev('trig')">← Back</button>
+<button onclick="next('trig')">Next →</button>
+
+<div class="math">
+<strong>All Formulas (Trig Limits)</strong><br>
+$$\lim_{x\to0}\frac{\sin x}{x}=1$$
+$$\lim_{x\to0}\frac{\tan x}{x}=1$$
+$$\lim_{x\to0}\frac{1-\cos x}{x}=0$$
+$$\lim_{x\to0}\frac{\sin ax}{x}=a$$
+$$\lim_{x\to0}\frac{e^x-1}{x}=1$$
+</div>
+
+<button class="lab-btn" onclick="toggleLab('trig-lab')">Where to use – Problem Lab</button>
+<div id="trig-lab" class="subjective-ans">
+<p><strong>1.</strong> $\frac{\sin4x}{x}$ → 4</p>
+<p><strong>2.</strong> $\frac{1-\cos x}{x^2}$ → $1/2$</p>
+<p><strong>3.</strong> $\frac{\tan3x}{x}$ → 3</p>
+<p><strong>4.</strong> $\frac{\sin x}{\tan x}$ → 1</p>
+<p><strong>5.</strong> $\frac{e^{\sin x}-1}{x}$ → 1</p>
+</div>
+
+<h3>Checkpoints</h3>
+<div class="mcq">
+<p>1. $\frac{\sin x}{x}$ =
+<button onclick="tick(this,'derivative')">1</button>
+<button>0</button></p>
+
+<p>2. $\frac{\sin2x}{x}$ =
+<button onclick="tick(this)">2</button>
+<button>1</button></p>
+
+<p>3. $\frac{1-\cos x}{x}$ =
+<button onclick="tick(this)">0</button>
+<button>1</button></p>
+
+<p>4. $\frac{\tan x}{x}$ =
+<button onclick="tick(this)">1</button>
+<button>0</button></p>
+
+<p>5. Trig limits used near zero =
+<button onclick="tick(this)">True</button>
+<button>False</button></p>
+</div>
+
+</div>
+</section>
+
+<!-- ================================================= -->
+<!-- DERIVATIVE -->
+<!-- ================================================= -->
+<section id="derivative" class="locked">
+<div class="concept">
+<h2>Derivatives</h2>
+
+<input type="hidden" id="derivative-i" value="0">
+
+<div class="slide">$d/dx(x^2)=2x$</div>
+<div class="slide">$d/dx(x^3)=3x^2$</div>
+<div class="slide">$d/dx(5x)=5$</div>
+<div class="slide">$d/dx(c)=0$</div>
+<div class="slide">Derivative gives rate of change</div>
+
+<button onclick="prev('derivative')">← Back</button>
+<button onclick="next('derivative')">Next →</button>
+
+<div class="math">
+<strong>All Formulas (Derivatives)</strong><br>
+$$\frac{d}{dx}(x^n)=nx^{n-1}$$
+$$\frac{d}{dx}(c)=0$$
+$$\frac{d}{dx}(u+v)=u'+v'$$
+$$\frac{d}{dx}(uv)=u'v+uv'$$
+$$\frac{d}{dx}\left(\frac{u}{v}\right)=\frac{vu'-uv'}{v^2}$$
+$$\frac{d}{dx}(\sin x)=\cos x$$
+</div>
+
+<button class="lab-btn" onclick="toggleLab('deriv-lab')">Where to use – Problem Lab</button>
+<div id="deriv-lab" class="subjective-ans">
+<p><strong>1.</strong> $x^4$ → $4x^3$</p>
+<p><strong>2.</strong> $5x^2$ → $10x$</p>
+<p><strong>3.</strong> $x\sin x$ → $\sin x+x\cos x$</p>
+<p><strong>4.</strong> $\frac{x}{x+1}$ → $\frac{1}{(x+1)^2}$</p>
+<p><strong>5.</strong> $\sin x+\cos x$ → $\cos x-\sin x$</p>
+</div>
+
+<h3>Checkpoints</h3>
+<div class="mcq">
+<p>1. $d/dx(x^4)$ =
+<button onclick="tick(this,'first')">4x^3</button>
+<button>x^3</button></p>
+
+<p>2. $d/dx(7)$ =
+<button onclick="tick(this)">0</button>
+<button>7</button></p>
+
+<p>3. $d/dx(2x)$ =
+<button onclick="tick(this)">2</button>
+<button>1</button></p>
+
+<p>4. $d/dx(x)$ =
+<button onclick="tick(this)">1</button>
+<button>0</button></p>
+
+<p>5. Power rule applies =
+<button onclick="tick(this)">Yes</button>
+<button>No</button></p>
+</div>
+
+</div>
+</section>
+
+<!-- ================================================= -->
+<!-- FIRST PRINCIPLES -->
+<!-- ================================================= -->
+<section id="first" class="locked">
+<div class="concept">
+<h2>First Principles</h2>
+
+<input type="hidden" id="first-i" value="0">
+
+<div class="slide">$[f(x+h)-f(x)]/h$</div>
+<div class="slide">$h\to0$</div>
+<div class="slide">$f(x)=x^2$</div>
+<div class="slide">$f(x)=x^3$</div>
+<div class="slide">Foundation of derivatives</div>
+
+<button onclick="prev('first')">← Back</button>
+<button onclick="next('first')">Next →</button>
+
+<div class="math">
+<strong>All Formulas (First Principles)</strong><br>
+$$\frac{dy}{dx}=\lim_{h\to0}\frac{f(x+h)-f(x)}{h}$$
+$f(x)=x^2\Rightarrow2x$<br>
+$f(x)=x^3\Rightarrow3x^2$
+</div>
+
+<button class="lab-btn" onclick="toggleLab('first-lab')">Where to use – Problem Lab</button>
+<div id="first-lab" class="subjective-ans">
+<p><strong>1.</strong> $x^2$ → expand → simplify → $2x$</p>
+<p><strong>2.</strong> $x^3$ → $3x^2$</p>
+<p><strong>3.</strong> $3x$ → $3$</p>
+<p><strong>4.</strong> Constant → $0$</p>
+<p><strong>5.</strong> All formulas originate here</p>
+</div>
+
+</div>
+</section>
 
 <footer>
 <p>Proceed to exercises.</p>
@@ -242,7 +390,7 @@ with:
 </footer>
 
 <script>
-["approach","limits"].forEach(id=>show(id,0));
+["approach","limits","trig","derivative","first"].forEach(id=>show(id,0));
 </script>
 
 </body>
