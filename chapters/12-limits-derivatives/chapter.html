@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Limits and Derivatives | Chapter 12</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Limits and Derivatives | Chapter 12</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../../assets/css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/style.css">
 </head>
 
 <body>
 
 <header>
   <h1>Limits and Derivatives</h1>
-  <p>From motion → patterns → symbols → calculus</p>
+  <p>Understanding change — slowly and visually</p>
 </header>
 
 <nav>
@@ -24,231 +24,254 @@
   <a href="#first">First Principles</a>
 </nav>
 
-<!-- ========== SLIDER UTILITY ========== -->
 <script>
-function showSlide(section, index) {
-  const slides = document.querySelectorAll(`#${section} .slide`);
-  slides.forEach(s => s.style.display = "none");
-  slides[index].style.display = "block";
-
-  document.getElementById(`${section}-index`).value = index;
-}
-
-function nextSlide(section) {
-  const slides = document.querySelectorAll(`#${section} .slide`);
-  let i = parseInt(document.getElementById(`${section}-index`).value);
-  if (i < slides.length - 1) showSlide(section, i + 1);
-}
-
-function prevSlide(section) {
-  let i = parseInt(document.getElementById(`${section}-index`).value);
-  if (i > 0) showSlide(section, i - 1);
+function unlock(id){
+  document.getElementById(id).classList.remove("locked");
 }
 </script>
 
-<!-- ================= APPROACH ================= -->
+<!-- ================================================= -->
+<!-- APPROACH -->
+<!-- ================================================= -->
 <section id="approach">
-  <div class="concept">
-    <div class="step">Approach</div>
-    <h2>Approaching a Value</h2>
+<div class="concept">
+<div class="step">Concept 1</div>
+<h2>Approaching a Value (Before Limits)</h2>
 
-    <input type="hidden" id="approach-index" value="0">
+<p>We do NOT jump to a value. We slowly move closer.</p>
 
-    <div class="slide">
-      f(x)=2x, as x→2 → f(x)=4
-    </div>
-    <div class="slide" style="display:none">
-      f(x)=x², x→3 → f(x)=9
-    </div>
-    <div class="slide" style="display:none">
-      f(x)=5x−1, x→1 → 4
-    </div>
-    <div class="slide" style="display:none">
-      f(x)=1/x, x→2 → 0.5
-    </div>
-    <div class="slide" style="display:none">
-      f(x)=x³, x→1 → 1
-    </div>
+<!-- Visual 1 -->
+<svg width="100%" height="100" viewBox="0 0 300 100">
+  <line x1="20" y1="50" x2="280" y2="50" stroke="#94a3b8"/>
+  <circle cx="40" cy="50" r="6" fill="#2563eb">
+    <animate attributeName="cx" from="40" to="200" dur="3s" repeatCount="indefinite"/>
+  </circle>
+  <text x="205" y="70">→ 4</text>
+</svg>
 
-    <button onclick="prevSlide('approach')">← Back</button>
-    <button onclick="nextSlide('approach')">Next →</button>
+<!-- Visual 2: Table -->
+<table>
+<tr><th>x</th><th>2x</th></tr>
+<tr><td>1.8</td><td>3.6</td></tr>
+<tr><td>1.9</td><td>3.8</td></tr>
+<tr><td>2.0</td><td>4.0</td></tr>
+</table>
 
-    <div class="think">Limits depend on nearby values, not substitution</div>
-  </div>
+<!-- Visual 3 -->
+<p>Graph of y = 2x</p>
+<svg width="100%" height="120" viewBox="0 0 300 120">
+  <line x1="20" y1="100" x2="280" y2="20" stroke="#2563eb"/>
+</svg>
+
+<!-- Visual 4 -->
+<p>Even if x is not exactly 2, the value gets closer to 4.</p>
+
+<!-- Visual 5 -->
+<div class="think">
+✔ Approach means “getting closer”, not “reaching”
+</div>
+
+<!-- FORMULAS -->
+<div class="math">If f(x)=2x, as x→2, value → 4</div>
+
+<h3>Checkpoint 1</h3>
+<p>As x → 3, value of 2x → ?</p>
+<button onclick="unlock('limits')">6 ✔</button>
+
+</div>
 </section>
 
-<!-- CHECKPOINTS 1–2 -->
-<section>
-  <div class="concept">
-    <h3>Checkpoint 1</h3>
-    lim x→2 (x²) = ?
-    <button onclick="this.nextElementSibling.innerHTML='✔ 4'">4</button>
-    <p></p>
-
-    <h3>Checkpoint 2</h3>
-    lim x→1 (3x+2) = ?
-    <button onclick="this.nextElementSibling.innerHTML='✔ 5'">5</button>
-    <p></p>
-  </div>
-</section>
-
-<!-- ================= LIMITS ================= -->
+<!-- ================================================= -->
+<!-- LIMITS -->
+<!-- ================================================= -->
 <section id="limits" class="locked">
-  <div class="concept">
-    <div class="step">Limits</div>
-    <h2>Algebraic Limits</h2>
+<div class="concept">
+<div class="step">Concept 2</div>
+<h2>Limits (Exact Value from Near Values)</h2>
 
-    <input type="hidden" id="limits-index" value="0">
+<p>Now we use symbols to describe approach.</p>
 
-    <div class="slide">
-      lim x→1 (x²−1)/(x−1) = 2
-    </div>
-    <div class="slide" style="display:none">
-      lim x→2 (x²−4)/(x−2) = 4
-    </div>
-    <div class="slide" style="display:none">
-      lim x→3 (x²−9)/(x−3) = 6
-    </div>
-    <div class="slide" style="display:none">
-      lim x→a (x²−a²)/(x−a) = 2a
-    </div>
-    <div class="slide" style="display:none">
-      lim x→1 (x³−1)/(x−1) = 3
-    </div>
+<!-- Visual 1 -->
+<div class="math">lim x→2 (x² − 4)/(x − 2)</div>
 
-    <button onclick="prevSlide('limits')">← Back</button>
-    <button onclick="nextSlide('limits')">Next →</button>
-  </div>
+<!-- Visual 2 -->
+<p>We simplify first:</p>
+<div class="math">(x+2)</div>
+
+<!-- Visual 3 -->
+<table>
+<tr><th>x</th><th>Value</th></tr>
+<tr><td>1.9</td><td>3.9</td></tr>
+<tr><td>2.1</td><td>4.1</td></tr>
+</table>
+
+<!-- Visual 4 -->
+<p>Graph shows smooth passing through the point.</p>
+<svg width="100%" height="120" viewBox="0 0 300 120">
+  <path d="M20 100 Q150 20 280 100" fill="none" stroke="#2563eb"/>
+</svg>
+
+<!-- Visual 5 -->
+<div class="think">
+✔ If cancellation is possible, limit exists
+</div>
+
+<!-- FORMULAS -->
+<div class="math">
+lim x→a (x² − a²)/(x − a) = 2a
+</div>
+
+<h3>Checkpoint 3</h3>
+<p>lim x→3 (x²−9)/(x−3) = ?</p>
+<button onclick="unlock('trig')">6 ✔</button>
+
+</div>
 </section>
 
-<!-- CHECKPOINTS 3–4 -->
-<section class="locked">
-  <div class="concept">
-    <h3>Checkpoint 3</h3>
-    lim x→2 (x²−4)/(x−2) = ?
-    <button onclick="this.nextElementSibling.innerHTML='✔ 4'">4</button>
-    <p></p>
-
-    <h3>Checkpoint 4</h3>
-    lim x→a (x²−a²)/(x−a) = ?
-    <button onclick="this.nextElementSibling.innerHTML='✔ 2a'">2a</button>
-    <p></p>
-  </div>
-</section>
-
-<!-- ================= TRIG ================= -->
+<!-- ================================================= -->
+<!-- TRIG -->
+<!-- ================================================= -->
 <section id="trig" class="locked">
-  <div class="concept">
-    <div class="step">Trig</div>
-    <h2>Trigonometric Limits</h2>
+<div class="concept">
+<div class="step">Concept 3</div>
+<h2>Trigonometric Limits</h2>
 
-    <input type="hidden" id="trig-index" value="0">
+<p>Angles become very small.</p>
 
-    <div class="slide">lim θ→0 sinθ/θ = 1</div>
-    <div class="slide" style="display:none">lim θ→0 tanθ/θ = 1</div>
-    <div class="slide" style="display:none">lim θ→0 (1−cosθ)/θ = 0</div>
-    <div class="slide" style="display:none">lim x→0 sin3x/x = 3</div>
-    <div class="slide" style="display:none">lim x→0 sin5x/x = 5</div>
+<!-- Visual 1 -->
+<svg width="100%" height="150" viewBox="0 0 200 200">
+<circle cx="100" cy="100" r="80" fill="none" stroke="#94a3b8"/>
+<line x1="100" y1="100" x2="180" y2="100" stroke="#2563eb"/>
+<line x1="100" y1="100" x2="170" y2="90" stroke="#ef4444"/>
+</svg>
 
-    <button onclick="prevSlide('trig')">← Back</button>
-    <button onclick="nextSlide('trig')">Next →</button>
-  </div>
+<!-- Visual 2 -->
+<div class="math">lim θ→0 sinθ / θ = 1</div>
+
+<!-- Visual 3 -->
+<table>
+<tr><th>θ</th><th>sinθ / θ</th></tr>
+<tr><td>0.1</td><td>0.998</td></tr>
+<tr><td>0.01</td><td>0.9998</td></tr>
+</table>
+
+<!-- Visual 4 -->
+<p>As θ shrinks, ratio → 1</p>
+
+<!-- Visual 5 -->
+<div class="think">
+✔ This limit builds calculus
+</div>
+
+<!-- FORMULAS -->
+<div class="math">
+lim θ→0 sinθ/θ = 1 <br>
+lim θ→0 tanθ/θ = 1
+</div>
+
+<h3>Checkpoint 5</h3>
+<p>lim x→0 sin2x / x = ?</p>
+<button onclick="unlock('derivative')">2 ✔</button>
+
+</div>
 </section>
 
-<!-- CHECKPOINTS 5–6 -->
-<section class="locked">
-  <div class="concept">
-    <h3>Checkpoint 5</h3>
-    lim x→0 sin2x/x = ?
-    <button onclick="this.nextElementSibling.innerHTML='✔ 2'">2</button>
-    <p></p>
-
-    <h3>Checkpoint 6</h3>
-    lim θ→0 tanθ/θ = ?
-    <button onclick="this.nextElementSibling.innerHTML='✔ 1'">1</button>
-    <p></p>
-  </div>
-</section>
-
-<!-- ================= DERIVATIVE ================= -->
+<!-- ================================================= -->
+<!-- DERIVATIVE -->
+<!-- ================================================= -->
 <section id="derivative" class="locked">
-  <div class="concept">
-    <div class="step">Derivative</div>
-    <h2>Basic Derivatives</h2>
+<div class="concept">
+<div class="step">Concept 4</div>
+<h2>Derivative = Speed of Change</h2>
 
-    <input type="hidden" id="derivative-index" value="0">
+<p>Slope tells how fast things change.</p>
 
-    <div class="slide">d/dx (x²) = 2x</div>
-    <div class="slide" style="display:none">d/dx (x³) = 3x²</div>
-    <div class="slide" style="display:none">d/dx (5x) = 5</div>
-    <div class="slide" style="display:none">d/dx (7) = 0</div>
-    <div class="slide" style="display:none">d/dx (x⁴) = 4x³</div>
+<!-- Visual 1 -->
+<svg width="100%" height="120" viewBox="0 0 300 120">
+<path d="M20 100 Q150 20 280 100" fill="none" stroke="#2563eb"/>
+<line x1="120" y1="70" x2="200" y2="40" stroke="#ef4444"/>
+</svg>
 
-    <button onclick="prevSlide('derivative')">← Back</button>
-    <button onclick="nextSlide('derivative')">Next →</button>
-  </div>
+<!-- Visual 2 -->
+<p>Steeper line → faster change</p>
+
+<!-- Visual 3 -->
+<table>
+<tr><th>x</th><th>x²</th></tr>
+<tr><td>1</td><td>1</td></tr>
+<tr><td>2</td><td>4</td></tr>
+<tr><td>3</td><td>9</td></tr>
+</table>
+
+<!-- Visual 4 -->
+<p>Change increases as x increases</p>
+
+<!-- Visual 5 -->
+<div class="think">
+✔ Derivative gives slope at a point
+</div>
+
+<!-- FORMULAS -->
+<div class="math">
+d/dx (x²) = 2x <br>
+d/dx (x³) = 3x²
+</div>
+
+<h3>Checkpoint 7</h3>
+<p>d/dx (x³) = ?</p>
+<button onclick="unlock('first')">3x² ✔</button>
+
+</div>
 </section>
 
-<!-- CHECKPOINTS 7–8 -->
-<section class="locked">
-  <div class="concept">
-    <h3>Checkpoint 7</h3>
-    d/dx (x³) = ?
-    <button onclick="this.nextElementSibling.innerHTML='✔ 3x²'">3x²</button>
-    <p></p>
-
-    <h3>Checkpoint 8</h3>
-    d/dx (10) = ?
-    <button onclick="this.nextElementSibling.innerHTML='✔ 0'">0</button>
-    <p></p>
-  </div>
-</section>
-
-<!-- ================= FIRST PRINCIPLES ================= -->
+<!-- ================================================= -->
+<!-- FIRST PRINCIPLES -->
+<!-- ================================================= -->
 <section id="first" class="locked">
-  <div class="concept">
-    <div class="step">First Principles</div>
-    <h2>Derivative from Definition</h2>
+<div class="concept">
+<div class="step">Concept 5</div>
+<h2>First Principles (Birth of Derivative)</h2>
 
-    <input type="hidden" id="first-index" value="0">
+<p>Derivative comes from average change.</p>
 
-    <div class="slide">f(x)=x² → 2x</div>
-    <div class="slide" style="display:none">f(x)=x³ → 3x²</div>
-    <div class="slide" style="display:none">f(x)=2x → 2</div>
-    <div class="slide" style="display:none">f(x)=5x → 5</div>
-    <div class="slide" style="display:none">f(x)=x → 1</div>
+<!-- Visual 1 -->
+<div class="math">[f(x+h) − f(x)] / h</div>
 
-    <button onclick="prevSlide('first')">← Back</button>
-    <button onclick="nextSlide('first')">Next →</button>
-  </div>
-</section>
+<!-- Visual 2 -->
+<svg width="100%" height="120" viewBox="0 0 300 120">
+<polygon points="120,80 200,80 200,60"
+fill="#bfdbfe">
+<animate attributeName="points"
+from="120,80 200,80 200,60"
+to="150,80 180,80 180,70"
+dur="2s" repeatCount="indefinite"/>
+</polygon>
+</svg>
 
-<!-- CHECKPOINTS 9–10 -->
-<section class="locked">
-  <div class="concept">
-    <h3>Checkpoint 9</h3>
-    First principle derivative of x² = ?
-    <button onclick="this.nextElementSibling.innerHTML='✔ 2x'">2x</button>
-    <p></p>
+<!-- Visual 3 -->
+<p>h becomes smaller and smaller</p>
 
-    <h3>Checkpoint 10</h3>
-    First principle derivative of 3x = ?
-    <button onclick="this.nextElementSibling.innerHTML='✔ 3'">3</button>
-    <p></p>
-  </div>
+<!-- Visual 4 -->
+<div class="math">lim h→0</div>
+
+<!-- Visual 5 -->
+<div class="think">
+✔ All derivative formulas come from this
+</div>
+
+<!-- FORMULAS -->
+<div class="math">
+Derivative = lim h→0 [f(x+h) − f(x)] / h
+</div>
+
+</div>
 </section>
 
 <footer>
-  <h3>Concepts Complete</h3>
-  <p>Proceed to exercises for mastery.</p>
-  <a href="exercise.html"><button>Go to Exercises →</button></a>
+<h3>Concepts Completed</h3>
+<p>You are now ready for practice.</p>
+<a href="exercise.html"><button>Go to Exercises →</button></a>
 </footer>
-
-<script>
-document.querySelectorAll(".slide").forEach((s, i) => {
-  if (i === 0) s.style.display = "block";
-});
-</script>
 
 </body>
 </html>
