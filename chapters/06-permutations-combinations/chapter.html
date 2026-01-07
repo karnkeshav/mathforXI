@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Permutations & Combinations | Chapter 06</title>
+
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[','\\]']],
+    processEscapes: true
+  },
+  chtml: {
+    scale: 1.05,
+    matchFontHeight: true
+  }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/style.css">
+
+<style>
+.slide { display:none; }
+.subjective-ans {
+  display:none;
+  margin-top:1rem;
+  padding:1.5rem;
+  background:#f8fafc;
+  border-left:5px solid var(--primary);
+  border-radius:8px;
+}
+.lab-btn { background:var(--secondary); margin-top:1rem; }
+.mcq button { margin-right:0.5rem; }
+.mcq .correct { color:green; font-weight:600; }
+.math { overflow-x:auto; }
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Permutations & Combinations</h1>
+<p>Count → Arrange → Select → Solve</p>
+</header>
+
+<nav>
+<a href="#fpc">Principles</a>
+<a href="#permutations">Permutations</a>
+<a href="#combinations">Combinations</a>
+<a href="#applications">Applications</a>
+</nav>
+
+<script>
+function show(section,i){
+  const slides=document.querySelectorAll(`#${section} .slide`);
+  slides.forEach(s=>s.style.display="none");
+  slides[i].style.display="block";
+  document.getElementById(section+"-i").value=i;
+}
+function next(section){
+  let i=+document.getElementById(section+"-i").value;
+  const slides=document.querySelectorAll(`#${section} .slide`);
+  if(i<slides.length-1) show(section,i+1);
+}
+function prev(section){
+  let i=+document.getElementById(section+"-i").value;
+  if(i>0) show(section,i-1);
+}
+function tick(btn,unlockId){
+  btn.innerHTML="✔ Correct";
+  btn.classList.add("correct");
+  if(unlockId) document.getElementById(unlockId).classList.remove("locked");
+}
+function toggleLab(id){
+  const el=document.getElementById(id);
+  el.style.display = el.style.display==="block" ? "none" : "block";
+}
+</script>
+
+<section id="fpc">
+<div class="concept">
+<h2>Fundamental Principle of Counting</h2>
+
+<input type="hidden" id="fpc-i" value="0">
+
+<div class="slide">
+<p><strong>Multiplication Rule (AND):</strong></p>
+<p>If event A happens in $m$ ways AND event B happens in $n$ ways, then both happen in $m \times n$ ways.</p>
+</div>
+
+<div class="slide">
+<p><strong>Addition Rule (OR):</strong></p>
+<p>If event A happens in $m$ ways OR event B happens in $n$ ways (mutually exclusive), then either happens in $m + n$ ways.</p>
+</div>
+
+<div class="slide">
+<p><strong>Factorial ($n!$):</strong></p>
+<p>$n! = n \times (n-1) \times \dots \times 1$.</p>
+<p>$0! = 1$.</p>
+</div>
+
+<button onclick="prev('fpc')">← Back</button>
+<button onclick="next('fpc')">Next →</button>
+
+<div class="math">
+<strong>Example</strong><br>
+3 shirts, 2 pants.<br>
+Combinations: $3 \times 2 = 6$.
+</div>
+
+<button class="lab-btn" onclick="toggleLab('fpc-lab')">Where to use – Problem Lab</button>
+<div id="fpc-lab" class="subjective-ans">
+<p><strong>Counting:</strong></p>
+<p><strong>1. 3-digit numbers from {1, 2, 3, 4, 5} (Repetition allowed):</strong></p>
+<p>Places: _ _ _. Options: 5 $\times$ 5 $\times$ 5 = 125.</p>
+<p><strong>2. (No Repetition):</strong> 5 $\times$ 4 $\times$ 3 = 60.</p>
+</div>
+
+<h3>Checkpoints</h3>
+<div class="mcq">
+<p>1. Value of $4!$:<br>
+<button onclick="tick(this,'permutations')">24</button>
+<button>12</button></p>
+
+<p>2. "AND" implies:<br>
+<button onclick="tick(this)">Multiplication</button>
+<button>Addition</button></p>
+</div>
+
+</div>
+</section>
+
+<section id="permutations" class="locked">
+<div class="concept">
+<h2>Permutations (Order Matters)</h2>
+
+<input type="hidden" id="permutations-i" value="0">
+
+<div class="slide">
+<p><strong>Definition:</strong> Arrangement of objects in a specific order.</p>
+<p>Example: Ranking 1st, 2nd, 3rd.</p>
+</div>
+
+<div class="slide">
+<p><strong>Formula:</strong></p>
+<p>$^nP_r = \frac{n!}{(n-r)!}$.</p>
+<p>Arranging $n$ items in $r$ spots.</p>
+</div>
+
+<div class="slide">
+<p><strong>Repetition of Objects:</strong></p>
+<p>Arranging word "ROOT". 4 letters, 2 O's.</p>
+<p>Ways = $\frac{4!}{2!} = \frac{24}{2} = 12$.</p>
+</div>
+
+<button onclick="prev('permutations')">← Back</button>
+<button onclick="next('permutations')">Next →</button>
+
+<div class="math">
+<strong>Key Idea</strong><br>
+$^nP_n = n!$<br>
+$^nP_0 = 1$
+</div>
+
+<button class="lab-btn" onclick="toggleLab('perm-lab')">Where to use – Problem Lab</button>
+<div id="perm-lab" class="subjective-ans">
+<p><strong>Word Problems:</strong></p>
+<p><strong>1. Word "ROSE":</strong> 4 distinct letters. $4! = 24$ ways.</p>
+<p><strong>2. Word "APPLE":</strong> 5 letters, 2 P's. $5!/2! = 120/2 = 60$ ways.</p>
+</div>
+
+<h3>Checkpoints</h3>
+<div class="mcq">
+<p>1. Formula for $^nP_r$ is:<br>
+<button onclick="tick(this,'combinations')">n! / (n-r)!</button>
+<button>n! / r!(n-r)!</button></p>
+
+<p>2. Order matters in permutations.<br>
+<button onclick="tick(this)">True</button>
+<button>False</button></p>
+</div>
+
+</div>
+</section>
+
+<section id="combinations" class="locked">
+<div class="concept">
+<h2>Combinations (Order Doesn't Matter)</h2>
+
+<input type="hidden" id="combinations-i" value="0">
+
+<div class="slide">
+<p><strong>Definition:</strong> Selection of objects where order is irrelevant.</p>
+<p>Example: Selecting a team of 11 players.</p>
+</div>
+
+<div class="slide">
+<p><strong>Formula:</strong></p>
+<p>$^nC_r = \frac{n!}{r!(n-r)!}$.</p>
+<p>Also denoted as $\binom{n}{r}$.</p>
+</div>
+
+<div class="slide">
+<p><strong>Properties:</strong></p>
+<p>$^nC_r = ^nC_{n-r}$.</p>
+<p>$^nC_0 = 1, ^nC_n = 1$.</p>
+</div>
+
+<button onclick="prev('combinations')">← Back</button>
+<button onclick="next('combinations')">Next →</button>
+
+<div class="math">
+<strong>Relation</strong><br>
+$^nP_r = ^nC_r \times r!$<br>
+Selection $\times$ Arrangement = Permutation.
+</div>
+
+<button class="lab-btn" onclick="toggleLab('comb-lab')">Where to use – Problem Lab</button>
+<div id="comb-lab" class="subjective-ans">
+<p><strong>Selection Problems:</strong></p>
+<p><strong>1. Select 3 from 5 friends:</strong> $^5C_3 = \frac{5 \times 4 \times 3}{3 \times 2 \times 1} = 10$.</p>
+<p><strong>2. Handshakes:</strong> 10 people shake hands. Order A-B is same as B-A. $^10C_2 = \frac{10 \times 9}{2} = 45$.</p>
+</div>
+
+<h3>Checkpoints</h3>
+<div class="mcq">
+<p>1. $^nC_r$ represents:<br>
+<button onclick="tick(this,'applications')">Selection</button>
+<button>Arrangement</button></p>
+
+<p>2. $^5C_2 = $<br>
+<button onclick="tick(this)">10</button>
+<button>20</button></p>
+</div>
+
+</div>
+</section>
+
+<section id="applications" class="locked">
+<div class="concept">
+<h2>Applications & Logic</h2>
+
+<input type="hidden" id="applications-i" value="0">
+
+<div class="slide">
+<p><strong>Decision Tree:</strong></p>
+<p>Does order matter?</p>
+<p>YES $\to$ Permutation.</p>
+<p>NO $\to$ Combination.</p>
+</div>
+
+<div class="slide">
+<p><strong>Cards (Deck of 52):</strong></p>
+<p>4 Suits (Spade, Heart, Diamond, Club).</p>
+<p>13 Ranks each.</p>
+<p>Select 4 cards of same suit: $^4C_1 \times ^{13}C_4$ (Choose suit AND choose cards).</p>
+</div>
+
+<button onclick="prev('applications')">← Back</button>
+<button onclick="next('applications')">Next →</button>
+
+<div class="math">
+<strong>Tip</strong><br>
+Selecting "at least one":<br>
+Total Ways - (Ways to select none).
+</div>
+
+<button class="lab-btn" onclick="toggleLab('app-lab')">Where to use – Problem Lab</button>
+<div id="app-lab" class="subjective-ans">
+<p><strong>Committee Problem:</strong></p>
+<p>From 6 Men, 4 Women, select 5 (3 Men, 2 Women).</p>
+<p>Ways = $^6C_3 \times ^4C_2$.</p>
+<p>$= 20 \times 6 = 120$.</p>
+</div>
+
+<h3>Checkpoints</h3>
+<div class="mcq">
+<p>1. Selection of cricket team is:<br>
+<button onclick="tick(this,'tips')">Combination</button>
+<button>Permutation</button></p>
+
+<p>2. $^nC_r + ^nC_{r-1} = $<br>
+<button onclick="tick(this)">^{n+1}C_r</button>
+<button>^{n+1}C_{r-1}</button></p>
+</div>
+
+</div>
+</section>
+
+<section id="tips" class="locked">
+<div class="concept">
+<h2>Tips & Tricks – P & C</h2>
+
+<input type="hidden" id="tips-i" value="0">
+
+<div class="slide">
+<p><strong>Gap Method:</strong></p>
+<p>To ensure items are never together.</p>
+<p>Place others first, then place items in gaps.</p>
+</div>
+
+<div class="slide">
+<p><strong>String Method:</strong></p>
+<p>To ensure items are always together.</p>
+<p>Tie them as one unit. Arrange units. Then arrange inside the unit.</p>
+</div>
+
+<div class="slide">
+<p><strong>Dictionary Rank:</strong></p>
+<p>Fix first letter, count remaining arrangements. Move alphabetically.</p>
+</div>
+
+<button onclick="prev('tips')">← Back</button>
+<button onclick="next('tips')">Next →</button>
+
+<div class="math">
+<strong>Formula</strong><br>
+Number of diagonals in n-sided polygon: $^nC_2 - n$.
+</div>
+
+</div>
+</section>
+
+<script>
+show("tips",0);
+</script>
+
+<footer>
+<p>Proceed to exercises.</p>
+<a href="exercise.html"><button>Go to Exercises →</button></a>
+</footer>
+
+<script>
+["fpc","permutations","combinations","applications","tips"].forEach(id=>show(id,0));
+</script>
+
+</body>
+</html>

@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Conic Sections | Chapter 10</title>
+
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[','\\]']],
+    processEscapes: true
+  },
+  chtml: {
+    scale: 1.05,
+    matchFontHeight: true
+  }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/style.css">
+
+<style>
+.slide { display:none; }
+.subjective-ans {
+  display:none;
+  margin-top:1rem;
+  padding:1.5rem;
+  background:#f8fafc;
+  border-left:5px solid var(--primary);
+  border-radius:8px;
+}
+.lab-btn { background:var(--secondary); margin-top:1rem; }
+.mcq button { margin-right:0.5rem; }
+.mcq .correct { color:green; font-weight:600; }
+.math { overflow-x:auto; }
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Conic Sections</h1>
+<p>Circle → Parabola → Ellipse → Hyperbola</p>
+</header>
+
+<nav>
+<a href="#circle">Circle</a>
+<a href="#parabola">Parabola</a>
+<a href="#ellipse">Ellipse</a>
+<a href="#hyperbola">Hyperbola</a>
+</nav>
+
+<script>
+function show(section,i){
+  const slides=document.querySelectorAll(`#${section} .slide`);
+  slides.forEach(s=>s.style.display="none");
+  slides[i].style.display="block";
+  document.getElementById(section+"-i").value=i;
+}
+function next(section){
+  let i=+document.getElementById(section+"-i").value;
+  const slides=document.querySelectorAll(`#${section} .slide`);
+  if(i<slides.length-1) show(section,i+1);
+}
+function prev(section){
+  let i=+document.getElementById(section+"-i").value;
+  if(i>0) show(section,i-1);
+}
+function tick(btn,unlockId){
+  btn.innerHTML="✔ Correct";
+  btn.classList.add("correct");
+  if(unlockId) document.getElementById(unlockId).classList.remove("locked");
+}
+function toggleLab(id){
+  const el=document.getElementById(id);
+  el.style.display = el.style.display==="block" ? "none" : "block";
+}
+</script>
+
+<section id="circle">
+<div class="concept">
+<h2>Circle</h2>
+
+<input type="hidden" id="circle-i" value="0">
+
+<div class="slide">
+<p><strong>Definition:</strong> Set of points equidistant from a center $(h, k)$.</p>
+<p>Distance = Radius $r$.</p>
+</div>
+
+<div class="slide">
+<p><strong>Standard Equation:</strong></p>
+<p>$(x-h)^2 + (y-k)^2 = r^2$.</p>
+</div>
+
+<div class="slide">
+<p><strong>General Equation:</strong></p>
+<p>$x^2 + y^2 + 2gx + 2fy + c = 0$.</p>
+<p>Center: $(-g, -f)$. Radius: $\sqrt{g^2+f^2-c}$.</p>
+</div>
+
+<button onclick="prev('circle')">← Back</button>
+<button onclick="next('circle')">Next →</button>
+
+<div class="math">
+<strong>Note</strong><br>
+If center is origin (0,0), then $x^2 + y^2 = r^2$.
+</div>
+
+<button class="lab-btn" onclick="toggleLab('circ-lab')">Where to use – Problem Lab</button>
+<div id="circ-lab" class="subjective-ans">
+<p><strong>Find center and radius of $x^2 + y^2 - 8x + 10y - 12 = 0$:</strong></p>
+<p>$2g = -8 \implies g = -4$. $2f = 10 \implies f = 5$. $c = -12$.</p>
+<p>Center: $(-g, -f) = (4, -5)$.</p>
+<p>Radius: $\sqrt{16 + 25 - (-12)} = \sqrt{53}$.</p>
+</div>
+
+<h3>Checkpoints</h3>
+<div class="mcq">
+<p>1. Center of $(x-2)^2 + (y+3)^2 = 16$:<br>
+<button onclick="tick(this,'parabola')">(2, -3)</button>
+<button>(-2, 3)</button></p>
+
+<p>2. Radius of $x^2+y^2=9$:<br>
+<button onclick="tick(this)">3</button>
+<button>9</button></p>
+</div>
+
+</div>
+</section>
+
+<section id="parabola" class="locked">
+<div class="concept">
+<h2>Parabola</h2>
+
+<input type="hidden" id="parabola-i" value="0">
+
+<div class="slide">
+<p><strong>Definition:</strong> Locus of points equidistant from a fixed point (Focus) and a fixed line (Directrix).</p>
+<p>$e=1$.</p>
+</div>
+
+<div class="slide">
+<p><strong>Standard Forms ($a>0$):</strong></p>
+<p>1. Right: $y^2 = 4ax$. Focus $(a, 0)$.</p>
+<p>2. Left: $y^2 = -4ax$. Focus $(-a, 0)$.</p>
+<p>3. Up: $x^2 = 4ay$. Focus $(0, a)$.</p>
+<p>4. Down: $x^2 = -4ay$. Focus $(0, -a)$.</p>
+</div>
+
+<div class="slide">
+<p><strong>Latus Rectum:</strong></p>
+<p>Length of chord through focus perpendicular to axis = $4a$.</p>
+</div>
+
+<button onclick="prev('parabola')">← Back</button>
+<button onclick="next('parabola')">Next →</button>
+
+<div class="math">
+<strong>Tip</strong><br>
+Linear variable tells the axis of symmetry.<br>
+$y^2=4ax$: Symmetry about X-axis.
+</div>
+
+<button class="lab-btn" onclick="toggleLab('para-lab')">Where to use – Problem Lab</button>
+<div id="para-lab" class="subjective-ans">
+<p><strong>Find focus of $y^2 = 12x$:</strong></p>
+<p>$4a = 12 \implies a = 3$.</p>
+<p>Right handed parabola. Focus $(3, 0)$. Directrix $x = -3$.</p>
+</div>
+
+<h3>Checkpoints</h3>
+<div class="mcq">
+<p>1. Axis of $x^2 = -8y$:<br>
+<button onclick="tick(this,'ellipse')">Y-axis</button>
+<button>X-axis</button></p>
+
+<p>2. Length of Latus Rectum of $y^2=8x$:<br>
+<button onclick="tick(this)">8</button>
+<button>2</button></p>
+</div>
+
+</div>
+</section>
+
+<section id="ellipse" class="locked">
+<div class="concept">
+<h2>Ellipse</h2>
+
+<input type="hidden" id="ellipse-i" value="0">
+
+<div class="slide">
+<p><strong>Standard Equation ($a > b$):</strong></p>
+<p>$\frac{x^2}{a^2} + \frac{y^2}{b^2} = 1$.</p>
+<p>Major Axis: 2a (along X). Minor Axis: 2b.</p>
+</div>
+
+<div class="slide">
+<p><strong>Relation:</strong></p>
+<p>$c^2 = a^2 - b^2$ (where $c$ is distance to focus).</p>
+<p>Foci: $(\pm c, 0)$.</p>
+</div>
+
+<div class="slide">
+<p><strong>Eccentricity ($e$):</strong></p>
+<p>$e = c/a < 1$.</p>
+</div>
+
+<button onclick="prev('ellipse')">← Back</button>
+<button onclick="next('ellipse')">Next →</button>
+
+<div class="math">
+<strong>Vertical Ellipse</strong><br>
+If denominator of $y^2$ is larger, major axis is Y-axis.<br>
+Foci: $(0, \pm c)$.
+</div>
+
+<button class="lab-btn" onclick="toggleLab('ell-lab')">Where to use – Problem Lab</button>
+<div id="ell-lab" class="subjective-ans">
+<p><strong>Find foci of $x^2/25 + y^2/9 = 1$:</strong></p>
+<p>$a^2=25, b^2=9$. $c^2 = 25-9=16 \implies c=4$.</p>
+<p>Horizontal ellipse. Foci $(\pm 4, 0)$.</p>
+</div>
+
+<h3>Checkpoints</h3>
+<div class="mcq">
+<p>1. Length of major axis for $x^2/16 + y^2/25 = 1$:<br>
+<button onclick="tick(this,'hyperbola')">10</button>
+<button>8</button></p>
+
+<p>2. Sum of focal distances is:<br>
+<button onclick="tick(this)">2a</button>
+<button>2b</button></p>
+</div>
+
+</div>
+</section>
+
+<section id="hyperbola" class="locked">
+<div class="concept">
+<h2>Hyperbola</h2>
+
+<input type="hidden" id="hyperbola-i" value="0">
+
+<div class="slide">
+<p><strong>Standard Equation:</strong></p>
+<p>$\frac{x^2}{a^2} - \frac{y^2}{b^2} = 1$.</p>
+<p>Transverse Axis: 2a (along X).</p>
+</div>
+
+<div class="slide">
+<p><strong>Relation:</strong></p>
+<p>$c^2 = a^2 + b^2$.</p>
+<p>Foci: $(\pm c, 0)$.</p>
+</div>
+
+<div class="slide">
+<p><strong>Eccentricity ($e$):</strong></p>
+<p>$e = c/a > 1$.</p>
+</div>
+
+<button onclick="prev('hyperbola')">← Back</button>
+<button onclick="next('hyperbola')">Next →</button>
+
+<div class="math">
+<strong>Conjugate Hyperbola</strong><br>
+$\frac{y^2}{a^2} - \frac{x^2}{b^2} = 1$.<br>
+Transverse axis along Y.
+</div>
+
+<button class="lab-btn" onclick="toggleLab('hyp-lab')">Where to use – Problem Lab</button>
+<div id="hyp-lab" class="subjective-ans">
+<p><strong>Find foci of $x^2/9 - y^2/16 = 1$:</strong></p>
+<p>$a^2=9, b^2=16$. $c^2 = 9+16=25 \implies c=5$.</p>
+<p>Foci $(\pm 5, 0)$.</p>
+</div>
+
+<h3>Checkpoints</h3>
+<div class="mcq">
+<p>1. Eccentricity of hyperbola is:<br>
+<button onclick="tick(this,'tips')">> 1</button>
+<button>< 1</button></p>
+
+<p>2. Length of transverse axis is:<br>
+<button onclick="tick(this)">2a</button>
+<button>2b</button></p>
+</div>
+
+</div>
+</section>
+
+<section id="tips" class="locked">
+<div class="concept">
+<h2>Tips & Tricks – Conics</h2>
+
+<input type="hidden" id="tips-i" value="0">
+
+<div class="slide">
+<p><strong>Identifying Conic:</strong></p>
+<p>Look at $x^2$ and $y^2$ terms.</p>
+<p>Same coeffs (+): Circle.</p>
+<p>Diff coeffs (+): Ellipse.</p>
+<p>One minus (-): Hyperbola.</p>
+<p>Only one squared: Parabola.</p>
+</div>
+
+<div class="slide">
+<p><strong>Parametric Forms:</strong></p>
+<p>Circle: $(r\cos\theta, r\sin\theta)$.</p>
+<p>Parabola: $(at^2, 2at)$.</p>
+<p>Ellipse: $(a\cos\theta, b\sin\theta)$.</p>
+</div>
+
+<button onclick="prev('tips')">← Back</button>
+<button onclick="next('tips')">Next →</button>
+
+<div class="math">
+<strong>Latus Rectum Lengths</strong><br>
+Parabola: $4a$<br>
+Ellipse/Hyperbola: $2b^2/a$
+</div>
+
+</div>
+</section>
+
+<script>
+show("tips",0);
+</script>
+
+<footer>
+<p>Proceed to exercises.</p>
+<a href="exercise.html"><button>Go to Exercises →</button></a>
+</footer>
+
+<script>
+["circle","parabola","ellipse","hyperbola","tips"].forEach(id=>show(id,0));
+</script>
+
+</body>
+</html>

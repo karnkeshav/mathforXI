@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Linear Inequalities | Chapter 05</title>
+
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[','\\]']],
+    processEscapes: true
+  },
+  chtml: {
+    scale: 1.05,
+    matchFontHeight: true
+  }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/style.css">
+
+<style>
+.slide { display:none; }
+.subjective-ans {
+  display:none;
+  margin-top:1rem;
+  padding:1.5rem;
+  background:#f8fafc;
+  border-left:5px solid var(--primary);
+  border-radius:8px;
+}
+.lab-btn { background:var(--secondary); margin-top:1rem; }
+.mcq button { margin-right:0.5rem; }
+.mcq .correct { color:green; font-weight:600; }
+.math { overflow-x:auto; }
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Linear Inequalities</h1>
+<p>Solve → Graph → Shade → Region</p>
+</header>
+
+<nav>
+<a href="#algebra">Algebraic</a>
+<a href="#graphical">Graphical</a>
+<a href="#systems">Systems</a>
+</nav>
+
+<script>
+function show(section,i){
+  const slides=document.querySelectorAll(`#${section} .slide`);
+  slides.forEach(s=>s.style.display="none");
+  slides[i].style.display="block";
+  document.getElementById(section+"-i").value=i;
+}
+function next(section){
+  let i=+document.getElementById(section+"-i").value;
+  const slides=document.querySelectorAll(`#${section} .slide`);
+  if(i<slides.length-1) show(section,i+1);
+}
+function prev(section){
+  let i=+document.getElementById(section+"-i").value;
+  if(i>0) show(section,i-1);
+}
+function tick(btn,unlockId){
+  btn.innerHTML="✔ Correct";
+  btn.classList.add("correct");
+  if(unlockId) document.getElementById(unlockId).classList.remove("locked");
+}
+function toggleLab(id){
+  const el=document.getElementById(id);
+  el.style.display = el.style.display==="block" ? "none" : "block";
+}
+</script>
+
+<section id="algebra">
+<div class="concept">
+<h2>Algebraic Solutions</h2>
+
+<input type="hidden" id="algebra-i" value="0">
+
+<div class="slide">
+<p><strong>Rules:</strong></p>
+<p>1. Add/Subtract same number: Sign stays same.</p>
+<p>2. Multiply/Divide by positive: Sign stays same.</p>
+<p>3. Multiply/Divide by <strong>negative</strong>: Sign <strong>reverses</strong>.</p>
+</div>
+
+<div class="slide">
+<p><strong>Example:</strong></p>
+<p>$3x - 5 < 10 \implies 3x < 15 \implies x < 5$.</p>
+<p>$-2x > 6 \implies x < -3$ (Sign flipped!).</p>
+</div>
+
+<div class="slide">
+<p><strong>Interval Notation:</strong></p>
+<p>$x < 5 \implies (-\infty, 5)$.</p>
+<p>$x \ge 2 \implies [2, \infty)$.</p>
+</div>
+
+<button onclick="prev('algebra')">← Back</button>
+<button onclick="next('algebra')">Next →</button>
+
+<div class="math">
+<strong>Key Idea</strong><br>
+Strict ($<, >$): Open circles / dotted lines.<br>
+Slack ($\le, \ge$): Closed circles / solid lines.
+</div>
+
+<button class="lab-btn" onclick="toggleLab('alg-lab')">Where to use – Problem Lab</button>
+<div id="alg-lab" class="subjective-ans">
+<p><strong>Solving:</strong></p>
+<p><strong>1. $5x-3 < 3x+1$:</strong> $2x < 4 \implies x < 2$. Interval: $(-\infty, 2)$.</p>
+<p><strong>2. $\frac{x}{3} > \frac{x}{2} + 1$:</strong> Multiply by 6: $2x > 3x + 6$. $-x > 6 \implies x < -6$.</p>
+</div>
+
+<h3>Checkpoints</h3>
+<div class="mcq">
+<p>1. Solving $-x > 5$ gives:<br>
+<button onclick="tick(this,'graphical')">x < -5</button>
+<button>x > -5</button></p>
+
+<p>2. Interval for $x \le 3$:<br>
+<button onclick="tick(this)">(-∞, 3]</button>
+<button>(-∞, 3)</button></p>
+</div>
+
+</div>
+</section>
+
+<section id="graphical" class="locked">
+<div class="concept">
+<h2>Graphical Solutions (2 Variables)</h2>
+
+<input type="hidden" id="graphical-i" value="0">
+
+<div class="slide">
+<p><strong>Step 1:</strong> Replace inequality with $=$ to get a line.</p>
+<p>$2x+y > 6 \to 2x+y=6$.</p>
+</div>
+
+<div class="slide">
+<p><strong>Step 2:</strong> Draw the line.</p>
+<p>Solid line for $\ge, \le$.</p>
+<p>Dotted line for $>, <$.</p>
+</div>
+
+<div class="slide">
+<p><strong>Step 3:</strong> Test a point (usually origin $(0,0)$).</p>
+<p>If $(0,0)$ satisfies inequality, shade origin side.</p>
+<p>If not, shade opposite side.</p>
+</div>
+
+<button onclick="prev('graphical')">← Back</button>
+<button onclick="next('graphical')">Next →</button>
+
+<div class="math">
+<strong>Test Point Trick</strong><br>
+For $ax+by < c$, put $(0,0)$.<br>
+$0 < c$? If true, shade towards origin.
+</div>
+
+<button class="lab-btn" onclick="toggleLab('graph-lab')">Where to use – Problem Lab</button>
+<div id="graph-lab" class="subjective-ans">
+<p><strong>Graph $x+y < 5$:</strong></p>
+<p>Line $x+y=5$. Dotted (strict inequality).</p>
+<p>Test $(0,0): 0+0 < 5$ is True.</p>
+<p>Shade region containing $(0,0)$.</p>
+</div>
+
+<h3>Checkpoints</h3>
+<div class="mcq">
+<p>1. Line for $2x+y \ge 10$ is:<br>
+<button onclick="tick(this,'systems')">Solid</button>
+<button>Dotted</button></p>
+
+<p>2. If $0 > 5$ is False, shade:<br>
+<button onclick="tick(this)">Away from origin</button>
+<button>Towards origin</button></p>
+</div>
+
+</div>
+</section>
+
+<section id="systems" class="locked">
+<div class="concept">
+<h2>Systems of Inequalities</h2>
+
+<input type="hidden" id="systems-i" value="0">
+
+<div class="slide">
+<p><strong>Definition:</strong> More than one inequality to satisfy simultaneously.</p>
+<p>Example: $x \ge 0, y \ge 0, x+y \le 4$.</p>
+</div>
+
+<div class="slide">
+<p><strong>Solution Region:</strong></p>
+<p>The common shaded area (overlap) of all inequalities.</p>
+<p>This region is often a polygon.</p>
+</div>
+
+<button onclick="prev('systems')">← Back</button>
+<button onclick="next('systems')">Next →</button>
+
+<div class="math">
+<strong>Corner Points</strong><br>
+Vertices of the solution region are important for optimization (Class XII).
+</div>
+
+<button class="lab-btn" onclick="toggleLab('sys-lab')">Where to use – Problem Lab</button>
+<div id="sys-lab" class="subjective-ans">
+<p><strong>Solve System: $x+y \le 5, x \ge 0, y \ge 0$.</strong></p>
+<p>1. $x \ge 0, y \ge 0$: First Quadrant.</p>
+<p>2. $x+y \le 5$: Below line joining $(5,0)$ and $(0,5)$.</p>
+<p>Region is triangle with vertices $(0,0), (5,0), (0,5)$.</p>
+</div>
+
+<h3>Checkpoints</h3>
+<div class="mcq">
+<p>1. $x \ge 0, y \ge 0$ represents:<br>
+<button onclick="tick(this,'tips')">1st Quadrant</button>
+<button>3rd Quadrant</button></p>
+
+<p>2. Solution of system is the:<br>
+<button onclick="tick(this)">Common Region</button>
+<button>Total Area</button></p>
+</div>
+
+</div>
+</section>
+
+<section id="tips" class="locked">
+<div class="concept">
+<h2>Tips & Tricks – Inequalities</h2>
+
+<input type="hidden" id="tips-i" value="0">
+
+<div class="slide">
+<p><strong>Sign Flipper:</strong></p>
+<p>Watch out for multiplying/dividing by negative numbers. It is the #1 mistake.</p>
+</div>
+
+<div class="slide">
+<p><strong>Line Type:</strong></p>
+<p>Check strictness ($<$) vs slack ($\le$) before drawing the line.</p>
+</div>
+
+<div class="slide">
+<p><strong>Word Problems:</strong></p>
+<p>"At least" $\implies \ge$.</p>
+<p>"At most" $\implies \le$.</p>
+<p>"More than" $\implies >$.</p>
+</div>
+
+<button onclick="prev('tips')">← Back</button>
+<button onclick="next('tips')">Next →</button>
+
+<div class="math">
+<strong>Double Inequality</strong><br>
+$2 < 3x-4 \le 5$<br>
+Add 4 everywhere: $6 < 3x \le 9$<br>
+Divide by 3: $2 < x \le 3$.
+</div>
+
+</div>
+</section>
+
+<script>
+show("tips",0);
+</script>
+
+<footer>
+<p>Proceed to exercises.</p>
+<a href="exercise.html"><button>Go to Exercises →</button></a>
+</footer>
+
+<script>
+["algebra","graphical","systems","tips"].forEach(id=>show(id,0));
+</script>
+
+</body>
+</html>

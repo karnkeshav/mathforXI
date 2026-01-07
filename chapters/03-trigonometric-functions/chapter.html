@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trigonometric Functions | Chapter 03</title>
+
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[','\\]']],
+    processEscapes: true
+  },
+  chtml: {
+    scale: 1.05,
+    matchFontHeight: true
+  }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/style.css">
+
+<style>
+.slide { display:none; }
+.subjective-ans {
+  display:none;
+  margin-top:1rem;
+  padding:1.5rem;
+  background:#f8fafc;
+  border-left:5px solid var(--primary);
+  border-radius:8px;
+}
+.lab-btn { background:var(--secondary); margin-top:1rem; }
+.mcq button { margin-right:0.5rem; }
+.mcq .correct { color:green; font-weight:600; }
+.math { overflow-x:auto; }
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Trigonometric Functions</h1>
+<p>Angles → Unit Circle → Identities → Equations</p>
+</header>
+
+<nav>
+<a href="#angles">Angles</a>
+<a href="#unit">Unit Circle</a>
+<a href="#identities">Identities</a>
+<a href="#equations">Equations</a>
+</nav>
+
+<script>
+function show(section,i){
+  const slides=document.querySelectorAll(`#${section} .slide`);
+  slides.forEach(s=>s.style.display="none");
+  slides[i].style.display="block";
+  document.getElementById(section+"-i").value=i;
+}
+function next(section){
+  let i=+document.getElementById(section+"-i").value;
+  const slides=document.querySelectorAll(`#${section} .slide`);
+  if(i<slides.length-1) show(section,i+1);
+}
+function prev(section){
+  let i=+document.getElementById(section+"-i").value;
+  if(i>0) show(section,i-1);
+}
+function tick(btn,unlockId){
+  btn.innerHTML="✔ Correct";
+  btn.classList.add("correct");
+  if(unlockId) document.getElementById(unlockId).classList.remove("locked");
+}
+function toggleLab(id){
+  const el=document.getElementById(id);
+  el.style.display = el.style.display==="block" ? "none" : "block";
+}
+</script>
+
+<section id="angles">
+<div class="concept">
+<h2>Angles & Measurement</h2>
+
+<input type="hidden" id="angles-i" value="0">
+
+<div class="slide">
+<p><strong>Two Units:</strong></p>
+<p><strong>Degrees:</strong> $360^\circ$ in a circle.</p>
+<p><strong>Radians:</strong> $2\pi$ radians in a circle.</p>
+</div>
+
+<div class="slide">
+<p><strong>Conversion:</strong></p>
+<p>$\pi \text{ rad} = 180^\circ$</p>
+<p>$1 \text{ rad} \approx 57^\circ 16'$</p>
+<p>$1^\circ \approx 0.01746 \text{ rad}$</p>
+</div>
+
+<div class="slide">
+<p><strong>Arc Length ($l$) and Radius ($r$):</strong></p>
+<p>Angle $\theta$ (in radians) $= l/r$.</p>
+<p>$l = r\theta$.</p>
+</div>
+
+<button onclick="prev('angles')">← Back</button>
+<button onclick="next('angles')">Next →</button>
+
+<div class="math">
+<strong>Formula Bank</strong><br>
+Deg to Rad: $\times \frac{\pi}{180}$<br>
+Rad to Deg: $\times \frac{180}{\pi}$
+</div>
+
+<button class="lab-btn" onclick="toggleLab('angle-lab')">Where to use – Problem Lab</button>
+<div id="angle-lab" class="subjective-ans">
+<p><strong>Conversions:</strong></p>
+<p><strong>1. $40^\circ 20'$ to radians:</strong> $20' = (20/60)^\circ = (1/3)^\circ$. Total $40.33^\circ$. Multiply by $\pi/180$.</p>
+<p><strong>2. $6$ radians to degrees:</strong> $6 \times \frac{180}{\pi} = \frac{1080}{22/7} \approx 343^\circ 38' 11''$.</p>
+</div>
+
+<h3>Checkpoints</h3>
+<div class="mcq">
+<p>1. Angle in semicircle in radians is:<br>
+<button onclick="tick(this,'unit')">π</button>
+<button>2π</button></p>
+
+<p>2. Formula $l=r\theta$ uses $\theta$ in:<br>
+<button onclick="tick(this)">Radians</button>
+<button>Degrees</button></p>
+</div>
+
+</div>
+</section>
+
+<section id="unit" class="locked">
+<div class="concept">
+<h2>Trigonometric Functions (Unit Circle)</h2>
+
+<input type="hidden" id="unit-i" value="0">
+
+<div class="slide">
+<p><strong>Definition:</strong> Consider a unit circle (radius 1).</p>
+<p>Coordinates of a point $P$ on circle at angle $x$: $(\cos x, \sin x)$.</p>
+</div>
+
+<div class="slide">
+<p><strong>Signs in Quadrants (ASTC):</strong></p>
+<p><strong>I:</strong> All Positive.</p>
+<p><strong>II:</strong> Sin Positive (S).</p>
+<p><strong>III:</strong> Tan Positive (T).</p>
+<p><strong>IV:</strong> Cos Positive (C).</p>
+</div>
+
+<div class="slide">
+<p><strong>Periodicity:</strong></p>
+<p>$\sin(2n\pi + x) = \sin x$.</p>
+<p>$\cos(2n\pi + x) = \cos x$.</p>
+</div>
+
+<button onclick="prev('unit')">← Back</button>
+<button onclick="next('unit')">Next →</button>
+
+<div class="math">
+<strong>Values</strong><br>
+$\sin(\pi) = 0, \cos(\pi) = -1$<br>
+$\sin(3\pi/2) = -1, \cos(3\pi/2) = 0$
+</div>
+
+<button class="lab-btn" onclick="toggleLab('unit-lab')">Where to use – Problem Lab</button>
+<div id="unit-lab" class="subjective-ans">
+<p><strong>Finding Values:</strong></p>
+<p><strong>1. $\cos(-1710^\circ)$:</strong> $\cos(-x) = \cos x$. $1710 = 4 \times 360 + 270$. So $\cos(270^\circ) = 0$.</p>
+<p><strong>2. $\sin(31\pi/3)$:</strong> $31\pi/3 = 10\pi + \pi/3$. Period is $2\pi$. Equivalent to $\sin(\pi/3) = \sqrt{3}/2$.</p>
+</div>
+
+<h3>Checkpoints</h3>
+<div class="mcq">
+<p>1. $\cos x$ is positive in:<br>
+<button onclick="tick(this,'identities')">I & IV</button>
+<button>I & II</button></p>
+
+<p>2. Value of $\sin \pi$:<br>
+<button onclick="tick(this)">0</button>
+<button>1</button></p>
+</div>
+
+</div>
+</section>
+
+<section id="identities" class="locked">
+<div class="concept">
+<h2>Compound Angles & Identities</h2>
+
+<input type="hidden" id="identities-i" value="0">
+
+<div class="slide">
+<p><strong>Sum & Difference:</strong></p>
+<p>$\sin(x+y) = \sin x \cos y + \cos x \sin y$</p>
+<p>$\cos(x+y) = \cos x \cos y - \sin x \sin y$</p>
+</div>
+
+<div class="slide">
+<p><strong>Double Angle:</strong></p>
+<p>$\sin 2x = 2\sin x \cos x$</p>
+<p>$\cos 2x = \cos^2 x - \sin^2 x = 2\cos^2 x - 1$</p>
+</div>
+
+<div class="slide">
+<p><strong>Sum to Product:</strong></p>
+<p>$\sin A + \sin B = 2\sin(\frac{A+B}{2})\cos(\frac{A-B}{2})$</p>
+</div>
+
+<button onclick="prev('identities')">← Back</button>
+<button onclick="next('identities')">Next →</button>
+
+<div class="math">
+<strong>Identity Box</strong><br>
+$\tan(x+y) = \frac{\tan x + \tan y}{1 - \tan x \tan y}$<br>
+$1 + \cos 2x = 2\cos^2 x$<br>
+$1 - \cos 2x = 2\sin^2 x$
+</div>
+
+<button class="lab-btn" onclick="toggleLab('ident-lab')">Where to use – Problem Lab</button>
+<div id="ident-lab" class="subjective-ans">
+<p><strong>Proving Identities:</strong></p>
+<p><strong>1. Value of $\sin 15^\circ$:</strong> $\sin(45-30) = \sin 45 \cos 30 - \cos 45 \sin 30$.</p>
+<p>$= \frac{1}{\sqrt{2}} \frac{\sqrt{3}}{2} - \frac{1}{\sqrt{2}} \frac{1}{2} = \frac{\sqrt{3}-1}{2\sqrt{2}}$.</p>
+</div>
+
+<h3>Checkpoints</h3>
+<div class="mcq">
+<p>1. $\sin 2x$ =<br>
+<button onclick="tick(this,'equations')">2sinx cosx</button>
+<button>2sinx</button></p>
+
+<p>2. $1 - \cos 2x$ =<br>
+<button onclick="tick(this)">2sin²x</button>
+<button>2cos²x</button></p>
+</div>
+
+</div>
+</section>
+
+<section id="equations" class="locked">
+<div class="concept">
+<h2>Trigonometric Equations</h2>
+
+<input type="hidden" id="equations-i" value="0">
+
+<div class="slide">
+<p><strong>Principal Solution:</strong></p>
+<p>Solutions in the interval $[0, 2\pi)$.</p>
+</div>
+
+<div class="slide">
+<p><strong>General Solution:</strong></p>
+<p>$\sin x = \sin y \implies x = n\pi + (-1)^n y$</p>
+<p>$\cos x = \cos y \implies x = 2n\pi \pm y$</p>
+<p>$\tan x = \tan y \implies x = n\pi + y$</p>
+</div>
+
+<button onclick="prev('equations')">← Back</button>
+<button onclick="next('equations')">Next →</button>
+
+<div class="math">
+<strong>Tips</strong><br>
+Always find the smallest positive angle $\alpha$ first.<br>
+Check quadrant to find $y$.
+</div>
+
+<button class="lab-btn" onclick="toggleLab('eq-lab')">Where to use – Problem Lab</button>
+<div id="eq-lab" class="subjective-ans">
+<p><strong>Solving Equations:</strong></p>
+<p><strong>1. $\sin x = \frac{1}{2}$:</strong> Principal: $\pi/6, 5\pi/6$. General: $n\pi + (-1)^n \frac{\pi}{6}$.</p>
+<p><strong>2. $\tan x = -1$:</strong> $\tan$ negative in II and IV. II Quadrant: $\pi - \pi/4 = 3\pi/4$. General: $n\pi + 3\pi/4$.</p>
+</div>
+
+<h3>Checkpoints</h3>
+<div class="mcq">
+<p>1. General solution for $\sin x = 0$:<br>
+<button onclick="tick(this,'tips')">nπ</button>
+<button>2nπ</button></p>
+
+<p>2. Principal solutions exist in:<br>
+<button onclick="tick(this)">[0, 2π)</button>
+<button>[0, π)</button></p>
+</div>
+
+</div>
+</section>
+
+<section id="tips" class="locked">
+<div class="concept">
+<h2>Tips & Tricks – Trigonometry</h2>
+
+<input type="hidden" id="tips-i" value="0">
+
+<div class="slide">
+<p><strong>ASTC Rule:</strong></p>
+<p>All Silver Tea Cups (All, Sin, Tan, Cos).</p>
+</div>
+
+<div class="slide">
+<p><strong>Angle Reduction:</strong></p>
+<ul>
+<li>$n\pi \pm \theta$: Function remains same.</li>
+<li>$(2n+1)\pi/2 \pm \theta$: Function changes (sin $\leftrightarrow$ cos).</li>
+</ul>
+</div>
+
+<div class="slide">
+<p><strong>Half Angle Tricks:</strong></p>
+<p>Use $1-\cos \theta = 2\sin^2(\theta/2)$ and $1+\cos \theta = 2\cos^2(\theta/2)$ often in calculus.</p>
+</div>
+
+<button onclick="prev('tips')">← Back</button>
+<button onclick="next('tips')">Next →</button>
+
+<div class="math">
+<strong>Mastery</strong><br>
+Memorise $\sin 30, 45, 60$.<br>
+Know graphs of $\sin x$ and $\cos x$.
+</div>
+
+</div>
+</section>
+
+<script>
+show("tips",0);
+</script>
+
+<footer>
+<p>Proceed to exercises.</p>
+<a href="exercise.html"><button>Go to Exercises →</button></a>
+</footer>
+
+<script>
+["angles","unit","identities","equations","tips"].forEach(id=>show(id,0));
+</script>
+
+</body>
+</html>

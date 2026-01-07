@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercises | Sets</title>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* Subjective Section Styles */
+        .subjective-ans {
+            display: none;
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            border: 1px dashed var(--primary);
+            font-size: 1.1rem;
+        }
+        .ans-toggle {
+            display: inline-block;
+            margin-top: 10px;
+            color: var(--primary);
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        /* Quiz Overlay & Card */
+        #quiz-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(30, 41, 59, 0.98);
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 20px;
+        }
+        .quiz-card {
+            background: var(--card);
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2.5rem;
+            border-radius: 20px;
+            position: relative;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        /* Close Icon Styling */
+        .close-quiz {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            font-size: 2rem;
+            color: var(--muted);
+            cursor: pointer;
+            border: none;
+            background: none;
+            line-height: 1;
+            transition: color 0.2s;
+        }
+        .close-quiz:hover { color: var(--text); }
+
+        /* Option Button Visibility Fix */
+        .option-btn {
+            display: block;
+            width: 100%;
+            text-align: left;
+            background: #ffffff;
+            color: var(--text);
+            border: 1px solid #e2e8f0;
+            padding: 1.2rem;
+            margin: 0.8rem 0;
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.2s;
+        }
+        .option-btn:hover:not(:disabled) {
+            background: #f1f5f9;
+            border-color: var(--primary);
+        }
+
+        /* Correct/Wrong States */
+        .correct { background: #dcfce7 !important; border-color: #22c55e !important; color: #166534 !important; }
+        .wrong { background: #fee2e2 !important; border-color: #ef4444 !important; color: #991b1b !important; }
+
+        .quiz-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+            gap: 1rem;
+        }
+
+        .nav-btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Chapter 01: Practice Exercises</h1>
+</header>
+
+<nav>
+    <a href="landing.html">← Back</a>
+    <a href="chapter.html">Concepts</a>
+    <a href="exercise.html" style="border-bottom: 2px solid var(--primary);">Exercises</a>
+</nav>
+
+<section>
+    <div class="concept">
+        <div class="step">Check Point (NCERT & Exemplar)</div>
+        <h2>Subjective Questions</h2>
+
+        <div class="question-box" style="margin-bottom: 2.5rem;">
+            <p><strong>Q1.</strong> Write the set $\{x : x \text{ is a positive integer and } x^2 < 40\}$ in Roster form.</p>
+            <span class="ans-toggle" onclick="toggleAns('ans1')">Show Answer</span>
+            <div id="ans1" class="subjective-ans">
+                <strong>Solution:</strong> The positive integers whose squares are less than 40 are 1, 2, 3, 4, 5, 6. <br> So, the set is $\{1, 2, 3, 4, 5, 6\}$.
+            </div>
+        </div>
+
+        <div class="question-box" style="margin-bottom: 2.5rem;">
+            <p><strong>Q2.</strong> Let $A = \{1, 2, 3, 4, 5, 6\}$. Insert the appropriate symbol $\in$ or $\notin$ in the blank space: $5 \dots A$.</p>
+            <span class="ans-toggle" onclick="toggleAns('ans2')">Show Answer</span>
+            <div id="ans2" class="subjective-ans">
+                <strong>Solution:</strong> Since 5 is an element of A, we use $\in$. <br> $5 \in A$.
+            </div>
+        </div>
+
+        <div class="question-box" style="margin-bottom: 2.5rem;">
+            <p><strong>Q3.</strong> If $X$ and $Y$ are two sets such that $X \cup Y$ has 50 elements, $X$ has 28 elements and $Y$ has 32 elements, how many elements does $X \cap Y$ have?</p>
+            <span class="ans-toggle" onclick="toggleAns('ans3')">Show Answer</span>
+            <div id="ans3" class="subjective-ans">
+                <strong>Solution:</strong> Formula: $n(X \cup Y) = n(X) + n(Y) - n(X \cap Y)$. <br> $50 = 28 + 32 - n(X \cap Y) \implies 50 = 60 - n(X \cap Y) \implies n(X \cap Y) = 10$.
+            </div>
+        </div>
+
+        <div class="question-box" style="margin-bottom: 2.5rem;">
+            <p><strong>Q4.</strong> Write down all the subsets of the set $\{1, 2, 3\}$.</p>
+            <span class="ans-toggle" onclick="toggleAns('ans4')">Show Answer</span>
+            <div id="ans4" class="subjective-ans">
+                <strong>Solution:</strong> $\phi, \{1\}, \{2\}, \{3\}, \{1, 2\}, \{1, 3\}, \{2, 3\}, \{1, 2, 3\}$.
+            </div>
+        </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 3rem;">
+        <button class="primary-btn" style="padding: 1rem 2.5rem;" onclick="startQuiz()">Take Mastery Test</button>
+    </div>
+</section>
+
+<div id="quiz-overlay">
+    <div class="quiz-card">
+        <button class="close-quiz" onclick="closeQuiz()">&times;</button>
+        <div id="quiz-body">
+            <div class="step" id="quiz-progress"></div>
+            <h3 id="quiz-question" style="margin: 1.5rem 0;"></h3>
+            <div id="quiz-options"></div>
+            <div id="quiz-feedback" class="think" style="display:none; margin-top:1.5rem;"></div>
+            <div class="quiz-nav">
+                <button id="prev-btn" class="nav-btn" style="background:var(--muted); color:white; border:none;" onclick="prevQuestion()">Previous</button>
+                <button id="next-btn" class="nav-btn" style="display:none; background:var(--primary); color:white; border:none;" onclick="nextQuestion()">Next Question</button>
+            </div>
+        </div>
+        <div id="quiz-results" style="display:none; text-align:center;">
+            <h2>Mastery Complete!</h2>
+            <div class="math" id="final-score" style="font-size: 2.5rem; color:var(--primary); margin: 1.5rem 0;"></div>
+            <button class="primary-btn" onclick="location.reload()">Restart Practice</button>
+        </div>
+    </div>
+</div>
+
+<script>
+function toggleAns(id) {
+    const el = document.getElementById(id);
+    el.style.display = (el.style.display === 'block') ? 'none' : 'block';
+}
+
+const questions = [
+    { q: "A set is a well-defined collection of:", a: ["Objects", "Ideas", "Opinions", "None"], correct: 0, step: "Definition: Set is a well-defined collection of objects." },
+    { q: "Which of the following is a set?", a: ["Best cricket players", "Difficult problems", "Natural numbers < 10", "Most talented writers"], correct: 2, step: "Option C is well-defined. Others depend on opinion." },
+    { q: "The roster form of $\{x : x \text{ is a vowel}\}$ is:", a: ["{a, b, c}", "{a, e, i, o, u}", "{v, o, w, e, l}", "{a, e}"], correct: 1, step: "Vowels are a, e, i, o, u." },
+    { q: "A set with no elements is called:", a: ["Finite set", "Infinite set", "Empty set", "Singleton set"], correct: 2, step: "A set containing no elements is the empty set $\\phi$." },
+    { q: "If $A = \\{1, 2\\}$, the number of subsets is:", a: ["2", "4", "3", "1"], correct: 1, step: "$2^n = 2^2 = 4$." },
+    { q: "$A \\cup B$ represents elements in:", a: ["A only", "B only", "A or B", "A and B"], correct: 2, step: "Union contains elements belonging to either A or B or both." },
+    { q: "$A \\cap B$ represents elements in:", a: ["A only", "B only", "A or B", "A and B"], correct: 3, step: "Intersection contains common elements (A and B)." },
+    { q: "If $A \\subset B$, then $A \\cup B = $", a: ["A", "B", "$\\phi$", "Universal Set"], correct: 1, step: "Since A is inside B, combining them gives B." },
+    { q: "If $A \\subset B$, then $A \\cap B = $", a: ["A", "B", "$\\phi$", "Universal Set"], correct: 0, step: "Common part is A itself." },
+    { q: "Number of elements in power set of $\\phi$:", a: ["0", "1", "2", "Undefined"], correct: 1, step: "$P(\\phi) = \\{\\phi\\}$, so 1 element ($2^0=1$)." },
+    { q: "The set of all integers is:", a: ["Finite", "Infinite", "Empty", "Singleton"], correct: 1, step: "Integers continue indefinitely." },
+    { q: "$A - B$ means:", a: ["Elements in A but not B", "Elements in B but not A", "Elements in both", "None"], correct: 0, step: "Difference set contains elements of A excluding those in B." },
+    { q: "$(A \\cup B)'$ is equal to:", a: ["$A' \\cup B'$", "$A' \\cap B'$", "$A \\cap B$", "$A' - B'$"], correct: 1, step: "De Morgan's Law: Complement of union is intersection of complements." },
+    { q: "If $n(A)=3, n(B)=4$ and sets are disjoint, $n(A \\cup B)$ is:", a: ["7", "1", "12", "0"], correct: 0, step: "For disjoint sets, $n(A \\cup B) = n(A) + n(B) = 3+4=7$." },
+    { q: "Which symbol denotes 'belongs to'?", a: ["$\\subset$", "$\\in$", "$\\cup$", "$\\forall$"], correct: 1, step: "$\\in$ is the symbol for membership." },
+    { q: "The set $\{x : x^2 = 4, x \text{ is odd}\}$ is:", a: ["Empty", "Singleton", "Finite", "Infinite"], correct: 0, step: "Roots of $x^2=4$ are 2, -2. Neither is odd. So empty." },
+    { q: "Order of elements in a set matters.", a: ["True", "False"], correct: 1, step: "In sets, order does not matter." },
+    { q: "Repetition of elements changes the set.", a: ["True", "False"], correct: 1, step: "Repetition is ignored in sets." },
+    { q: "The complement of Universal Set is:", a: ["Universal Set", "Empty Set", "A", "B"], correct: 1, step: "$U' = \\phi$." },
+    { q: "Number of proper subsets of $\{1, 2, 3\}$:", a: ["8", "7", "6", "9"], correct: 1, step: "Total subsets $2^3=8$. Proper subsets exclude the set itself, so $8-1=7$." }
+];
+
+let curIdx = 0; let score = 0; let userAnswers = new Array(questions.length).fill(null);
+
+function startQuiz() { document.getElementById('quiz-overlay').style.display = 'block'; document.body.style.overflow = 'hidden'; showQuestion(); }
+function closeQuiz() { document.getElementById('quiz-overlay').style.display = 'none'; document.body.style.overflow = 'auto'; }
+
+function showQuestion() {
+    const data = questions[curIdx];
+    document.getElementById('quiz-progress').innerText = `Question ${curIdx + 1} of 20`;
+    document.getElementById('quiz-question').innerHTML = data.q;
+    const optionsDiv = document.getElementById('quiz-options');
+    optionsDiv.innerHTML = '';
+    document.getElementById('prev-btn').style.visibility = (curIdx === 0) ? 'hidden' : 'visible';
+    document.getElementById('next-btn').style.display = (userAnswers[curIdx] !== null) ? 'block' : 'none';
+    const feedback = document.getElementById('quiz-feedback');
+    if (userAnswers[curIdx] !== null) { feedback.style.display = 'block'; feedback.innerHTML = `<strong>Explanation:</strong> ${data.step}`; }
+    else { feedback.style.display = 'none'; }
+    data.a.forEach((opt, i) => {
+        const btn = document.createElement('button'); btn.className = 'option-btn'; btn.innerHTML = opt;
+        if (userAnswers[curIdx] !== null) { btn.disabled = true; if (i === data.correct) btn.classList.add('correct'); if (i === userAnswers[curIdx] && i !== data.correct) btn.classList.add('wrong'); }
+        btn.onclick = () => { userAnswers[curIdx] = i; if (i === data.correct) score++; showQuestion(); };
+        optionsDiv.appendChild(btn);
+    });
+    MathJax.typeset();
+}
+
+function nextQuestion() {
+    if (curIdx < questions.length - 1) { curIdx++; showQuestion(); }
+    else { document.getElementById('quiz-body').style.display = 'none'; document.getElementById('quiz-results').style.display = 'block'; document.getElementById('final-score').innerText = `${score} / 20`; }
+}
+function prevQuestion() { if (curIdx > 0) { curIdx--; showQuestion(); } }
+</script>
+</body>
+</html>

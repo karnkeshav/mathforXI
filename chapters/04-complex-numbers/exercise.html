@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercises | Complex Numbers</title>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* Subjective Section Styles */
+        .subjective-ans {
+            display: none;
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            border: 1px dashed var(--primary);
+            font-size: 1.1rem;
+        }
+        .ans-toggle {
+            display: inline-block;
+            margin-top: 10px;
+            color: var(--primary);
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        /* Quiz Overlay & Card */
+        #quiz-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(30, 41, 59, 0.98);
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 20px;
+        }
+        .quiz-card {
+            background: var(--card);
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2.5rem;
+            border-radius: 20px;
+            position: relative;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        /* Close Icon Styling */
+        .close-quiz {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            font-size: 2rem;
+            color: var(--muted);
+            cursor: pointer;
+            border: none;
+            background: none;
+            line-height: 1;
+            transition: color 0.2s;
+        }
+        .close-quiz:hover { color: var(--text); }
+
+        /* Option Button Visibility Fix */
+        .option-btn {
+            display: block;
+            width: 100%;
+            text-align: left;
+            background: #ffffff;
+            color: var(--text);
+            border: 1px solid #e2e8f0;
+            padding: 1.2rem;
+            margin: 0.8rem 0;
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.2s;
+        }
+        .option-btn:hover:not(:disabled) {
+            background: #f1f5f9;
+            border-color: var(--primary);
+        }
+
+        /* Correct/Wrong States */
+        .correct { background: #dcfce7 !important; border-color: #22c55e !important; color: #166534 !important; }
+        .wrong { background: #fee2e2 !important; border-color: #ef4444 !important; color: #991b1b !important; }
+
+        .quiz-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+            gap: 1rem;
+        }
+
+        .nav-btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Chapter 04: Practice Exercises</h1>
+</header>
+
+<nav>
+    <a href="landing.html">← Back</a>
+    <a href="chapter.html">Concepts</a>
+    <a href="exercise.html" style="border-bottom: 2px solid var(--primary);">Exercises</a>
+</nav>
+
+<section>
+    <div class="concept">
+        <div class="step">Check Point (NCERT & Exemplar)</div>
+        <h2>Subjective Questions</h2>
+
+        <div class="question-box" style="margin-bottom: 2.5rem;">
+            <p><strong>Q1.</strong> Express $(5-3i)^3$ in the form $a+ib$.</p>
+            <span class="ans-toggle" onclick="toggleAns('ans1')">Show Answer</span>
+            <div id="ans1" class="subjective-ans">
+                <strong>Solution:</strong> $(5-3i)^3 = 5^3 - 3(5)^2(3i) + 3(5)(3i)^2 - (3i)^3$ <br> $= 125 - 225i + 15(-9) - 27(-i)$ <br> $= 125 - 225i - 135 + 27i = -10 - 198i$.
+            </div>
+        </div>
+
+        <div class="question-box" style="margin-bottom: 2.5rem;">
+            <p><strong>Q2.</strong> Find the multiplicative inverse of $2-3i$.</p>
+            <span class="ans-toggle" onclick="toggleAns('ans2')">Show Answer</span>
+            <div id="ans2" class="subjective-ans">
+                <strong>Solution:</strong> Inverse $z^{-1} = \frac{\bar{z}}{|z|^2} = \frac{2+3i}{2^2+(-3)^2} = \frac{2+3i}{4+9} = \frac{2}{13} + i\frac{3}{13}$.
+            </div>
+        </div>
+
+        <div class="question-box" style="margin-bottom: 2.5rem;">
+            <p><strong>Q3.</strong> Convert $-1-i$ into polar form.</p>
+            <span class="ans-toggle" onclick="toggleAns('ans3')">Show Answer</span>
+            <div id="ans3" class="subjective-ans">
+                <strong>Solution:</strong> $r = \sqrt{(-1)^2+(-1)^2} = \sqrt{2}$. <br> $\tan \alpha = |-1/-1| = 1 \implies \alpha = \pi/4$. <br> Point in III Quadrant, so $\theta = -(\pi-\pi/4) = -3\pi/4$. <br> Polar form: $\sqrt{2}(\cos(-3\pi/4) + i\sin(-3\pi/4))$.
+            </div>
+        </div>
+
+        <div class="question-box" style="margin-bottom: 2.5rem;">
+            <p><strong>Q4.</strong> Solve $x^2 + 3x + 9 = 0$.</p>
+            <span class="ans-toggle" onclick="toggleAns('ans4')">Show Answer</span>
+            <div id="ans4" class="subjective-ans">
+                <strong>Solution:</strong> $D = 3^2 - 4(1)(9) = 9 - 36 = -27$. <br> $x = \frac{-3 \pm \sqrt{-27}}{2} = \frac{-3 \pm 3\sqrt{3}i}{2}$.
+            </div>
+        </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 3rem;">
+        <button class="primary-btn" style="padding: 1rem 2.5rem;" onclick="startQuiz()">Take Mastery Test</button>
+    </div>
+</section>
+
+<div id="quiz-overlay">
+    <div class="quiz-card">
+        <button class="close-quiz" onclick="closeQuiz()">&times;</button>
+        <div id="quiz-body">
+            <div class="step" id="quiz-progress"></div>
+            <h3 id="quiz-question" style="margin: 1.5rem 0;"></h3>
+            <div id="quiz-options"></div>
+            <div id="quiz-feedback" class="think" style="display:none; margin-top:1.5rem;"></div>
+            <div class="quiz-nav">
+                <button id="prev-btn" class="nav-btn" style="background:var(--muted); color:white; border:none;" onclick="prevQuestion()">Previous</button>
+                <button id="next-btn" class="nav-btn" style="display:none; background:var(--primary); color:white; border:none;" onclick="nextQuestion()">Next Question</button>
+            </div>
+        </div>
+        <div id="quiz-results" style="display:none; text-align:center;">
+            <h2>Mastery Complete!</h2>
+            <div class="math" id="final-score" style="font-size: 2.5rem; color:var(--primary); margin: 1.5rem 0;"></div>
+            <button class="primary-btn" onclick="location.reload()">Restart Practice</button>
+        </div>
+    </div>
+</div>
+
+<script>
+function toggleAns(id) {
+    const el = document.getElementById(id);
+    el.style.display = (el.style.display === 'block') ? 'none' : 'block';
+}
+
+const questions = [
+    { q: "$i = $", a: ["$\\sqrt{1}$", "$-1$", "$\\sqrt{-1}$", "$0$"], correct: 2, step: "Definition of imaginary unit." },
+    { q: "$i^{4n} = $", a: ["1", "i", "-1", "-i"], correct: 0, step: "Powers of i repeat every 4." },
+    { q: "Conjugate of $z = a+ib$ is:", a: ["$a-ib$", "$-a+ib$", "$-a-ib$", "$b+ia$"], correct: 0, step: "Change sign of imaginary part." },
+    { q: "Modulus of $3-4i$ is:", a: ["5", "-5", "7", "25"], correct: 0, step: "$\\sqrt{3^2+(-4)^2} = 5$." },
+    { q: "Value of $i^9$ is:", a: ["1", "i", "-1", "-i"], correct: 1, step: "$9 = 4(2)+1$, so $i^1$." },
+    { q: "Roots of $x^2+1=0$ are:", a: ["1, -1", "i, -i", "1, i", "0, 1"], correct: 1, step: "$x^2=-1$." },
+    { q: "If $z_1=z_2$, then:", a: ["$Re(z_1)=Re(z_2)$", "$Im(z_1)=Im(z_2)$", "Both", "None"], correct: 2, step: "Equality implies both parts are equal." },
+    { q: "Argand plane represents:", a: ["Real numbers", "Complex numbers", "Integers", "Matrices"], correct: 1, step: "Geometrical representation of complex numbers." },
+    { q: "Argument of $-1$ is:", a: ["0", "$\\pi/2$", "$\\pi$", "$-\\pi/2$"], correct: 2, step: "Point (-1, 0) lies on negative real axis." },
+    { q: "Multiplicative inverse of $i$ is:", a: ["1", "-1", "i", "-i"], correct: 3, step: "$1/i = i/i^2 = i/(-1) = -i$." },
+    { q: "$(1+i)^2 = $", a: ["$2i$", "$1-i$", "2", "0"], correct: 0, step: "$1 + 2i + i^2 = 1 + 2i - 1 = 2i$." },
+    { q: "Polar form of $1+i$:", a: ["$\\sqrt{2} \\angle 45^\\circ$", "$2 \\angle 45^\\circ$", "$\\sqrt{2} \\angle 90^\\circ$", "$1 \\angle 45^\\circ$"], correct: 0, step: "$r=\\sqrt{2}, \\theta = 45^\\circ$." },
+    { q: "$|z|^2 = $", a: ["$z^2$", "$z\\bar{z}$", "$\\bar{z}^2$", "$z+\\bar{z}$"], correct: 1, step: "Property $z\\bar{z} = |z|^2$." },
+    { q: "If $a+ib=0$, then:", a: ["$a=0, b=0$", "$a=0$", "$b=0$", "$a=b$"], correct: 0, step: "Complex number is zero iff both parts are zero." },
+    { q: "Value of $i^{-1}$:", a: ["i", "-i", "1", "-1"], correct: 1, step: "Same as $1/i = -i$." },
+    { q: "In Argand plane, $x$-axis is:", a: ["Real axis", "Imaginary axis", "Z-axis", "None"], correct: 0, step: "Convention." },
+    { q: "Modulus of product $|z_1 z_2| = $", a: ["$|z_1| + |z_2|$", "$|z_1| |z_2|$", "$|z_1| - |z_2|$", "0"], correct: 1, step: "Modulus distributes over multiplication." },
+    { q: "Solution of $x^2+2=0$:", a: ["$\\pm 2$", "$\\pm \\sqrt{2}i$", "$\\pm 2i$", "$\\pm \\sqrt{2}$"], correct: 1, step: "$x^2=-2$." },
+    { q: "Argument of a positive real number is:", a: ["0", "$\\pi$", "$\\pi/2$", "$-\\pi/2$"], correct: 0, step: "Lies on positive x-axis." },
+    { q: "Conjugate of $i$ is:", a: ["1", "-i", "i", "-1"], correct: 1, step: "$0+1i \\to 0-1i$." }
+];
+
+let curIdx = 0; let score = 0; let userAnswers = new Array(questions.length).fill(null);
+
+function startQuiz() { document.getElementById('quiz-overlay').style.display = 'block'; document.body.style.overflow = 'hidden'; showQuestion(); }
+function closeQuiz() { document.getElementById('quiz-overlay').style.display = 'none'; document.body.style.overflow = 'auto'; }
+
+function showQuestion() {
+    const data = questions[curIdx];
+    document.getElementById('quiz-progress').innerText = `Question ${curIdx + 1} of 20`;
+    document.getElementById('quiz-question').innerHTML = data.q;
+    const optionsDiv = document.getElementById('quiz-options');
+    optionsDiv.innerHTML = '';
+    document.getElementById('prev-btn').style.visibility = (curIdx === 0) ? 'hidden' : 'visible';
+    document.getElementById('next-btn').style.display = (userAnswers[curIdx] !== null) ? 'block' : 'none';
+    const feedback = document.getElementById('quiz-feedback');
+    if (userAnswers[curIdx] !== null) { feedback.style.display = 'block'; feedback.innerHTML = `<strong>Explanation:</strong> ${data.step}`; }
+    else { feedback.style.display = 'none'; }
+    data.a.forEach((opt, i) => {
+        const btn = document.createElement('button'); btn.className = 'option-btn'; btn.innerHTML = opt;
+        if (userAnswers[curIdx] !== null) { btn.disabled = true; if (i === data.correct) btn.classList.add('correct'); if (i === userAnswers[curIdx] && i !== data.correct) btn.classList.add('wrong'); }
+        btn.onclick = () => { userAnswers[curIdx] = i; if (i === data.correct) score++; showQuestion(); };
+        optionsDiv.appendChild(btn);
+    });
+    MathJax.typeset();
+}
+
+function nextQuestion() {
+    if (curIdx < questions.length - 1) { curIdx++; showQuestion(); }
+    else { document.getElementById('quiz-body').style.display = 'none'; document.getElementById('quiz-results').style.display = 'block'; document.getElementById('final-score').innerText = `${score} / 20`; }
+}
+function prevQuestion() { if (curIdx > 0) { curIdx--; showQuestion(); } }
+</script>
+</body>
+</html>

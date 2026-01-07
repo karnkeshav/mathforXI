@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sets | Chapter 01</title>
+
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[','\\]']],
+    processEscapes: true
+  },
+  chtml: {
+    scale: 1.05,
+    matchFontHeight: true
+  }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/style.css">
+
+<style>
+.slide { display:none; }
+.subjective-ans {
+  display:none;
+  margin-top:1rem;
+  padding:1.5rem;
+  background:#f8fafc;
+  border-left:5px solid var(--primary);
+  border-radius:8px;
+}
+.lab-btn { background:var(--secondary); margin-top:1rem; }
+.mcq button { margin-right:0.5rem; }
+.mcq .correct { color:green; font-weight:600; }
+.math { overflow-x:auto; }
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Sets</h1>
+<p>Collections → Representations → Operations → Logic</p>
+</header>
+
+<nav>
+<a href="#intro">Introduction</a>
+<a href="#types">Types & Subsets</a>
+<a href="#venn">Venn Diagrams</a>
+<a href="#operations">Operations</a>
+</nav>
+
+<script>
+function show(section,i){
+  const slides=document.querySelectorAll(`#${section} .slide`);
+  slides.forEach(s=>s.style.display="none");
+  slides[i].style.display="block";
+  document.getElementById(section+"-i").value=i;
+}
+function next(section){
+  let i=+document.getElementById(section+"-i").value;
+  const slides=document.querySelectorAll(`#${section} .slide`);
+  if(i<slides.length-1) show(section,i+1);
+}
+function prev(section){
+  let i=+document.getElementById(section+"-i").value;
+  if(i>0) show(section,i-1);
+}
+function tick(btn,unlockId){
+  btn.innerHTML="✔ Correct";
+  btn.classList.add("correct");
+  if(unlockId) document.getElementById(unlockId).classList.remove("locked");
+}
+function toggleLab(id){
+  const el=document.getElementById(id);
+  el.style.display = el.style.display==="block" ? "none" : "block";
+}
+</script>
+
+<section id="intro">
+<div class="concept">
+<h2>Introduction to Sets</h2>
+
+<input type="hidden" id="intro-i" value="0">
+
+<div class="slide">
+<p><strong>Definition:</strong> A set is a well-defined collection of objects.</p>
+<p>Examples: Rivers of India, Vowels in English alphabet.</p>
+<p>Not Sets: "Best players in the world" (Opinion varies).</p>
+</div>
+
+<div class="slide">
+<p><strong>Representation:</strong></p>
+<p><strong>1. Roster Form:</strong> List all elements. $\{a, e, i, o, u\}$</p>
+<p><strong>2. Set-Builder Form:</strong> Define by property. $\{x : x \text{ is a vowel}\}$</p>
+</div>
+
+<div class="slide">
+<p><strong>Symbols:</strong></p>
+<p>$\in$: Belongs to. $a \in V$</p>
+<p>$\notin$: Does not belong to. $b \notin V$</p>
+</div>
+
+<button onclick="prev('intro')">← Back</button>
+<button onclick="next('intro')">Next →</button>
+
+<div class="math">
+<strong>Key Concepts</strong><br>
+Set is denoted by Capital letters: $A, B, X$.<br>
+Elements by small letters: $x, y$.<br>
+Order in Roster form doesn't matter: $\{1, 2\} = \{2, 1\}$.<br>
+Repetition is ignored: $\{1, 1, 2\} = \{1, 2\}$.
+</div>
+
+<button class="lab-btn" onclick="toggleLab('intro-lab')">Where to use – Problem Lab</button>
+<div id="intro-lab" class="subjective-ans">
+<p><strong>Converting Forms:</strong></p>
+<p><strong>1. Roster to Set-Builder:</strong> $\{1, 4, 9, 16\} \rightarrow \{x : x = n^2, n \in \mathbb{N}, 1 \le n \le 4\}$.</p>
+<p><strong>2. Set-Builder to Roster:</strong> $\{x : x \text{ is an integer and } -3 < x < 7\} \rightarrow \{-2, -1, 0, 1, 2, 3, 4, 5, 6\}$.</p>
+</div>
+
+<h3>Checkpoints</h3>
+<div class="mcq">
+<p>1. Which is a set?<br>
+<button onclick="tick(this,'types')">Vowels</button>
+<button>Good books</button></p>
+
+<p>2. Roster form of $\{x : x \text{ is even prime}\}$ =<br>
+<button onclick="tick(this)">{2}</button>
+<button>{1, 2}</button></p>
+</div>
+
+</div>
+</section>
+
+<section id="types" class="locked">
+<div class="concept">
+<h2>Types & Subsets</h2>
+
+<input type="hidden" id="types-i" value="0">
+
+<div class="slide">
+<p><strong>Empty Set ($\phi$):</strong> Contains no elements. e.g. $\{x : x^2 = 4, x \text{ is odd}\}$.</p>
+</div>
+
+<div class="slide">
+<p><strong>Finite vs Infinite:</strong></p>
+<p>Finite: Countable elements. $\{1, 2, 3\}$.</p>
+<p>Infinite: Uncountable. Set of Natural numbers $\mathbb{N}$.</p>
+</div>
+
+<div class="slide">
+<p><strong>Subsets ($\subset$):</strong></p>
+<p>$A \subset B$ if every element of A is also in B.</p>
+<p>Number of subsets of a set with $n$ elements = $2^n$.</p>
+</div>
+
+<div class="slide">
+<p><strong>Intervals as Subsets of $\mathbb{R}$:</strong></p>
+<p>$(a, b)$: Open interval $\{x : a < x < b\}$.</p>
+<p>$[a, b]$: Closed interval $\{x : a \le x \le b\}$.</p>
+</div>
+
+<button onclick="prev('types')">← Back</button>
+<button onclick="next('types')">Next →</button>
+
+<div class="math">
+<strong>Formulas</strong><br>
+If $A \subset B$ and $A \ne B$, A is a proper subset.<br>
+Power Set $P(A)$: Collection of all subsets.<br>
+If $n(A) = m$, then $n(P(A)) = 2^m$.
+</div>
+
+<button class="lab-btn" onclick="toggleLab('types-lab')">Where to use – Problem Lab</button>
+<div id="types-lab" class="subjective-ans">
+<p><strong>Finding Subsets:</strong></p>
+<p><strong>1. Subsets of $\{1, 2\}$:</strong> $\phi, \{1\}, \{2\}, \{1, 2\}$. Total $2^2 = 4$.</p>
+<p><strong>2. Check Subset:</strong> Is $\{a\} \subset \{a, b, c\}$? Yes.</p>
+</div>
+
+<h3>Checkpoints</h3>
+<div class="mcq">
+<p>1. Number of subsets of $\{1, 2, 3\}$ =<br>
+<button onclick="tick(this,'venn')">8</button>
+<button>6</button></p>
+
+<p>2. Which is a subset of every set?<br>
+<button onclick="tick(this)">Empty Set</button>
+<button>{0}</button></p>
+</div>
+
+</div>
+</section>
+
+<section id="venn" class="locked">
+<div class="concept">
+<h2>Venn Diagrams</h2>
+
+<input type="hidden" id="venn-i" value="0">
+
+<div class="slide">
+<p><strong>Visualising Sets:</strong></p>
+<p>Universal Set ($U$): Represented by a rectangle.</p>
+<p>Subsets ($A, B$): Circles inside the rectangle.</p>
+</div>
+
+<div class="slide">
+<p><strong>Union ($A \cup B$):</strong> Area covering both circles.</p>
+<p><strong>Intersection ($A \cap B$):</strong> Common overlapping area.</p>
+</div>
+
+<div class="slide">
+<p><strong>Disjoint Sets:</strong> Circles that do not touch. $A \cap B = \phi$.</p>
+</div>
+
+<button onclick="prev('venn')">← Back</button>
+<button onclick="next('venn')">Next →</button>
+
+<div class="math">
+<strong>Visualization</strong><br>
+Use shading to represent operations.<br>
+Union: Shade everything in A and B.<br>
+Intersection: Shade only the overlap.
+</div>
+
+<h3>Checkpoints</h3>
+<div class="mcq">
+<p>1. In Venn diagram, Universal set is:<br>
+<button onclick="tick(this,'operations')">Rectangle</button>
+<button>Circle</button></p>
+
+<p>2. Overlapping region represents:<br>
+<button onclick="tick(this)">Intersection</button>
+<button>Union</button></p>
+</div>
+
+</div>
+</section>
+
+<section id="operations" class="locked">
+<div class="concept">
+<h2>Set Operations</h2>
+
+<input type="hidden" id="operations-i" value="0">
+
+<div class="slide">
+<p><strong>Union ($A \cup B$):</strong> Elements in A OR B.</p>
+<p>$\{1, 2\} \cup \{2, 3\} = \{1, 2, 3\}$.</p>
+</div>
+
+<div class="slide">
+<p><strong>Intersection ($A \cap B$):</strong> Elements in A AND B.</p>
+<p>$\{1, 2\} \cap \{2, 3\} = \{2\}$.</p>
+</div>
+
+<div class="slide">
+<p><strong>Difference ($A - B$):</strong> Elements in A but NOT in B.</p>
+<p>$\{1, 2\} - \{2, 3\} = \{1\}$.</p>
+</div>
+
+<div class="slide">
+<p><strong>Complement ($A'$):</strong> Elements in $U$ but NOT in A.</p>
+<p>If $U=\{1,2,3\}$ and $A=\{1\}$, then $A'=\{2,3\}$.</p>
+</div>
+
+<button onclick="prev('operations')">← Back</button>
+<button onclick="next('operations')">Next →</button>
+
+<div class="math">
+<strong>Laws of Operations</strong><br>
+$A \cup B = B \cup A$ (Commutative)<br>
+$(A \cup B)' = A' \cap B'$ (De Morgan's Law)<br>
+$n(A \cup B) = n(A) + n(B) - n(A \cap B)$
+</div>
+
+<button class="lab-btn" onclick="toggleLab('ops-lab')">Where to use – Problem Lab</button>
+<div id="ops-lab" class="subjective-ans">
+<p><strong>Practical Problems:</strong></p>
+<p><strong>Example:</strong> In a group of 50, 30 like Tea, 25 like Coffee, 10 like both.</p>
+<p>Use formula: $n(T \cup C) = n(T) + n(C) - n(T \cap C)$.</p>
+<p>$= 30 + 25 - 10 = 45$. So 45 people like at least one.</p>
+</div>
+
+<h3>Checkpoints</h3>
+<div class="mcq">
+<p>1. $\{1, 2\} \cup \{3\}$ =<br>
+<button onclick="tick(this,'tips')">{1, 2, 3}</button>
+<button>Empty</button></p>
+
+<p>2. $(A \cup B)'$ =<br>
+<button onclick="tick(this)">A' ∩ B'</button>
+<button>A' ∪ B'</button></p>
+</div>
+
+</div>
+</section>
+
+<section id="tips" class="locked">
+<div class="concept">
+<h2>Tips & Tricks – Sets</h2>
+
+<input type="hidden" id="tips-i" value="0">
+
+<div class="slide">
+<p><strong>Remember Definitions:</strong></p>
+<ul>
+<li>Set must be <strong>well-defined</strong>.</li>
+<li>$\phi$ is a subset of every set.</li>
+<li>Set itself is a subset of itself.</li>
+</ul>
+</div>
+
+<div class="slide">
+<p><strong>Operation Clues:</strong></p>
+<ul>
+<li>"OR" / "At least one" $\rightarrow$ Union ($\cup$).</li>
+<li>"AND" / "Both" $\rightarrow$ Intersection ($\cap$).</li>
+<li>"NOT" $\rightarrow$ Complement ($'$).</li>
+</ul>
+</div>
+
+<div class="slide">
+<p><strong>De Morgan's Laws:</strong></p>
+<p>Break the bar, change the sign.</p>
+<p>$\overline{A \cup B} = \overline{A} \cap \overline{B}$</p>
+</div>
+
+<button onclick="prev('tips')">← Back</button>
+<button onclick="next('tips')">Next →</button>
+
+<div class="math">
+<strong>Master Formula:</strong><br>
+$n(A \cup B \cup C) = n(A) + n(B) + n(C) - n(A \cap B) - n(B \cap C) - n(A \cap C) + n(A \cap B \cap C)$
+</div>
+
+</div>
+</section>
+
+<script>
+show("tips",0);
+</script>
+
+<footer>
+<p>Proceed to exercises.</p>
+<a href="exercise.html"><button>Go to Exercises →</button></a>
+</footer>
+
+<script>
+["intro","types","venn","operations","tips"].forEach(id=>show(id,0));
+</script>
+
+</body>
+</html>

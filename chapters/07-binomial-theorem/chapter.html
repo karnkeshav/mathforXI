@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Binomial Theorem | Chapter 07</title>
+
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[','\\]']],
+    processEscapes: true
+  },
+  chtml: {
+    scale: 1.05,
+    matchFontHeight: true
+  }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/style.css">
+
+<style>
+.slide { display:none; }
+.subjective-ans {
+  display:none;
+  margin-top:1rem;
+  padding:1.5rem;
+  background:#f8fafc;
+  border-left:5px solid var(--primary);
+  border-radius:8px;
+}
+.lab-btn { background:var(--secondary); margin-top:1rem; }
+.mcq button { margin-right:0.5rem; }
+.mcq .correct { color:green; font-weight:600; }
+.math { overflow-x:auto; }
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Binomial Theorem</h1>
+<p>Expand → Coefficients → General Term → Applications</p>
+</header>
+
+<nav>
+<a href="#intro">Theorem</a>
+<a href="#general">General Term</a>
+<a href="#middle">Middle Term</a>
+<a href="#tips">Tips</a>
+</nav>
+
+<script>
+function show(section,i){
+  const slides=document.querySelectorAll(`#${section} .slide`);
+  slides.forEach(s=>s.style.display="none");
+  slides[i].style.display="block";
+  document.getElementById(section+"-i").value=i;
+}
+function next(section){
+  let i=+document.getElementById(section+"-i").value;
+  const slides=document.querySelectorAll(`#${section} .slide`);
+  if(i<slides.length-1) show(section,i+1);
+}
+function prev(section){
+  let i=+document.getElementById(section+"-i").value;
+  if(i>0) show(section,i-1);
+}
+function tick(btn,unlockId){
+  btn.innerHTML="✔ Correct";
+  btn.classList.add("correct");
+  if(unlockId) document.getElementById(unlockId).classList.remove("locked");
+}
+function toggleLab(id){
+  const el=document.getElementById(id);
+  el.style.display = el.style.display==="block" ? "none" : "block";
+}
+</script>
+
+<section id="intro">
+<div class="concept">
+<h2>The Theorem</h2>
+
+<input type="hidden" id="intro-i" value="0">
+
+<div class="slide">
+<p><strong>Statement:</strong> For any positive integer $n$:</p>
+<p>$(a+b)^n = ^nC_0 a^n + ^nC_1 a^{n-1}b + \dots + ^nC_n b^n$.</p>
+</div>
+
+<div class="slide">
+<p><strong>Sigma Notation:</strong></p>
+<p>$(a+b)^n = \sum_{k=0}^{n} {^nC_k a^{n-k} b^k}$.</p>
+</div>
+
+<div class="slide">
+<p><strong>Observations:</strong></p>
+<p>Total terms = $n+1$.</p>
+<p>Sum of powers of a and b is always $n$.</p>
+</div>
+
+<button onclick="prev('intro')">← Back</button>
+<button onclick="next('intro')">Next →</button>
+
+<div class="math">
+<strong>Key Cases</strong><br>
+$(1+x)^n = ^nC_0 + ^nC_1 x + \dots + ^nC_n x^n$.<br>
+Coefficients are from Pascal's Triangle.
+</div>
+
+<button class="lab-btn" onclick="toggleLab('intro-lab')">Where to use – Problem Lab</button>
+<div id="intro-lab" class="subjective-ans">
+<p><strong>Expansion:</strong></p>
+<p><strong>Expand $(x^2 + \frac{3}{x})^4$:</strong></p>
+<p>$= ^4C_0 (x^2)^4 + ^4C_1 (x^2)^3 (\frac{3}{x}) + ^4C_2 (x^2)^2 (\frac{3}{x})^2 + \dots$</p>
+<p>$= x^8 + 4(x^6)(\frac{3}{x}) + 6(x^4)(\frac{9}{x^2}) + \dots$</p>
+<p>$= x^8 + 12x^5 + 54x^2 + \dots$</p>
+</div>
+
+<h3>Checkpoints</h3>
+<div class="mcq">
+<p>1. Number of terms in $(a+b)^n$:<br>
+<button onclick="tick(this,'general')">n+1</button>
+<button>n</button></p>
+
+<p>2. Sum of coefficients in $(1+x)^n$ (put x=1):<br>
+<button onclick="tick(this)">2^n</button>
+<button>n^2</button></p>
+</div>
+
+</div>
+</section>
+
+<section id="general" class="locked">
+<div class="concept">
+<h2>General Term</h2>
+
+<input type="hidden" id="general-i" value="0">
+
+<div class="slide">
+<p><strong>Formula ($T_{r+1}$):</strong></p>
+<p>For $(a+b)^n$, the $(r+1)^{th}$ term is:</p>
+<p>$T_{r+1} = ^nC_r a^{n-r} b^r$.</p>
+</div>
+
+<div class="slide">
+<p><strong>Finding Specific Terms:</strong></p>
+<p>To find coefficient of $x^m$, equate power of $x$ in general term to $m$.</p>
+</div>
+
+<button onclick="prev('general')">← Back</button>
+<button onclick="next('general')">Next →</button>
+
+<div class="math">
+<strong>Note</strong><br>
+General term helps find "Independent of x" term (power = 0).
+</div>
+
+<button class="lab-btn" onclick="toggleLab('gen-lab')">Where to use – Problem Lab</button>
+<div id="gen-lab" class="subjective-ans">
+<p><strong>Find 4th term in $(x-2y)^{12}$:</strong></p>
+<p>$r=3$ (since $T_4 = T_{3+1}$).</p>
+<p>$T_4 = ^{12}C_3 (x)^{12-3} (-2y)^3$.</p>
+<p>$= \frac{12 \times 11 \times 10}{6} x^9 (-8y^3) = 220(-8) x^9 y^3 = -1760 x^9 y^3$.</p>
+</div>
+
+<h3>Checkpoints</h3>
+<div class="mcq">
+<p>1. In $T_{r+1}$, the power of b is:<br>
+<button onclick="tick(this,'middle')">r</button>
+<button>n-r</button></p>
+
+<p>2. General term of $(x-y)^n$ has sign:<br>
+<button onclick="tick(this)">(-1)^r</button>
+<button>(-1)^n</button></p>
+</div>
+
+</div>
+</section>
+
+<section id="middle" class="locked">
+<div class="concept">
+<h2>Middle Terms</h2>
+
+<input type="hidden" id="middle-i" value="0">
+
+<div class="slide">
+<p><strong>Case 1: n is Even:</strong></p>
+<p>Number of terms $n+1$ is Odd.</p>
+<p>One middle term: $T_{n/2 + 1}$.</p>
+</div>
+
+<div class="slide">
+<p><strong>Case 2: n is Odd:</strong></p>
+<p>Number of terms $n+1$ is Even.</p>
+<p>Two middle terms: $T_{(n+1)/2}$ and $T_{(n+1)/2 + 1}$.</p>
+</div>
+
+<button onclick="prev('middle')">← Back</button>
+<button onclick="next('middle')">Next →</button>
+
+<div class="math">
+<strong>Logic</strong><br>
+Middle term has the greatest binomial coefficient ($^nC_{n/2}$).
+</div>
+
+<button class="lab-btn" onclick="toggleLab('mid-lab')">Where to use – Problem Lab</button>
+<div id="mid-lab" class="subjective-ans">
+<p><strong>Middle term of $(2x+3y)^8$:</strong></p>
+<p>$n=8$ (Even). Term is $T_{8/2+1} = T_5$.</p>
+<p>$T_5 = ^8C_4 (2x)^4 (3y)^4$.</p>
+</div>
+
+<h3>Checkpoints</h3>
+<div class="mcq">
+<p>1. If n=10, middle term is:<br>
+<button onclick="tick(this,'tips')">6th</button>
+<button>5th</button></p>
+
+<p>2. If n=7, number of middle terms:<br>
+<button onclick="tick(this)">2</button>
+<button>1</button></p>
+</div>
+
+</div>
+</section>
+
+<section id="tips" class="locked">
+<div class="concept">
+<h2>Tips & Tricks – Binomial</h2>
+
+<input type="hidden" id="tips-i" value="0">
+
+<div class="slide">
+<p><strong>Coefficients:</strong></p>
+<p>$^nC_0 = 1, ^nC_n = 1$.</p>
+<p>$^nC_1 = n$.</p>
+</div>
+
+<div class="slide">
+<p><strong>Divisibility Problems:</strong></p>
+<p>To show $6^n - 5n$ leaves remainder 1 when divided by 25:</p>
+<p>Write $6^n = (1+5)^n = 1 + 5n + ^nC_2 5^2 + \dots$</p>
+<p>$6^n - 5n = 1 + 25(\dots)$.</p>
+</div>
+
+<div class="slide">
+<p><strong>Approximations:</strong></p>
+<p>$(1.01)^{1000} \approx 1 + 1000(0.01) + \dots$</p>
+<p>If $x$ is very small, $(1+x)^n \approx 1+nx$.</p>
+</div>
+
+<button onclick="prev('tips')">← Back</button>
+<button onclick="next('tips')">Next →</button>
+
+<div class="math">
+<strong>Shortcut</strong><br>
+Total terms in $(x+a)^n + (x-a)^n$ is $(n/2)+1$ if n even.
+</div>
+
+</div>
+</section>
+
+<script>
+show("tips",0);
+</script>
+
+<footer>
+<p>Proceed to exercises.</p>
+<a href="exercise.html"><button>Go to Exercises →</button></a>
+</footer>
+
+<script>
+["intro","general","middle","tips"].forEach(id=>show(id,0));
+</script>
+
+</body>
+</html>

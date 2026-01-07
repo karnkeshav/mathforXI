@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercises | Relations & Functions</title>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* Subjective Section Styles */
+        .subjective-ans {
+            display: none;
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            border: 1px dashed var(--primary);
+            font-size: 1.1rem;
+        }
+        .ans-toggle {
+            display: inline-block;
+            margin-top: 10px;
+            color: var(--primary);
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        /* Quiz Overlay & Card */
+        #quiz-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(30, 41, 59, 0.98);
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 20px;
+        }
+        .quiz-card {
+            background: var(--card);
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2.5rem;
+            border-radius: 20px;
+            position: relative;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        /* Close Icon Styling */
+        .close-quiz {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            font-size: 2rem;
+            color: var(--muted);
+            cursor: pointer;
+            border: none;
+            background: none;
+            line-height: 1;
+            transition: color 0.2s;
+        }
+        .close-quiz:hover { color: var(--text); }
+
+        /* Option Button Visibility Fix */
+        .option-btn {
+            display: block;
+            width: 100%;
+            text-align: left;
+            background: #ffffff;
+            color: var(--text);
+            border: 1px solid #e2e8f0;
+            padding: 1.2rem;
+            margin: 0.8rem 0;
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.2s;
+        }
+        .option-btn:hover:not(:disabled) {
+            background: #f1f5f9;
+            border-color: var(--primary);
+        }
+
+        /* Correct/Wrong States */
+        .correct { background: #dcfce7 !important; border-color: #22c55e !important; color: #166534 !important; }
+        .wrong { background: #fee2e2 !important; border-color: #ef4444 !important; color: #991b1b !important; }
+
+        .quiz-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+            gap: 1rem;
+        }
+
+        .nav-btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Chapter 02: Practice Exercises</h1>
+</header>
+
+<nav>
+    <a href="landing.html">← Back</a>
+    <a href="chapter.html">Concepts</a>
+    <a href="exercise.html" style="border-bottom: 2px solid var(--primary);">Exercises</a>
+</nav>
+
+<section>
+    <div class="concept">
+        <div class="step">Check Point (NCERT & Exemplar)</div>
+        <h2>Subjective Questions</h2>
+
+        <div class="question-box" style="margin-bottom: 2.5rem;">
+            <p><strong>Q1.</strong> If $(x+1, y-2) = (3, 1)$, find the values of $x$ and $y$.</p>
+            <span class="ans-toggle" onclick="toggleAns('ans1')">Show Answer</span>
+            <div id="ans1" class="subjective-ans">
+                <strong>Solution:</strong> Equating components: $x+1=3 \implies x=2$ and $y-2=1 \implies y=3$.
+            </div>
+        </div>
+
+        <div class="question-box" style="margin-bottom: 2.5rem;">
+            <p><strong>Q2.</strong> Let $A = \{1, 2\}, B = \{3, 4\}$. Write $A \times B$. How many subsets will $A \times B$ have?</p>
+            <span class="ans-toggle" onclick="toggleAns('ans2')">Show Answer</span>
+            <div id="ans2" class="subjective-ans">
+                <strong>Solution:</strong> $A \times B = \{(1, 3), (1, 4), (2, 3), (2, 4)\}$. <br> Since $n(A \times B) = 4$, number of subsets = $2^4 = 16$.
+            </div>
+        </div>
+
+        <div class="question-box" style="margin-bottom: 2.5rem;">
+            <p><strong>Q3.</strong> Find the domain and range of the relation $R = \{(x, x+5) : x \in \{0, 1, 2, 3, 4, 5\}\}$.</p>
+            <span class="ans-toggle" onclick="toggleAns('ans3')">Show Answer</span>
+            <div id="ans3" class="subjective-ans">
+                <strong>Solution:</strong> Domain = $\{0, 1, 2, 3, 4, 5\}$. Range = $\{5, 6, 7, 8, 9, 10\}$.
+            </div>
+        </div>
+
+        <div class="question-box" style="margin-bottom: 2.5rem;">
+            <p><strong>Q4.</strong> Find the domain of the function $f(x) = \frac{x^2+3x+5}{x^2-5x+4}$.</p>
+            <span class="ans-toggle" onclick="toggleAns('ans4')">Show Answer</span>
+            <div id="ans4" class="subjective-ans">
+                <strong>Solution:</strong> Denominator $\neq 0$. $x^2-5x+4 \neq 0 \implies (x-1)(x-4) \neq 0$. <br> Domain: $\mathbb{R} - \{1, 4\}$.
+            </div>
+        </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 3rem;">
+        <button class="primary-btn" style="padding: 1rem 2.5rem;" onclick="startQuiz()">Take Mastery Test</button>
+    </div>
+</section>
+
+<div id="quiz-overlay">
+    <div class="quiz-card">
+        <button class="close-quiz" onclick="closeQuiz()">&times;</button>
+        <div id="quiz-body">
+            <div class="step" id="quiz-progress"></div>
+            <h3 id="quiz-question" style="margin: 1.5rem 0;"></h3>
+            <div id="quiz-options"></div>
+            <div id="quiz-feedback" class="think" style="display:none; margin-top:1.5rem;"></div>
+            <div class="quiz-nav">
+                <button id="prev-btn" class="nav-btn" style="background:var(--muted); color:white; border:none;" onclick="prevQuestion()">Previous</button>
+                <button id="next-btn" class="nav-btn" style="display:none; background:var(--primary); color:white; border:none;" onclick="nextQuestion()">Next Question</button>
+            </div>
+        </div>
+        <div id="quiz-results" style="display:none; text-align:center;">
+            <h2>Mastery Complete!</h2>
+            <div class="math" id="final-score" style="font-size: 2.5rem; color:var(--primary); margin: 1.5rem 0;"></div>
+            <button class="primary-btn" onclick="location.reload()">Restart Practice</button>
+        </div>
+    </div>
+</div>
+
+<script>
+function toggleAns(id) {
+    const el = document.getElementById(id);
+    el.style.display = (el.style.display === 'block') ? 'none' : 'block';
+}
+
+const questions = [
+    { q: "If $(x, y) = (2, 3)$, then:", a: ["$x=2, y=3$", "$x=3, y=2$", "$x=y$", "None"], correct: 0, step: "Ordered pairs are equal component-wise." },
+    { q: "If $n(A)=p, n(B)=q$, then $n(A \\times B)$ is:", a: ["$p+q$", "$pq$", "$p^q$", "$2^{pq}$"], correct: 1, step: "Number of elements in Cartesian product is product of cardinalities." },
+    { q: "A relation is a subset of:", a: ["A", "B", "$A \\times B$", "$A \\cup B$"], correct: 2, step: "Definition of relation." },
+    { q: "In a function $f: A \\to B$, set A is called:", a: ["Range", "Domain", "Co-domain", "Image"], correct: 1, step: "Input set is the Domain." },
+    { q: "The domain of $f(x) = \\sqrt{x-1}$ is:", a: ["$(1, \\infty)$", "$[1, \\infty)$", "$(-\\infty, 1)$", "$\\mathbb{R}$"], correct: 1, step: "$x-1 \\ge 0 \\implies x \\ge 1$." },
+    { q: "Which of these is NOT a function?", a: ["$\\{(1,2), (2,3)\\}$", "$\\{(1,2), (1,3)\\}$", "$\\{(1,2), (3,2)\\}$", "$y=x$"], correct: 1, step: "Input 1 maps to both 2 and 3." },
+    { q: "The range of $f(x) = |x|$ is:", a: ["$\\mathbb{R}$", "$[0, \\infty)$", "$(0, \\infty)$", "$(-\\infty, 0]$"], correct: 1, step: "Modulus is always non-negative." },
+    { q: "If $f(x) = x^2$, find $f(2)$:", a: ["2", "4", "0", "1"], correct: 1, step: "$2^2 = 4$." },
+    { q: "Number of relations from set A to B where $n(A)=2, n(B)=2$:", a: ["4", "8", "16", "2"], correct: 2, step: "$2^{2 \\times 2} = 2^4 = 16$." },
+    { q: "The graph of identity function $f(x)=x$ is:", a: ["Circle", "Parabola", "Line passing through origin", "Hyperbola"], correct: 2, step: "Identity function is a straight line $y=x$." },
+    { q: "If $f(x) = 2x+1$, find $x$ when $f(x)=7$.", a: ["2", "3", "4", "1"], correct: 1, step: "$2x+1=7 \\implies 2x=6 \\implies x=3$." },
+    { q: "Domain of $f(x) = 1/x$ is:", a: ["$\\mathbb{R}$", "$\\mathbb{R} - \\{0\\}$", "$[0, \\infty)$", "$\\mathbb{Z}$"], correct: 1, step: "Denominator cannot be zero." },
+    { q: "A function $f(x) = c$ is called:", a: ["Identity", "Constant", "Polynomial", "Linear"], correct: 1, step: "Constant function always yields $c$." },
+    { q: "Range of $f(x) = \\sin x$ is:", a: ["$\\mathbb{R}$", "$[-1, 1]$", "$[0, 1]$", "$(-\\infty, \\infty)$"], correct: 1, step: "Sine values oscillate between -1 and 1." },
+    { q: "If $f(x) = x^3 - 1$, then $f(-1)$ is:", a: ["0", "-2", "2", "-1"], correct: 1, step: "$(-1)^3 - 1 = -1 - 1 = -2$." },
+    { q: "Vertical line test is used for:", a: ["Relations", "Functions", "Sets", "Unions"], correct: 1, step: "Tests if a graph represents a function." },
+    { q: "The set of all second elements in a relation is:", a: ["Domain", "Range", "Co-domain", "Set B"], correct: 1, step: "Definition of Range." },
+    { q: "For $f(x) = [x]$ (Greatest Integer), $f(2.9)$ is:", a: ["3", "2", "2.9", "0"], correct: 1, step: "Floor of 2.9 is 2." },
+    { q: "If $A=\\phi$, then $A \\times B$ is:", a: ["B", "A", "$\\phi$", "Undefined"], correct: 2, step: "Cartesian product with empty set is empty." },
+    { q: "Domain of polynomial functions is usually:", a: ["$\\mathbb{R}$", "$[0, \\infty)$", "$\\mathbb{Z}$", "Empty"], correct: 0, step: "Polynomials are defined for all real numbers." }
+];
+
+let curIdx = 0; let score = 0; let userAnswers = new Array(questions.length).fill(null);
+
+function startQuiz() { document.getElementById('quiz-overlay').style.display = 'block'; document.body.style.overflow = 'hidden'; showQuestion(); }
+function closeQuiz() { document.getElementById('quiz-overlay').style.display = 'none'; document.body.style.overflow = 'auto'; }
+
+function showQuestion() {
+    const data = questions[curIdx];
+    document.getElementById('quiz-progress').innerText = `Question ${curIdx + 1} of 20`;
+    document.getElementById('quiz-question').innerHTML = data.q;
+    const optionsDiv = document.getElementById('quiz-options');
+    optionsDiv.innerHTML = '';
+    document.getElementById('prev-btn').style.visibility = (curIdx === 0) ? 'hidden' : 'visible';
+    document.getElementById('next-btn').style.display = (userAnswers[curIdx] !== null) ? 'block' : 'none';
+    const feedback = document.getElementById('quiz-feedback');
+    if (userAnswers[curIdx] !== null) { feedback.style.display = 'block'; feedback.innerHTML = `<strong>Explanation:</strong> ${data.step}`; }
+    else { feedback.style.display = 'none'; }
+    data.a.forEach((opt, i) => {
+        const btn = document.createElement('button'); btn.className = 'option-btn'; btn.innerHTML = opt;
+        if (userAnswers[curIdx] !== null) { btn.disabled = true; if (i === data.correct) btn.classList.add('correct'); if (i === userAnswers[curIdx] && i !== data.correct) btn.classList.add('wrong'); }
+        btn.onclick = () => { userAnswers[curIdx] = i; if (i === data.correct) score++; showQuestion(); };
+        optionsDiv.appendChild(btn);
+    });
+    MathJax.typeset();
+}
+
+function nextQuestion() {
+    if (curIdx < questions.length - 1) { curIdx++; showQuestion(); }
+    else { document.getElementById('quiz-body').style.display = 'none'; document.getElementById('quiz-results').style.display = 'block'; document.getElementById('final-score').innerText = `${score} / 20`; }
+}
+function prevQuestion() { if (curIdx > 0) { curIdx--; showQuestion(); } }
+</script>
+</body>
+</html>

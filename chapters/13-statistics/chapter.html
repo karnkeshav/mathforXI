@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Statistics | Chapter 13</title>
+
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[','\\]']],
+    processEscapes: true
+  },
+  chtml: {
+    scale: 1.05,
+    matchFontHeight: true
+  }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/style.css">
+
+<style>
+.slide { display:none; }
+.subjective-ans {
+  display:none;
+  margin-top:1rem;
+  padding:1.5rem;
+  background:#f8fafc;
+  border-left:5px solid var(--primary);
+  border-radius:8px;
+}
+.lab-btn { background:var(--secondary); margin-top:1rem; }
+.mcq button { margin-right:0.5rem; }
+.mcq .correct { color:green; font-weight:600; }
+.math { overflow-x:auto; }
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Statistics</h1>
+<p>Mean → Deviation → Variance → Analysis</p>
+</header>
+
+<nav>
+<a href="#dispersion">Dispersion</a>
+<a href="#mean-dev">Mean Deviation</a>
+<a href="#variance">Variance</a>
+<a href="#cv">C.V.</a>
+</nav>
+
+<script>
+function show(section,i){
+  const slides=document.querySelectorAll(`#${section} .slide`);
+  slides.forEach(s=>s.style.display="none");
+  slides[i].style.display="block";
+  document.getElementById(section+"-i").value=i;
+}
+function next(section){
+  let i=+document.getElementById(section+"-i").value;
+  const slides=document.querySelectorAll(`#${section} .slide`);
+  if(i<slides.length-1) show(section,i+1);
+}
+function prev(section){
+  let i=+document.getElementById(section+"-i").value;
+  if(i>0) show(section,i-1);
+}
+function tick(btn,unlockId){
+  btn.innerHTML="✔ Correct";
+  btn.classList.add("correct");
+  if(unlockId) document.getElementById(unlockId).classList.remove("locked");
+}
+function toggleLab(id){
+  const el=document.getElementById(id);
+  el.style.display = el.style.display==="block" ? "none" : "block";
+}
+</script>
+
+<section id="dispersion">
+<div class="concept">
+<h2>Measures of Dispersion</h2>
+
+<input type="hidden" id="dispersion-i" value="0">
+
+<div class="slide">
+<p><strong>Dispersion:</strong> How scattered the data is from the central value.</p>
+</div>
+
+<div class="slide">
+<p><strong>Range:</strong> Max Value - Min Value.</p>
+<p>Simple but sensitive to outliers.</p>
+</div>
+
+<div class="slide">
+<p><strong>Quartile Deviation:</strong> Based on Inter-Quartile Range.</p>
+</div>
+
+<button onclick="prev('dispersion')">← Back</button>
+<button onclick="next('dispersion')">Next →</button>
+
+<div class="math">
+<strong>Goal</strong><br>
+Find a single number that represents "spread".
+</div>
+
+<button class="lab-btn" onclick="toggleLab('disp-lab')">Where to use – Problem Lab</button>
+<div id="disp-lab" class="subjective-ans">
+<p><strong>Find Range of 5, 10, 15, 20, 25:</strong></p>
+<p>Max = 25, Min = 5.</p>
+<p>Range = 25 - 5 = 20.</p>
+</div>
+
+<h3>Checkpoints</h3>
+<div class="mcq">
+<p>1. Range of 2, 8, 1 is:<br>
+<button onclick="tick(this,'mean-dev')">7</button>
+<button>6</button></p>
+
+<p>2. Dispersion measures:<br>
+<button onclick="tick(this)">Spread</button>
+<button>Centrality</button></p>
+</div>
+
+</div>
+</section>
+
+<section id="mean-dev" class="locked">
+<div class="concept">
+<h2>Mean Deviation</h2>
+
+<input type="hidden" id="mean-dev-i" value="0">
+
+<div class="slide">
+<p><strong>Definition:</strong> Average of absolute differences from Mean or Median.</p>
+<p>$M.D.(\bar{x}) = \frac{\sum |x_i - \bar{x}|}{n}$.</p>
+</div>
+
+<div class="slide">
+<p><strong>Steps:</strong></p>
+<p>1. Calculate Mean ($\bar{x}$).</p>
+<p>2. Find deviation $|x_i - \bar{x}|$ for each.</p>
+<p>3. Find average of deviations.</p>
+</div>
+
+<button onclick="prev('mean-dev')">← Back</button>
+<button onclick="next('mean-dev')">Next →</button>
+
+<div class="math">
+<strong>Note</strong><br>
+We take modulus to avoid sum becoming zero.
+</div>
+
+<button class="lab-btn" onclick="toggleLab('md-lab')">Where to use – Problem Lab</button>
+<div id="md-lab" class="subjective-ans">
+<p><strong>M.D. about Mean for 6, 7, 10, 12, 13, 4, 8, 12:</strong></p>
+<p>Sum = 72, n = 8. Mean $\bar{x} = 9$.</p>
+<p>Deviations: $|6-9|=3, 2, 1, 3, 4, 5, 1, 3$.</p>
+<p>Sum of Dev = 22.</p>
+<p>M.D. = $22/8 = 2.75$.</p>
+</div>
+
+<h3>Checkpoints</h3>
+<div class="mcq">
+<p>1. Sum of deviations (signed) from mean is always:<br>
+<button onclick="tick(this,'variance')">0</button>
+<button>1</button></p>
+
+<p>2. M.D. uses:<br>
+<button onclick="tick(this)">Absolute values</button>
+<button>Squared values</button></p>
+</div>
+
+</div>
+</section>
+
+<section id="variance" class="locked">
+<div class="concept">
+<h2>Variance & Standard Deviation</h2>
+
+<input type="hidden" id="variance-i" value="0">
+
+<div class="slide">
+<p><strong>Variance ($\sigma^2$):</strong> Average of <em>squared</em> deviations.</p>
+<p>$\sigma^2 = \frac{\sum (x_i - \bar{x})^2}{n}$.</p>
+</div>
+
+<div class="slide">
+<p><strong>Standard Deviation ($\sigma$):</strong> Square root of Variance.</p>
+<p>$\sigma = \sqrt{\text{Variance}}$.</p>
+</div>
+
+<div class="slide">
+<p><strong>Why Square?</strong></p>
+<p>To handle negative signs algebraically better than modulus.</p>
+</div>
+
+<button onclick="prev('variance')">← Back</button>
+<button onclick="next('variance')">Next →</button>
+
+<div class="math">
+<strong>Shortcut Formula</strong><br>
+$\sigma^2 = \frac{\sum x_i^2}{n} - (\frac{\sum x_i}{n})^2$.<br>
+Mean of squares minus Square of mean.
+</div>
+
+<button class="lab-btn" onclick="toggleLab('var-lab')">Where to use – Problem Lab</button>
+<div id="var-lab" class="subjective-ans">
+<p><strong>S.D. of 2, 4, 6:</strong></p>
+<p>Mean = 4.</p>
+<p>Deviations: -2, 0, 2.</p>
+<p>Squares: 4, 0, 4.</p>
+<p>Variance = $8/3 \approx 2.67$.</p>
+<p>S.D. = $\sqrt{2.67} \approx 1.63$.</p>
+</div>
+
+<h3>Checkpoints</h3>
+<div class="mcq">
+<p>1. If variance is 16, S.D. is:<br>
+<button onclick="tick(this,'cv')">4</button>
+<button>256</button></p>
+
+<p>2. Variance is always:<br>
+<button onclick="tick(this)">Non-negative</button>
+<button>Negative</button></p>
+</div>
+
+</div>
+</section>
+
+<section id="cv" class="locked">
+<div class="concept">
+<h2>Coefficient of Variation (C.V.)</h2>
+
+<input type="hidden" id="cv-i" value="0">
+
+<div class="slide">
+<p><strong>Definition:</strong> Comparison of variability relative to mean.</p>
+<p>$C.V. = \frac{\sigma}{\bar{x}} \times 100$.</p>
+</div>
+
+<div class="slide">
+<p><strong>Interpretation:</strong></p>
+<p>Lower C.V. $\implies$ More consistent (stable).</p>
+<p>Higher C.V. $\implies$ More variable.</p>
+</div>
+
+<button onclick="prev('cv')">← Back</button>
+<button onclick="next('cv')">Next →</button>
+
+<div class="math">
+<strong>Usage</strong><br>
+Comparing units with different scales (e.g. height vs weight).
+</div>
+
+<button class="lab-btn" onclick="toggleLab('cv-lab')">Where to use – Problem Lab</button>
+<div id="cv-lab" class="subjective-ans">
+<p><strong>Compare two cricketers:</strong></p>
+<p>A: Mean=50, SD=5. CV = 10%.</p>
+<p>B: Mean=20, SD=2. CV = 10%.</p>
+<p>Both are equally consistent relative to their scoring ability.</p>
+</div>
+
+<h3>Checkpoints</h3>
+<div class="mcq">
+<p>1. Higher C.V. means:<br>
+<button onclick="tick(this,'tips')">Less Consistent</button>
+<button>More Consistent</button></p>
+
+<p>2. C.V. is a percentage.<br>
+<button onclick="tick(this)">True</button>
+<button>False</button></p>
+</div>
+
+</div>
+</section>
+
+<section id="tips" class="locked">
+<div class="concept">
+<h2>Tips & Tricks – Statistics</h2>
+
+<input type="hidden" id="tips-i" value="0">
+
+<div class="slide">
+<p><strong>Change of Origin/Scale:</strong></p>
+<p>Adding constant ($x+a$): Variance unchanged.</p>
+<p>Multiplying constant ($ax$): SD becomes $|a|\sigma$, Variance $a^2\sigma^2$.</p>
+</div>
+
+<div class="slide">
+<p><strong>Calculation Trick:</strong></p>
+<p>Use Assumed Mean ($A$) and Step Deviation ($u_i$) for large numbers.</p>
+<p>$\sigma_x = h \sigma_u$.</p>
+</div>
+
+<div class="slide">
+<p><strong>Combined Variance:</strong></p>
+<p>Merging two groups requires careful application of formula.</p>
+</div>
+
+<button onclick="prev('tips')">← Back</button>
+<button onclick="next('tips')">Next →</button>
+
+<div class="math">
+<strong>Remember</strong><br>
+Standard Deviation is the root mean square deviation.
+</div>
+
+</div>
+</section>
+
+<script>
+show("tips",0);
+</script>
+
+<footer>
+<p>Proceed to exercises.</p>
+<a href="exercise.html"><button>Go to Exercises →</button></a>
+</footer>
+
+<script>
+["dispersion","mean-dev","variance","cv","tips"].forEach(id=>show(id,0));
+</script>
+
+</body>
+</html>
