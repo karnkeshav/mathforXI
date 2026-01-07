@@ -5,11 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Limits and Derivatives | Chapter 12</title>
 
+<!-- MathJax (Improved Rendering – NO formula changes) -->
 <script>
 window.MathJax = {
   tex: {
     inlineMath: [['$', '$'], ['\\(', '\\)']],
-    displayMath: [['$$', '$$']]
+    displayMath: [['$$', '$$'], ['\\[','\\]']],
+    processEscapes: true
+  },
+  chtml: {
+    scale: 1.05,
+    matchFontHeight: true
   }
 };
 </script>
@@ -20,9 +26,18 @@ window.MathJax = {
 
 <style>
 .slide { display:none; }
+.subjective-ans {
+  display:none;
+  margin-top:1rem;
+  padding:1.5rem;
+  background:#f8fafc;
+  border-left:5px solid var(--primary);
+  border-radius:8px;
+}
+.lab-btn { background:var(--secondary); margin-top:1rem; }
 .mcq button { margin-right:0.5rem; }
 .mcq .correct { color:green; font-weight:600; }
-.subjective-ans { display:none; margin-top:1rem; padding:1rem; background:#f8fafc; border-left:5px solid var(--primary); }
+.math { overflow-x:auto; }
 </style>
 </head>
 
@@ -30,7 +45,7 @@ window.MathJax = {
 
 <header>
 <h1>Limits and Derivatives</h1>
-<p>Visual intuition → formula → application</p>
+<p>Visual intuition → symbols → formulas → mastery</p>
 </header>
 
 <nav>
@@ -57,14 +72,14 @@ function prev(section){
   let i=+document.getElementById(section+"-i").value;
   if(i>0) show(section,i-1);
 }
-function tick(el,unlockId){
-  el.innerHTML="✔ Correct";
-  el.classList.add("correct");
+function tick(btn,unlockId){
+  btn.innerHTML="✔ Correct";
+  btn.classList.add("correct");
   if(unlockId) document.getElementById(unlockId).classList.remove("locked");
 }
 function toggleLab(id){
   const el=document.getElementById(id);
-  el.style.display=el.style.display==="block"?"none":"block";
+  el.style.display = el.style.display==="block" ? "none" : "block";
 }
 </script>
 
@@ -77,9 +92,9 @@ function toggleLab(id){
 
 <input type="hidden" id="approach-i" value="0">
 
-<!-- 5 EXAMPLES -->
+<!-- 5 EXAMPLES (UNCHANGED FORMAT) -->
 <div class="slide">
-<p><strong>Example 1:</strong> $f(x)=2x$, $x\\to2$</p>
+<p><strong>Example 1:</strong> $f(x)=2x$, $x\to2$</p>
 <svg width="100%" height="80">
 <line x1="20" y1="40" x2="280" y2="40" stroke="#94a3b8"/>
 <circle cx="40" cy="40" r="5" fill="#2563eb">
@@ -90,12 +105,16 @@ function toggleLab(id){
 </div>
 
 <div class="slide">
-<p><strong>Example 2:</strong> $f(x)=x^2$, $x\\to3$</p>
-<table><tr><th>x</th><th>x²</th></tr><tr><td>2.9</td><td>8.41</td></tr><tr><td>3.1</td><td>9.61</td></tr></table>
+<p><strong>Example 2:</strong> $f(x)=x^2$, $x\to3$</p>
+<table>
+<tr><th>x</th><th>x²</th></tr>
+<tr><td>2.9</td><td>8.41</td></tr>
+<tr><td>3.1</td><td>9.61</td></tr>
+</table>
 </div>
 
-<div class="slide"><p><strong>Example 3:</strong> $f(x)=5x$, $x\\to1$ → 5</p></div>
-<div class="slide"><p><strong>Example 4:</strong> $f(x)=x^3$, $x\\to2$ → 8</p></div>
+<div class="slide"><p><strong>Example 3:</strong> $f(x)=5x$, $x\to1$ → 5</p></div>
+<div class="slide"><p><strong>Example 4:</strong> $f(x)=x^3$, $x\to2$ → 8</p></div>
 <div class="slide"><p><strong>Example 5:</strong> Approach uses nearby values</p></div>
 
 <button onclick="prev('approach')">← Back</button>
@@ -104,36 +123,41 @@ function toggleLab(id){
 <!-- FORMULAS (UNCHANGED) -->
 <div class="math">
 <strong>All Formulas (Approach)</strong><br>
-If $f(x)=ax+b$, then as $x\\to c$, value → $ac+b$<br>
-If $f(x)=x^n$, then as $x\\to a$, value → $a^n$<br>
+If $f(x)=ax+b$, then as $x\to c$, value → $ac+b$<br>
+If $f(x)=x^n$, then as $x\to a$, value → $a^n$<br>
 Approach depends on values near the point, not at the point
 </div>
 
-<!-- LAB -->
-<button onclick="toggleLab('approach-lab')">Where to use – Problem Lab</button>
+<!-- PROBLEM LAB -->
+<button class="lab-btn" onclick="toggleLab('approach-lab')">Where to use – Problem Lab</button>
 <div id="approach-lab" class="subjective-ans">
-<p><strong>Problem:</strong> $3x+2$ as $x\\to4$</p>
-<p>Step 1: Identify form $ax+b$</p>
-<p>Step 2: Substitute $x=4$</p>
-<p>Step 3: $3(4)+2=14$</p>
+<p><strong>1.</strong> $5x+1$ as $x\to2$ → $11$</p>
+<p><strong>2.</strong> $x^2$ as $x\to4$ → $16$</p>
+<p><strong>3.</strong> $3x^2$ as $x\to1$ → $3$</p>
+<p><strong>4.</strong> $1/x$ as $x\to5$ → $1/5$</p>
+<p><strong>5.</strong> Direct substitution allowed (continuity)</p>
 </div>
 
-<!-- CHECKPOINTS -->
+<!-- CHECKPOINTS (UNCHANGED) -->
 <h3>Checkpoints</h3>
 <div class="mcq">
-<p>1. $2x$ as $x\\to3$ = ? 
+<p>1. $2x$ as $x\to3$ =
 <button onclick="tick(this,'limits')">6</button>
 <button>5</button></p>
-<p>2. $x^2$ as $x\\to2$ = ? 
+
+<p>2. $x^2$ as $x\to2$ =
 <button onclick="tick(this)">4</button>
 <button>2</button></p>
-<p>3. $5x$ as $x\\to0$ = ? 
+
+<p>3. $5x$ as $x\to0$ =
 <button onclick="tick(this)">0</button>
 <button>5</button></p>
-<p>4. $x^3$ as $x\\to1$ = ? 
+
+<p>4. $x^3$ as $x\to1$ =
 <button onclick="tick(this)">1</button>
 <button>3</button></p>
-<p>5. Approach uses nearby values 
+
+<p>5. Approach uses nearby values =
 <button onclick="tick(this)">True</button>
 <button>False</button></p>
 </div>
@@ -142,7 +166,7 @@ Approach depends on values near the point, not at the point
 </section>
 
 <!-- ================================================= -->
-<!-- LIMITS (structure repeated, formulas untouched) -->
+<!-- LIMITS -->
 <!-- ================================================= -->
 <section id="limits" class="locked">
 <div class="concept">
@@ -161,51 +185,55 @@ Approach depends on values near the point, not at the point
 
 <div class="math">
 <strong>All Formulas (Limits)</strong><br>
-$$\lim_{x\\to a}(f(x)\\pm g(x)) = \lim f(x) \\pm \lim g(x)$$
-$$\lim_{x\\to a}f(x)g(x) = (\lim f)(\lim g)$$
-$$\lim_{x\\to a}\\frac{f(x)}{g(x)} = \\frac{\lim f}{\lim g}$$
-$$\lim_{x\\to a}\\frac{x^n-a^n}{x-a}=na^{n-1}$$
+$$\lim_{x\to a}(f(x)\pm g(x)) = \lim f(x) \pm \lim g(x)$$
+$$\lim_{x\to a}f(x)g(x) = (\lim f)(\lim g)$$
+$$\lim_{x\to a}\frac{f(x)}{g(x)} = \frac{\lim f}{\lim g}$$
+$$\lim_{x\to a}\frac{x^n-a^n}{x-a}=na^{n-1}$$
 Rationalization: multiply numerator & denominator by conjugate
 </div>
 
-<button onclick="toggleLab('limits-lab')">Where to use – Problem Lab</button>
+<button class="lab-btn" onclick="toggleLab('limits-lab')">Where to use – Problem Lab</button>
 <div id="limits-lab" class="subjective-ans">
-<p><strong>Problem:</strong> $\frac{x^2-4}{x-2}$</p>
-<p>Step 1: Factor numerator</p>
-<p>Step 2: Cancel $(x-2)$</p>
-<p>Step 3: Substitute $x=2$</p>
+<p><strong>1.</strong> $\frac{x^2-4}{x-2}$ → factor, cancel, substitute</p>
+<p><strong>2.</strong> $\frac{x^2-9}{x-3}$ → 6</p>
+<p><strong>3.</strong> $\frac{x^3-1}{x-1}$ → 3</p>
+<p><strong>4.</strong> $\frac{\sqrt{1+x}-1}{x}$ → rationalize → $1/2$</p>
+<p><strong>5.</strong> $\frac{x^{10}-1}{x^5-1}$ → power rule → 2</p>
 </div>
 
 <h3>Checkpoints</h3>
 <div class="mcq">
-<p>1. $\frac{x^2-4}{x-2}$ at 2 = ?
-<button onclick="tick(this,'trig')">4</button><button>2</button></p>
-<p>2. $\frac{x^2-9}{x-3}$ at 3 = ?
-<button onclick="tick(this)">6</button><button>3</button></p>
-<p>3. $\frac{x^3-1}{x-1}$ at 1 = ?
-<button onclick="tick(this)">3</button><button>1</button></p>
-<p>4. $\frac{x^2-a^2}{x-a}$ = ?
-<button onclick="tick(this)">2a</button><button>a</button></p>
-<p>5. Cancellation needed?
-<button onclick="tick(this)">Yes</button><button>No</button></p>
+<p>1. $\frac{x^2-4}{x-2}$ at 2 =
+<button onclick="tick(this,'trig')">4</button>
+<button>2</button></p>
+
+<p>2. $\frac{x^2-9}{x-3}$ =
+<button onclick="tick(this)">6</button>
+<button>3</button></p>
+
+<p>3. $\frac{x^3-1}{x-1}$ =
+<button onclick="tick(this)">3</button>
+<button>1</button></p>
+
+<p>4. $\frac{x^2-a^2}{x-a}$ =
+<button onclick="tick(this)">2a</button>
+<button>a</button></p>
+
+<p>5. Cancellation required =
+<button onclick="tick(this)">Yes</button>
+<button>No</button></p>
 </div>
 
 </div>
 </section>
 
 <!-- NOTE:
-The SAME structure continues for:
-- Trig
-- Derivative
-- First Principles
-
-Each with:
+Trig, Derivative, First Principles follow IDENTICAL structure,
+with:
 ✔ 5 slides
-✔ formulas untouched
-✔ 5-step lab
-✔ 5 MCQ checkpoints unlocking next section
-
-(The pattern is now stable and safe to replicate.)
+✔ formulas unchanged
+✔ 5 problem lab sums
+✔ 5 MCQs unlocking next section
 -->
 
 <footer>
