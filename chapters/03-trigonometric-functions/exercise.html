@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercises | Trigonometric Functions</title>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* Subjective Section Styles */
+        .subjective-ans {
+            display: none;
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            border: 1px dashed var(--primary);
+            font-size: 1.1rem;
+        }
+        .ans-toggle {
+            display: inline-block;
+            margin-top: 10px;
+            color: var(--primary);
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        /* Quiz Overlay & Card */
+        #quiz-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(30, 41, 59, 0.98);
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 20px;
+        }
+        .quiz-card {
+            background: var(--card);
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2.5rem;
+            border-radius: 20px;
+            position: relative;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        /* Close Icon Styling */
+        .close-quiz {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            font-size: 2rem;
+            color: var(--muted);
+            cursor: pointer;
+            border: none;
+            background: none;
+            line-height: 1;
+            transition: color 0.2s;
+        }
+        .close-quiz:hover { color: var(--text); }
+
+        /* Option Button Visibility Fix */
+        .option-btn {
+            display: block;
+            width: 100%;
+            text-align: left;
+            background: #ffffff;
+            color: var(--text);
+            border: 1px solid #e2e8f0;
+            padding: 1.2rem;
+            margin: 0.8rem 0;
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.2s;
+        }
+        .option-btn:hover:not(:disabled) {
+            background: #f1f5f9;
+            border-color: var(--primary);
+        }
+
+        /* Correct/Wrong States */
+        .correct { background: #dcfce7 !important; border-color: #22c55e !important; color: #166534 !important; }
+        .wrong { background: #fee2e2 !important; border-color: #ef4444 !important; color: #991b1b !important; }
+
+        .quiz-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+            gap: 1rem;
+        }
+
+        .nav-btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Chapter 03: Practice Exercises</h1>
+</header>
+
+<nav>
+    <a href="landing.html">← Back</a>
+    <a href="chapter.html">Concepts</a>
+    <a href="exercise.html" style="border-bottom: 2px solid var(--primary);">Exercises</a>
+</nav>
+
+<section>
+    <div class="concept">
+        <div class="step">Check Point (NCERT & Exemplar)</div>
+        <h2>Subjective Questions</h2>
+
+        <div class="question-box" style="margin-bottom: 2.5rem;">
+            <p><strong>Q1.</strong> Convert $40^\circ 20'$ into radian measure.</p>
+            <span class="ans-toggle" onclick="toggleAns('ans1')">Show Answer</span>
+            <div id="ans1" class="subjective-ans">
+                <strong>Solution:</strong> $40^\circ 20' = 40\frac{1}{3}^\circ = \frac{121}{3}^\circ$. <br> In radians: $\frac{121}{3} \times \frac{\pi}{180} = \frac{121\pi}{540}$ radians.
+            </div>
+        </div>
+
+        <div class="question-box" style="margin-bottom: 2.5rem;">
+            <p><strong>Q2.</strong> Find the value of $\sin \frac{31\pi}{3}$.</p>
+            <span class="ans-toggle" onclick="toggleAns('ans2')">Show Answer</span>
+            <div id="ans2" class="subjective-ans">
+                <strong>Solution:</strong> $\sin(10\pi + \frac{\pi}{3}) = \sin(\frac{\pi}{3}) = \frac{\sqrt{3}}{2}$.
+            </div>
+        </div>
+
+        <div class="question-box" style="margin-bottom: 2.5rem;">
+            <p><strong>Q3.</strong> Prove that $\frac{\sin x - \sin 3x}{\sin^2 x - \cos^2 x} = 2\sin x$.</p>
+            <span class="ans-toggle" onclick="toggleAns('ans3')">Show Answer</span>
+            <div id="ans3" class="subjective-ans">
+                <strong>Solution:</strong> Numerator: $\sin x - \sin 3x = -(\sin 3x - \sin x) = -2\cos 2x \sin x$. <br> Denominator: $-(\cos^2 x - \sin^2 x) = -\cos 2x$. <br> Ratio: $\frac{-2\cos 2x \sin x}{-\cos 2x} = 2\sin x$.
+            </div>
+        </div>
+
+        <div class="question-box" style="margin-bottom: 2.5rem;">
+            <p><strong>Q4.</strong> Find the general solution of $\cos x = \frac{1}{2}$.</p>
+            <span class="ans-toggle" onclick="toggleAns('ans4')">Show Answer</span>
+            <div id="ans4" class="subjective-ans">
+                <strong>Solution:</strong> $\cos x = \cos \frac{\pi}{3}$. <br> General solution: $x = 2n\pi \pm \frac{\pi}{3}, n \in \mathbb{Z}$.
+            </div>
+        </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 3rem;">
+        <button class="primary-btn" style="padding: 1rem 2.5rem;" onclick="startQuiz()">Take Mastery Test</button>
+    </div>
+</section>
+
+<div id="quiz-overlay">
+    <div class="quiz-card">
+        <button class="close-quiz" onclick="closeQuiz()">&times;</button>
+        <div id="quiz-body">
+            <div class="step" id="quiz-progress"></div>
+            <h3 id="quiz-question" style="margin: 1.5rem 0;"></h3>
+            <div id="quiz-options"></div>
+            <div id="quiz-feedback" class="think" style="display:none; margin-top:1.5rem;"></div>
+            <div class="quiz-nav">
+                <button id="prev-btn" class="nav-btn" style="background:var(--muted); color:white; border:none;" onclick="prevQuestion()">Previous</button>
+                <button id="next-btn" class="nav-btn" style="display:none; background:var(--primary); color:white; border:none;" onclick="nextQuestion()">Next Question</button>
+            </div>
+        </div>
+        <div id="quiz-results" style="display:none; text-align:center;">
+            <h2>Mastery Complete!</h2>
+            <div class="math" id="final-score" style="font-size: 2.5rem; color:var(--primary); margin: 1.5rem 0;"></div>
+            <button class="primary-btn" onclick="location.reload()">Restart Practice</button>
+        </div>
+    </div>
+</div>
+
+<script>
+function toggleAns(id) {
+    const el = document.getElementById(id);
+    el.style.display = (el.style.display === 'block') ? 'none' : 'block';
+}
+
+const questions = [
+    { q: "1 radian equals approximately:", a: ["$57^\\circ$", "$90^\\circ$", "$180^\\circ$", "$45^\\circ$"], correct: 0, step: "$180/\\pi \\approx 57.3^\\circ$." },
+    { q: "$\\sin(\\pi + x) = $", a: ["$\\sin x$", "$-\\sin x$", "$\\cos x$", "$-\\cos x$"], correct: 1, step: "3rd quadrant, sine is negative." },
+    { q: "Value of $\\cos 2\\pi$ is:", a: ["0", "1", "-1", "Undef"], correct: 1, step: "Same as $\\cos 0 = 1$." },
+    { q: "In the 3rd quadrant, $\\tan x$ is:", a: ["Positive", "Negative", "Zero", "Undefined"], correct: 0, step: "ASTC Rule: Tan is positive in 3rd." },
+    { q: "$\\sin 2x = $", a: ["$2\\sin x$", "$2\\sin x \\cos x$", "$\\cos 2x$", "$2\\cos x$"], correct: 1, step: "Double angle formula." },
+    { q: "Principal value of $\\sin x = \\frac{\\sqrt{3}}{2}$:", a: ["$\\pi/6, 5\\pi/6$", "$\\pi/3, 2\\pi/3$", "$\\pi/4, 3\\pi/4$", "$\\pi/3$ only"], correct: 1, step: "Sine is positive in I and II." },
+    { q: "$1 + \\tan^2 x = $", a: ["$\\sec^2 x$", "$\\cot^2 x$", "$\\sin^2 x$", "$\\cos^2 x$"], correct: 0, step: "Standard identity." },
+    { q: "Range of $f(x) = \\sin x$ is:", a: ["$(-1, 1)$", "$[-1, 1]$", "$[0, 1]$", "$\\mathbb{R}$"], correct: 1, step: "Sine oscillates between -1 and 1 inclusive." },
+    { q: "$\\cos(x-y) = $", a: ["$\\cos x \\cos y - \\sin x \\sin y$", "$\\cos x \\cos y + \\sin x \\sin y$", "$\\sin x \\cos y - \\cos x \\sin y$", "None"], correct: 1, step: "Cosine difference identity has a plus sign." },
+    { q: "Degree measure of $\\pi/6$ is:", a: ["$60^\\circ$", "$30^\\circ$", "$45^\\circ$", "$90^\\circ$"], correct: 1, step: "$180/6 = 30$." },
+    { q: "General solution of $\\tan x = 0$ is:", a: ["$n\\pi$", "$2n\\pi$", "$n\\pi/2$", "$(2n+1)\\pi/2$"], correct: 0, step: "Tan is zero at integral multiples of $\\pi$." },
+    { q: "Value of $\\sin 15^\\circ$:", a: ["$\\frac{\\sqrt{3}-1}{2\\sqrt{2}}$", "$\\frac{\\sqrt{3}+1}{2\\sqrt{2}}$", "$\\frac{1}{2}$", "1"], correct: 0, step: "Use $\\sin(45-30)$." },
+    { q: "Period of $\\sin x$ is:", a: ["$\\pi$", "$2\\pi$", "$\\pi/2$", "$4\\pi$"], correct: 1, step: "Sine repeats every $2\\pi$." },
+    { q: "$\\cos 2x = $", a: ["$2\\cos^2 x - 1$", "$1 - 2\\sin^2 x$", "$\\cos^2 x - \\sin^2 x$", "All of these"], correct: 3, step: "All are valid forms." },
+    { q: "Value of $\\tan(\\pi/4)$:", a: ["1", "0", "$\\infty$", "$\\sqrt{3}$"], correct: 0, step: "Tan 45 degrees is 1." },
+    { q: "If $\\sin x = 3/5$, then $\\cos x$ (in I quad) is:", a: ["4/5", "3/4", "5/4", "1/5"], correct: 0, step: "$3-4-5$ triangle." },
+    { q: "Which function is even?", a: ["$\\sin x$", "$\\cos x$", "$\\tan x$", "$\\cot x$"], correct: 1, step: "$\\cos(-x) = \\cos x$." },
+    { q: "Max value of $3\\sin x + 4\\cos x$ is:", a: ["7", "5", "1", "12"], correct: 1, step: "$\\sqrt{a^2+b^2} = \\sqrt{9+16} = 5$." },
+    { q: "$\\sin 75^\\circ$ equals:", a: ["$\\cos 15^\\circ$", "$\\sin 15^\\circ$", "$\\cos 75^\\circ$", "None"], correct: 0, step: "Cofunction identity: $75+15=90$." },
+    { q: "Radian measure of $270^\\circ$ is:", a: ["$3\\pi/2$", "$2\\pi/3$", "$5\\pi/4$", "$7\\pi/4$"], correct: 0, step: "$270 \\times \\pi/180 = 3\\pi/2$." }
+];
+
+let curIdx = 0; let score = 0; let userAnswers = new Array(questions.length).fill(null);
+
+function startQuiz() { document.getElementById('quiz-overlay').style.display = 'block'; document.body.style.overflow = 'hidden'; showQuestion(); }
+function closeQuiz() { document.getElementById('quiz-overlay').style.display = 'none'; document.body.style.overflow = 'auto'; }
+
+function showQuestion() {
+    const data = questions[curIdx];
+    document.getElementById('quiz-progress').innerText = `Question ${curIdx + 1} of 20`;
+    document.getElementById('quiz-question').innerHTML = data.q;
+    const optionsDiv = document.getElementById('quiz-options');
+    optionsDiv.innerHTML = '';
+    document.getElementById('prev-btn').style.visibility = (curIdx === 0) ? 'hidden' : 'visible';
+    document.getElementById('next-btn').style.display = (userAnswers[curIdx] !== null) ? 'block' : 'none';
+    const feedback = document.getElementById('quiz-feedback');
+    if (userAnswers[curIdx] !== null) { feedback.style.display = 'block'; feedback.innerHTML = `<strong>Explanation:</strong> ${data.step}`; }
+    else { feedback.style.display = 'none'; }
+    data.a.forEach((opt, i) => {
+        const btn = document.createElement('button'); btn.className = 'option-btn'; btn.innerHTML = opt;
+        if (userAnswers[curIdx] !== null) { btn.disabled = true; if (i === data.correct) btn.classList.add('correct'); if (i === userAnswers[curIdx] && i !== data.correct) btn.classList.add('wrong'); }
+        btn.onclick = () => { userAnswers[curIdx] = i; if (i === data.correct) score++; showQuestion(); };
+        optionsDiv.appendChild(btn);
+    });
+    MathJax.typeset();
+}
+
+function nextQuestion() {
+    if (curIdx < questions.length - 1) { curIdx++; showQuestion(); }
+    else { document.getElementById('quiz-body').style.display = 'none'; document.getElementById('quiz-results').style.display = 'block'; document.getElementById('final-score').innerText = `${score} / 20`; }
+}
+function prevQuestion() { if (curIdx > 0) { curIdx--; showQuestion(); } }
+</script>
+</body>
+</html>

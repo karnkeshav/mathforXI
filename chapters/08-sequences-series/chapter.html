@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sequences and Series | Chapter 08</title>
+
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[','\\]']],
+    processEscapes: true
+  },
+  chtml: {
+    scale: 1.05,
+    matchFontHeight: true
+  }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/style.css">
+
+<style>
+.slide { display:none; }
+.subjective-ans {
+  display:none;
+  margin-top:1rem;
+  padding:1.5rem;
+  background:#f8fafc;
+  border-left:5px solid var(--primary);
+  border-radius:8px;
+}
+.lab-btn { background:var(--secondary); margin-top:1rem; }
+.mcq button { margin-right:0.5rem; }
+.mcq .correct { color:green; font-weight:600; }
+.math { overflow-x:auto; }
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Sequences and Series</h1>
+<p>Patterns → A.P. → G.P. → Summation</p>
+</header>
+
+<nav>
+<a href="#ap">Arithmetic (A.P.)</a>
+<a href="#gp">Geometric (G.P.)</a>
+<a href="#means">Means</a>
+<a href="#special">Special Series</a>
+</nav>
+
+<script>
+function show(section,i){
+  const slides=document.querySelectorAll(`#${section} .slide`);
+  slides.forEach(s=>s.style.display="none");
+  slides[i].style.display="block";
+  document.getElementById(section+"-i").value=i;
+}
+function next(section){
+  let i=+document.getElementById(section+"-i").value;
+  const slides=document.querySelectorAll(`#${section} .slide`);
+  if(i<slides.length-1) show(section,i+1);
+}
+function prev(section){
+  let i=+document.getElementById(section+"-i").value;
+  if(i>0) show(section,i-1);
+}
+function tick(btn,unlockId){
+  btn.innerHTML="✔ Correct";
+  btn.classList.add("correct");
+  if(unlockId) document.getElementById(unlockId).classList.remove("locked");
+}
+function toggleLab(id){
+  const el=document.getElementById(id);
+  el.style.display = el.style.display==="block" ? "none" : "block";
+}
+</script>
+
+<section id="ap">
+<div class="concept">
+<h2>Arithmetic Progression (A.P.)</h2>
+
+<input type="hidden" id="ap-i" value="0">
+
+<div class="slide">
+<p><strong>Definition:</strong> Sequence where difference between consecutive terms is constant ($d$).</p>
+<p>$a, a+d, a+2d, \dots$</p>
+</div>
+
+<div class="slide">
+<p><strong>General Term ($a_n$):</strong></p>
+<p>$a_n = a + (n-1)d$.</p>
+</div>
+
+<div class="slide">
+<p><strong>Sum of n terms ($S_n$):</strong></p>
+<p>$S_n = \frac{n}{2}[2a + (n-1)d]$.</p>
+<p>$S_n = \frac{n}{2}[a + l]$ (where $l$ is last term).</p>
+</div>
+
+<button onclick="prev('ap')">← Back</button>
+<button onclick="next('ap')">Next →</button>
+
+<div class="math">
+<strong>Property</strong><br>
+If $a, b, c$ are in A.P., then $2b = a+c$.
+</div>
+
+<button class="lab-btn" onclick="toggleLab('ap-lab')">Where to use – Problem Lab</button>
+<div id="ap-lab" class="subjective-ans">
+<p><strong>Find 10th term of 2, 7, 12...</strong></p>
+<p>$a=2, d=5, n=10$.</p>
+<p>$a_{10} = 2 + (10-1)5 = 2 + 45 = 47$.</p>
+</div>
+
+<h3>Checkpoints</h3>
+<div class="mcq">
+<p>1. In A.P., $d$ represents:<br>
+<button onclick="tick(this,'gp')">Common Difference</button>
+<button>Common Ratio</button></p>
+
+<p>2. Sum of first n natural numbers:<br>
+<button onclick="tick(this)">n(n+1)/2</button>
+<button>n^2</button></p>
+</div>
+
+</div>
+</section>
+
+<section id="gp" class="locked">
+<div class="concept">
+<h2>Geometric Progression (G.P.)</h2>
+
+<input type="hidden" id="gp-i" value="0">
+
+<div class="slide">
+<p><strong>Definition:</strong> Sequence where ratio of consecutive terms is constant ($r$).</p>
+<p>$a, ar, ar^2, \dots$</p>
+</div>
+
+<div class="slide">
+<p><strong>General Term ($a_n$):</strong></p>
+<p>$a_n = ar^{n-1}$.</p>
+</div>
+
+<div class="slide">
+<p><strong>Sum of n terms ($S_n$):</strong></p>
+<p>If $r > 1$: $S_n = \frac{a(r^n-1)}{r-1}$.</p>
+<p>If $r < 1$: $S_n = \frac{a(1-r^n)}{1-r}$.</p>
+</div>
+
+<button onclick="prev('gp')">← Back</button>
+<button onclick="next('gp')">Next →</button>
+
+<div class="math">
+<strong>Property</strong><br>
+If $a, b, c$ are in G.P., then $b^2 = ac$.
+</div>
+
+<button class="lab-btn" onclick="toggleLab('gp-lab')">Where to use – Problem Lab</button>
+<div id="gp-lab" class="subjective-ans">
+<p><strong>Find 5th term of 3, 6, 12...</strong></p>
+<p>$a=3, r=2, n=5$.</p>
+<p>$a_5 = 3(2)^{5-1} = 3(16) = 48$.</p>
+</div>
+
+<h3>Checkpoints</h3>
+<div class="mcq">
+<p>1. Geometric mean of 4 and 9 is:<br>
+<button onclick="tick(this,'means')">6</button>
+<button>6.5</button></p>
+
+<p>2. Common ratio of 2, -4, 8 is:<br>
+<button onclick="tick(this)">-2</button>
+<button>2</button></p>
+</div>
+
+</div>
+</section>
+
+<section id="means" class="locked">
+<div class="concept">
+<h2>Relationship Between Means</h2>
+
+<input type="hidden" id="means-i" value="0">
+
+<div class="slide">
+<p><strong>Arithmetic Mean (A.M.):</strong></p>
+<p>$A = \frac{a+b}{2}$.</p>
+</div>
+
+<div class="slide">
+<p><strong>Geometric Mean (G.M.):</strong></p>
+<p>$G = \sqrt{ab}$.</p>
+</div>
+
+<div class="slide">
+<p><strong>Relation:</strong></p>
+<p>$A \ge G$.</p>
+<p>(Equality holds if $a=b$).</p>
+</div>
+
+<button onclick="prev('means')">← Back</button>
+<button onclick="next('means')">Next →</button>
+
+<div class="math">
+<strong>Proof</strong><br>
+$(\sqrt{a}-\sqrt{b})^2 \ge 0 \implies a+b-2\sqrt{ab} \ge 0 \implies \frac{a+b}{2} \ge \sqrt{ab}$.
+</div>
+
+<button class="lab-btn" onclick="toggleLab('mean-lab')">Where to use – Problem Lab</button>
+<div id="mean-lab" class="subjective-ans">
+<p><strong>Find numbers if A.M.=10, G.M.=8:</strong></p>
+<p>$a+b=20, ab=64$.</p>
+<p>Roots of $x^2 - 20x + 64 = 0$.</p>
+<p>$(x-16)(x-4)=0$. Numbers are 4 and 16.</p>
+</div>
+
+<h3>Checkpoints</h3>
+<div class="mcq">
+<p>1. For distinct positive numbers:<br>
+<button onclick="tick(this,'special')">AM > GM</button>
+<button>AM < GM</button></p>
+
+<p>2. Insert 1 A.M. between 2 and 8:<br>
+<button onclick="tick(this)">5</button>
+<button>4</button></p>
+</div>
+
+</div>
+</section>
+
+<section id="special" class="locked">
+<div class="concept">
+<h2>Special Series</h2>
+
+<input type="hidden" id="special-i" value="0">
+
+<div class="slide">
+<p><strong>Sum of First n Natural Numbers ($\sum n$):</strong></p>
+<p>$\frac{n(n+1)}{2}$.</p>
+</div>
+
+<div class="slide">
+<p><strong>Sum of Squares ($\sum n^2$):</strong></p>
+<p>$\frac{n(n+1)(2n+1)}{6}$.</p>
+</div>
+
+<div class="slide">
+<p><strong>Sum of Cubes ($\sum n^3$):</strong></p>
+<p>$[\frac{n(n+1)}{2}]^2$.</p>
+</div>
+
+<button onclick="prev('special')">← Back</button>
+<button onclick="next('special')">Next →</button>
+
+<div class="math">
+<strong>Usage</strong><br>
+Use these formulas to find sums of series like $1\cdot2 + 2\cdot3 + \dots$ by writing general term.
+</div>
+
+<button class="lab-btn" onclick="toggleLab('spec-lab')">Where to use – Problem Lab</button>
+<div id="spec-lab" class="subjective-ans">
+<p><strong>Sum of $1^2 + 2^2 + \dots + 10^2$:</strong></p>
+<p>Use formula for $\sum n^2$ with $n=10$.</p>
+<p>$\frac{10(11)(21)}{6} = \frac{2310}{6} = 385$.</p>
+</div>
+
+<h3>Checkpoints</h3>
+<div class="mcq">
+<p>1. $\sum k = $<br>
+<button onclick="tick(this,'tips')">n(n+1)/2</button>
+<button>n(n+1)</button></p>
+
+<p>2. Sum of first n odd numbers:<br>
+<button onclick="tick(this)">n^2</button>
+<button>2n</button></p>
+</div>
+
+</div>
+</section>
+
+<section id="tips" class="locked">
+<div class="concept">
+<h2>Tips & Tricks – Sequences</h2>
+
+<input type="hidden" id="tips-i" value="0">
+
+<div class="slide">
+<p><strong>Selection of Terms:</strong></p>
+<p>3 terms in A.P.: $a-d, a, a+d$.</p>
+<p>3 terms in G.P.: $a/r, a, ar$.</p>
+</div>
+
+<div class="slide">
+<p><strong>Infinite G.P.:</strong></p>
+<p>If $|r| < 1$, sum to infinity $S_\infty = \frac{a}{1-r}$.</p>
+</div>
+
+<div class="slide">
+<p><strong>Sigma Properties:</strong></p>
+<p>$\sum (a_k + b_k) = \sum a_k + \sum b_k$.</p>
+<p>$\sum c = nc$.</p>
+</div>
+
+<button onclick="prev('tips')">← Back</button>
+<button onclick="next('tips')">Next →</button>
+
+<div class="math">
+<strong>Shortcut</strong><br>
+To check A.P., see if $2b = a+c$.<br>
+To check G.P., see if $b^2 = ac$.
+</div>
+
+</div>
+</section>
+
+<script>
+show("tips",0);
+</script>
+
+<footer>
+<p>Proceed to exercises.</p>
+<a href="exercise.html"><button>Go to Exercises →</button></a>
+</footer>
+
+<script>
+["ap","gp","means","special","tips"].forEach(id=>show(id,0));
+</script>
+
+</body>
+</html>

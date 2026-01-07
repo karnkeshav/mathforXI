@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Straight Lines | Chapter 09</title>
+
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[','\\]']],
+    processEscapes: true
+  },
+  chtml: {
+    scale: 1.05,
+    matchFontHeight: true
+  }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/style.css">
+
+<style>
+.slide { display:none; }
+.subjective-ans {
+  display:none;
+  margin-top:1rem;
+  padding:1.5rem;
+  background:#f8fafc;
+  border-left:5px solid var(--primary);
+  border-radius:8px;
+}
+.lab-btn { background:var(--secondary); margin-top:1rem; }
+.mcq button { margin-right:0.5rem; }
+.mcq .correct { color:green; font-weight:600; }
+.math { overflow-x:auto; }
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Straight Lines</h1>
+<p>Slope → Equations → General Form → Distance</p>
+</header>
+
+<nav>
+<a href="#slope">Slope</a>
+<a href="#forms">Equations</a>
+<a href="#general">General Form</a>
+<a href="#distance">Distance</a>
+</nav>
+
+<script>
+function show(section,i){
+  const slides=document.querySelectorAll(`#${section} .slide`);
+  slides.forEach(s=>s.style.display="none");
+  slides[i].style.display="block";
+  document.getElementById(section+"-i").value=i;
+}
+function next(section){
+  let i=+document.getElementById(section+"-i").value;
+  const slides=document.querySelectorAll(`#${section} .slide`);
+  if(i<slides.length-1) show(section,i+1);
+}
+function prev(section){
+  let i=+document.getElementById(section+"-i").value;
+  if(i>0) show(section,i-1);
+}
+function tick(btn,unlockId){
+  btn.innerHTML="✔ Correct";
+  btn.classList.add("correct");
+  if(unlockId) document.getElementById(unlockId).classList.remove("locked");
+}
+function toggleLab(id){
+  const el=document.getElementById(id);
+  el.style.display = el.style.display==="block" ? "none" : "block";
+}
+</script>
+
+<section id="slope">
+<div class="concept">
+<h2>Slope (Gradient)</h2>
+
+<input type="hidden" id="slope-i" value="0">
+
+<div class="slide">
+<p><strong>Definition:</strong> Inclination $\theta$ with positive x-axis.</p>
+<p>Slope $m = \tan \theta$.</p>
+</div>
+
+<div class="slide">
+<p><strong>Two Points Formula:</strong></p>
+<p>$m = \frac{y_2 - y_1}{x_2 - x_1}$.</p>
+</div>
+
+<div class="slide">
+<p><strong>Parallel & Perpendicular:</strong></p>
+<p>Parallel: $m_1 = m_2$.</p>
+<p>Perpendicular: $m_1 m_2 = -1$.</p>
+</div>
+
+<button onclick="prev('slope')">← Back</button>
+<button onclick="next('slope')">Next →</button>
+
+<div class="math">
+<strong>Angle Between Lines</strong><br>
+$\tan \theta = |\frac{m_2 - m_1}{1 + m_1 m_2}|$.
+</div>
+
+<button class="lab-btn" onclick="toggleLab('slope-lab')">Where to use – Problem Lab</button>
+<div id="slope-lab" class="subjective-ans">
+<p><strong>Find slope of line through (1, 2) and (4, 5):</strong></p>
+<p>$m = \frac{5-2}{4-1} = \frac{3}{3} = 1$.</p>
+<p>Angle: $\tan \theta = 1 \implies \theta = 45^\circ$.</p>
+</div>
+
+<h3>Checkpoints</h3>
+<div class="mcq">
+<p>1. Slope of horizontal line:<br>
+<button onclick="tick(this,'forms')">0</button>
+<button>Undefined</button></p>
+
+<p>2. If lines are perpendicular, product of slopes is:<br>
+<button onclick="tick(this)">-1</button>
+<button>1</button></p>
+</div>
+
+</div>
+</section>
+
+<section id="forms" class="locked">
+<div class="concept">
+<h2>Forms of Equation</h2>
+
+<input type="hidden" id="forms-i" value="0">
+
+<div class="slide">
+<p><strong>Point-Slope Form:</strong></p>
+<p>$y - y_0 = m(x - x_0)$.</p>
+</div>
+
+<div class="slide">
+<p><strong>Two-Point Form:</strong></p>
+<p>$y - y_1 = \frac{y_2 - y_1}{x_2 - x_1}(x - x_1)$.</p>
+</div>
+
+<div class="slide">
+<p><strong>Slope-Intercept Form:</strong></p>
+<p>$y = mx + c$ (y-intercept c).</p>
+</div>
+
+<div class="slide">
+<p><strong>Intercept Form:</strong></p>
+<p>$\frac{x}{a} + \frac{y}{b} = 1$ (x-int a, y-int b).</p>
+</div>
+
+<button onclick="prev('forms')">← Back</button>
+<button onclick="next('forms')">Next →</button>
+
+<div class="math">
+<strong>Normal Form</strong><br>
+$x \cos \omega + y \sin \omega = p$<br>
+(p is perpendicular distance from origin).
+</div>
+
+<button class="lab-btn" onclick="toggleLab('form-lab')">Where to use – Problem Lab</button>
+<div id="form-lab" class="subjective-ans">
+<p><strong>Equation of line with slope 2 passing through (1, 3):</strong></p>
+<p>$y - 3 = 2(x - 1)$.</p>
+<p>$y - 3 = 2x - 2 \implies 2x - y + 1 = 0$.</p>
+</div>
+
+<h3>Checkpoints</h3>
+<div class="mcq">
+<p>1. Equation $y=mx+c$ represents:<br>
+<button onclick="tick(this,'general')">Slope-Intercept</button>
+<button>Intercept</button></p>
+
+<p>2. x-intercept of $x/3 + y/4 = 1$ is:<br>
+<button onclick="tick(this)">3</button>
+<button>4</button></p>
+</div>
+
+</div>
+</section>
+
+<section id="general" class="locked">
+<div class="concept">
+<h2>General Equation</h2>
+
+<input type="hidden" id="general-i" value="0">
+
+<div class="slide">
+<p><strong>Standard Form:</strong> $Ax + By + C = 0$.</p>
+</div>
+
+<div class="slide">
+<p><strong>Reduction to Slope-Intercept:</strong></p>
+<p>$By = -Ax - C \implies y = (-\frac{A}{B})x + (-\frac{C}{B})$.</p>
+<p>Slope $m = -A/B$.</p>
+</div>
+
+<div class="slide">
+<p><strong>Reduction to Intercept Form:</strong></p>
+<p>$Ax + By = -C \implies \frac{x}{-C/A} + \frac{y}{-C/B} = 1$.</p>
+</div>
+
+<button onclick="prev('general')">← Back</button>
+<button onclick="next('general')">Next →</button>
+
+<div class="math">
+<strong>Key Fact</strong><br>
+Any linear equation in x and y represents a straight line.
+</div>
+
+<button class="lab-btn" onclick="toggleLab('gen-lab')">Where to use – Problem Lab</button>
+<div id="gen-lab" class="subjective-ans">
+<p><strong>Find slope of $3x + 4y - 10 = 0$:</strong></p>
+<p>$A=3, B=4$. Slope $m = -A/B = -3/4$.</p>
+</div>
+
+<h3>Checkpoints</h3>
+<div class="mcq">
+<p>1. Slope of $2x - y + 5 = 0$:<br>
+<button onclick="tick(this,'distance')">2</button>
+<button>-2</button></p>
+
+<p>2. y-intercept of $3x + 2y - 6 = 0$:<br>
+<button onclick="tick(this)">3</button>
+<button>2</button></p>
+</div>
+
+</div>
+</section>
+
+<section id="distance" class="locked">
+<div class="concept">
+<h2>Distance Formulas</h2>
+
+<input type="hidden" id="distance-i" value="0">
+
+<div class="slide">
+<p><strong>Point from Line:</strong></p>
+<p>Distance of $(x_1, y_1)$ from $Ax + By + C = 0$:</p>
+<p>$d = \frac{|Ax_1 + By_1 + C|}{\sqrt{A^2 + B^2}}$.</p>
+</div>
+
+<div class="slide">
+<p><strong>Distance between Parallel Lines:</strong></p>
+<p>Lines: $Ax + By + C_1 = 0$ and $Ax + By + C_2 = 0$.</p>
+<p>$d = \frac{|C_1 - C_2|}{\sqrt{A^2 + B^2}}$.</p>
+</div>
+
+<button onclick="prev('distance')">← Back</button>
+<button onclick="next('distance')">Next →</button>
+
+<div class="math">
+<strong>Note</strong><br>
+Make sure coefficients of x and y are same for parallel distance formula.
+</div>
+
+<button class="lab-btn" onclick="toggleLab('dist-lab')">Where to use – Problem Lab</button>
+<div id="dist-lab" class="subjective-ans">
+<p><strong>Distance of (1, 1) from $3x - 4y + 1 = 0$:</strong></p>
+<p>$d = \frac{|3(1) - 4(1) + 1|}{\sqrt{3^2 + (-4)^2}} = \frac{|0|}{5} = 0$.</p>
+<p>Point lies on the line.</p>
+</div>
+
+<h3>Checkpoints</h3>
+<div class="mcq">
+<p>1. Denominator in distance formula is:<br>
+<button onclick="tick(this,'tips')">√(A² + B²)</button>
+<button>A² + B²</button></p>
+
+<p>2. Distance between $x=2$ and $x=5$:<br>
+<button onclick="tick(this)">3</button>
+<button>2</button></p>
+</div>
+
+</div>
+</section>
+
+<section id="tips" class="locked">
+<div class="concept">
+<h2>Tips & Tricks – Straight Lines</h2>
+
+<input type="hidden" id="tips-i" value="0">
+
+<div class="slide">
+<p><strong>Collinearity:</strong></p>
+<p>Three points are collinear if Slope(AB) = Slope(BC).</p>
+<p>Or Area of triangle is 0.</p>
+</div>
+
+<div class="slide">
+<p><strong>Concurrent Lines:</strong></p>
+<p>Three lines meet at a point if determinant of coefficients is 0.</p>
+</div>
+
+<div class="slide">
+<p><strong>Image of a Point:</strong></p>
+<p>Image $(h, k)$ of $(x_1, y_1)$ in line $Ax+By+C=0$:</p>
+<p>$\frac{h-x_1}{A} = \frac{k-y_1}{B} = -2\frac{Ax_1+By_1+C}{A^2+B^2}$.</p>
+</div>
+
+<button onclick="prev('tips')">← Back</button>
+<button onclick="next('tips')">Next →</button>
+
+<div class="math">
+<strong>Shortcut</strong><br>
+Area of triangle formed by line $Ax+By+C=0$ with axes is $\frac{1}{2} |\frac{C^2}{AB}|$.
+</div>
+
+</div>
+</section>
+
+<script>
+show("tips",0);
+</script>
+
+<footer>
+<p>Proceed to exercises.</p>
+<a href="exercise.html"><button>Go to Exercises →</button></a>
+</footer>
+
+<script>
+["slope","forms","general","distance","tips"].forEach(id=>show(id,0));
+</script>
+
+</body>
+</html>

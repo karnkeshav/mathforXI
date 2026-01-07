@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Relations & Functions | Chapter 02</title>
+
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[','\\]']],
+    processEscapes: true
+  },
+  chtml: {
+    scale: 1.05,
+    matchFontHeight: true
+  }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/style.css">
+
+<style>
+.slide { display:none; }
+.subjective-ans {
+  display:none;
+  margin-top:1rem;
+  padding:1.5rem;
+  background:#f8fafc;
+  border-left:5px solid var(--primary);
+  border-radius:8px;
+}
+.lab-btn { background:var(--secondary); margin-top:1rem; }
+.mcq button { margin-right:0.5rem; }
+.mcq .correct { color:green; font-weight:600; }
+.math { overflow-x:auto; }
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Relations & Functions</h1>
+<p>Pairs → Links → Rules → Graphs</p>
+</header>
+
+<nav>
+<a href="#cartesian">Cartesian Product</a>
+<a href="#relations">Relations</a>
+<a href="#functions">Functions</a>
+<a href="#algebra">Algebra</a>
+</nav>
+
+<script>
+function show(section,i){
+  const slides=document.querySelectorAll(`#${section} .slide`);
+  slides.forEach(s=>s.style.display="none");
+  slides[i].style.display="block";
+  document.getElementById(section+"-i").value=i;
+}
+function next(section){
+  let i=+document.getElementById(section+"-i").value;
+  const slides=document.querySelectorAll(`#${section} .slide`);
+  if(i<slides.length-1) show(section,i+1);
+}
+function prev(section){
+  let i=+document.getElementById(section+"-i").value;
+  if(i>0) show(section,i-1);
+}
+function tick(btn,unlockId){
+  btn.innerHTML="✔ Correct";
+  btn.classList.add("correct");
+  if(unlockId) document.getElementById(unlockId).classList.remove("locked");
+}
+function toggleLab(id){
+  const el=document.getElementById(id);
+  el.style.display = el.style.display==="block" ? "none" : "block";
+}
+</script>
+
+<section id="cartesian">
+<div class="concept">
+<h2>Cartesian Product</h2>
+
+<input type="hidden" id="cartesian-i" value="0">
+
+<div class="slide">
+<p><strong>Definition:</strong> Product of two sets $A$ and $B$ is the set of all ordered pairs $(a, b)$.</p>
+<p>$A \times B = \{(a, b) : a \in A, b \in B\}$.</p>
+</div>
+
+<div class="slide">
+<p><strong>Example:</strong></p>
+<p>$A = \{1, 2\}, B = \{3, 4\}$.</p>
+<p>$A \times B = \{(1, 3), (1, 4), (2, 3), (2, 4)\}$.</p>
+</div>
+
+<div class="slide">
+<p><strong>Properties:</strong></p>
+<p>$A \times B \neq B \times A$ (unless $A=B$).</p>
+<p>$n(A \times B) = n(A) \times n(B)$.</p>
+</div>
+
+<button onclick="prev('cartesian')">← Back</button>
+<button onclick="next('cartesian')">Next →</button>
+
+<div class="math">
+<strong>Key Concepts</strong><br>
+Ordered Pair: $(x, y) = (a, b) \iff x=a \text{ and } y=b$.<br>
+If either A or B is null, $A \times B = \phi$.
+</div>
+
+<button class="lab-btn" onclick="toggleLab('cart-lab')">Where to use – Problem Lab</button>
+<div id="cart-lab" class="subjective-ans">
+<p><strong>Solving Ordered Pair Problems:</strong></p>
+<p><strong>1. Find x and y:</strong> If $(x+1, y-2) = (3, 1)$.</p>
+<p>Equate components: $x+1=3 \implies x=2$. $y-2=1 \implies y=3$.</p>
+</div>
+
+<h3>Checkpoints</h3>
+<div class="mcq">
+<p>1. If $n(A)=2, n(B)=3$, then $n(A \times B)$ =<br>
+<button onclick="tick(this,'relations')">6</button>
+<button>5</button></p>
+
+<p>2. $(1, 2) = (2, 1)$ is<br>
+<button onclick="tick(this)">False</button>
+<button>True</button></p>
+</div>
+
+</div>
+</section>
+
+<section id="relations" class="locked">
+<div class="concept">
+<h2>Relations</h2>
+
+<input type="hidden" id="relations-i" value="0">
+
+<div class="slide">
+<p><strong>Definition:</strong> A relation $R$ from $A$ to $B$ is a subset of $A \times B$.</p>
+<p>It describes a relationship between the first and second element.</p>
+</div>
+
+<div class="slide">
+<p><strong>Visual:</strong> Arrow diagrams.</p>
+<p>Connect $a \in A$ to $b \in B$ if $(a, b) \in R$.</p>
+</div>
+
+<div class="slide">
+<p><strong>Domain & Range:</strong></p>
+<p>Domain: Set of all first elements in R.</p>
+<p>Range: Set of all second elements in R.</p>
+</div>
+
+<button onclick="prev('relations')">← Back</button>
+<button onclick="next('relations')">Next →</button>
+
+<div class="math">
+<strong>Formula</strong><br>
+Total number of relations from A to B is $2^{n(A) \times n(B)}$.
+</div>
+
+<button class="lab-btn" onclick="toggleLab('rel-lab')">Where to use – Problem Lab</button>
+<div id="rel-lab" class="subjective-ans">
+<p><strong>Example:</strong> $R = \{(x, y) : y = x+1, x \in \{1, 2, 3\}\}$.</p>
+<p>Pairs: When $x=1, y=2$. When $x=2, y=3$. When $x=3, y=4$.</p>
+<p>$R = \{(1, 2), (2, 3), (3, 4)\}$.</p>
+<p>Domain: $\{1, 2, 3\}$. Range: $\{2, 3, 4\}$.</p>
+</div>
+
+<h3>Checkpoints</h3>
+<div class="mcq">
+<p>1. Relation is a subset of Cartesian Product.<br>
+<button onclick="tick(this,'functions')">True</button>
+<button>False</button></p>
+
+<p>2. Set of second elements is called:<br>
+<button onclick="tick(this)">Range</button>
+<button>Domain</button></p>
+</div>
+
+</div>
+</section>
+
+<section id="functions" class="locked">
+<div class="concept">
+<h2>Functions</h2>
+
+<input type="hidden" id="functions-i" value="0">
+
+<div class="slide">
+<p><strong>Definition:</strong> A relation where every input has exactly one output.</p>
+<p><strong>Rule:</strong> No element in Domain is left unmapped. No element maps to two outputs.</p>
+</div>
+
+<div class="slide">
+<p><strong>Analogy:</strong> Vending Machine.</p>
+<p>Button 1 $\to$ Coke. Button 2 $\to$ Pepsi.</p>
+<p>Allowed: Btn 1 & 2 both give Coke.</p>
+<p>Not Allowed: Btn 1 gives Coke AND Pepsi.</p>
+</div>
+
+<div class="slide">
+<p><strong>Vertical Line Test:</strong></p>
+<p>If a vertical line cuts the graph at more than one point, it is NOT a function.</p>
+</div>
+
+<button onclick="prev('functions')">← Back</button>
+<button onclick="next('functions')">Next →</button>
+
+<div class="math">
+<strong>Notation</strong><br>
+$f: A \to B$<br>
+$y = f(x)$<br>
+x is pre-image, y is image.
+</div>
+
+<button class="lab-btn" onclick="toggleLab('func-lab')">Where to use – Problem Lab</button>
+<div id="func-lab" class="subjective-ans">
+<p><strong>Checking Function Status:</strong></p>
+<p><strong>1. $\{(2,1), (3,1), (4,2)\}$:</strong> Function. (Repeated y is okay).</p>
+<p><strong>2. $\{(2,1), (2,3), (4,2)\}$:</strong> Not a Function. (2 maps to 1 and 3).</p>
+</div>
+
+<h3>Checkpoints</h3>
+<div class="mcq">
+<p>1. Every function is a relation.<br>
+<button onclick="tick(this,'algebra')">True</button>
+<button>False</button></p>
+
+<p>2. One input can have multiple outputs in a function.<br>
+<button onclick="tick(this)">False</button>
+<button>True</button></p>
+</div>
+
+</div>
+</section>
+
+<section id="algebra" class="locked">
+<div class="concept">
+<h2>Algebra of Functions</h2>
+
+<input type="hidden" id="algebra-i" value="0">
+
+<div class="slide">
+<p><strong>Operations:</strong></p>
+<p>$(f+g)(x) = f(x) + g(x)$</p>
+<p>$(f-g)(x) = f(x) - g(x)$</p>
+<p>$(fg)(x) = f(x)g(x)$</p>
+<p>$(f/g)(x) = f(x)/g(x), g(x) \neq 0$</p>
+</div>
+
+<div class="slide">
+<p><strong>Standard Functions:</strong></p>
+<p>Identity: $f(x)=x$</p>
+<p>Constant: $f(x)=c$</p>
+<p>Modulus: $f(x)=|x|$</p>
+<p>Signum, Greatest Integer.</p>
+</div>
+
+<button onclick="prev('algebra')">← Back</button>
+<button onclick="next('algebra')">Next →</button>
+
+<div class="math">
+<strong>Domain Rules</strong><br>
+$\sqrt{f(x)} \implies f(x) \ge 0$<br>
+$1/f(x) \implies f(x) \ne 0$
+</div>
+
+<button class="lab-btn" onclick="toggleLab('alg-lab')">Where to use – Problem Lab</button>
+<div id="alg-lab" class="subjective-ans">
+<p><strong>Finding Domain:</strong></p>
+<p><strong>1. $f(x) = \sqrt{x-2}$:</strong> Condition $x-2 \ge 0 \implies x \ge 2$. Domain: $[2, \infty)$.</p>
+<p><strong>2. $f(x) = \frac{1}{x-3}$:</strong> Condition $x-3 \ne 0 \implies x \ne 3$. Domain: $\mathbb{R} - \{3\}$.</p>
+</div>
+
+<h3>Checkpoints</h3>
+<div class="mcq">
+<p>1. Domain of $\sqrt{x}$ is:<br>
+<button onclick="tick(this,'tips')">[0, ∞)</button>
+<button>R</button></p>
+
+<p>2. Value of $|-5|$ is:<br>
+<button onclick="tick(this)">5</button>
+<button>-5</button></p>
+</div>
+
+</div>
+</section>
+
+<section id="tips" class="locked">
+<div class="concept">
+<h2>Tips & Tricks – Relations & Functions</h2>
+
+<input type="hidden" id="tips-i" value="0">
+
+<div class="slide">
+<p><strong>Relation vs Function:</strong></p>
+<ul>
+<li>Relation: Any pairing.</li>
+<li>Function: Faithful pairing (One input $\to$ One output).</li>
+</ul>
+</div>
+
+<div class="slide">
+<p><strong>Finding Domain:</strong></p>
+<ul>
+<li>Look for square roots (inside $\ge 0$).</li>
+<li>Look for denominators (bottom $\ne 0$).</li>
+</ul>
+</div>
+
+<div class="slide">
+<p><strong>Finding Range:</strong></p>
+<ul>
+<li>Put $y = f(x)$ and solve for $x$ in terms of $y$.</li>
+<li>Apply conditions on $y$.</li>
+</ul>
+</div>
+
+<button onclick="prev('tips')">← Back</button>
+<button onclick="next('tips')">Next →</button>
+
+<div class="math">
+<strong>Modulus Trick</strong><br>
+$\sqrt{x^2} = |x|$<br>
+Domain of polynomial functions is usually $\mathbb{R}$.
+</div>
+
+</div>
+</section>
+
+<script>
+show("tips",0);
+</script>
+
+<footer>
+<p>Proceed to exercises.</p>
+<a href="exercise.html"><button>Go to Exercises →</button></a>
+</footer>
+
+<script>
+["cartesian","relations","functions","algebra","tips"].forEach(id=>show(id,0));
+</script>
+
+</body>
+</html>

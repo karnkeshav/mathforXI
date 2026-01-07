@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Probability | Chapter 14</title>
+
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[','\\]']],
+    processEscapes: true
+  },
+  chtml: {
+    scale: 1.05,
+    matchFontHeight: true
+  }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/style.css">
+
+<style>
+.slide { display:none; }
+.subjective-ans {
+  display:none;
+  margin-top:1rem;
+  padding:1.5rem;
+  background:#f8fafc;
+  border-left:5px solid var(--primary);
+  border-radius:8px;
+}
+.lab-btn { background:var(--secondary); margin-top:1rem; }
+.mcq button { margin-right:0.5rem; }
+.mcq .correct { color:green; font-weight:600; }
+.math { overflow-x:auto; }
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Probability</h1>
+<p>Experiments → Events → Axioms → Calculation</p>
+</header>
+
+<nav>
+<a href="#basics">Basics</a>
+<a href="#events">Events</a>
+<a href="#axioms">Axiomatic</a>
+<a href="#algebra">Algebra</a>
+</nav>
+
+<script>
+function show(section,i){
+  const slides=document.querySelectorAll(`#${section} .slide`);
+  slides.forEach(s=>s.style.display="none");
+  slides[i].style.display="block";
+  document.getElementById(section+"-i").value=i;
+}
+function next(section){
+  let i=+document.getElementById(section+"-i").value;
+  const slides=document.querySelectorAll(`#${section} .slide`);
+  if(i<slides.length-1) show(section,i+1);
+}
+function prev(section){
+  let i=+document.getElementById(section+"-i").value;
+  if(i>0) show(section,i-1);
+}
+function tick(btn,unlockId){
+  btn.innerHTML="✔ Correct";
+  btn.classList.add("correct");
+  if(unlockId) document.getElementById(unlockId).classList.remove("locked");
+}
+function toggleLab(id){
+  const el=document.getElementById(id);
+  el.style.display = el.style.display==="block" ? "none" : "block";
+}
+</script>
+
+<section id="basics">
+<div class="concept">
+<h2>Basics</h2>
+
+<input type="hidden" id="basics-i" value="0">
+
+<div class="slide">
+<p><strong>Random Experiment:</strong> Outcome cannot be predicted.</p>
+</div>
+
+<div class="slide">
+<p><strong>Sample Space (S):</strong> Set of all possible outcomes.</p>
+<p>Coin toss: $S = \{H, T\}$.</p>
+<p>Die roll: $S = \{1, 2, 3, 4, 5, 6\}$.</p>
+</div>
+
+<button onclick="prev('basics')">← Back</button>
+<button onclick="next('basics')">Next →</button>
+
+<div class="math">
+<strong>Sample Point</strong><br>
+Each element of S is a sample point.
+</div>
+
+<button class="lab-btn" onclick="toggleLab('basic-lab')">Where to use – Problem Lab</button>
+<div id="basic-lab" class="subjective-ans">
+<p><strong>Sample Space of 2 Coins:</strong></p>
+<p>Outcomes: HH, HT, TH, TT.</p>
+<p>$S = \{HH, HT, TH, TT\}$. $n(S) = 4$.</p>
+</div>
+
+<h3>Checkpoints</h3>
+<div class="mcq">
+<p>1. Sample space for a die roll has size:<br>
+<button onclick="tick(this,'events')">6</button>
+<button>1</button></p>
+
+<p>2. {H, T} is for:<br>
+<button onclick="tick(this)">1 Coin</button>
+<button>2 Coins</button></p>
+</div>
+
+</div>
+</section>
+
+<section id="events" class="locked">
+<div class="concept">
+<h2>Events</h2>
+
+<input type="hidden" id="events-i" value="0">
+
+<div class="slide">
+<p><strong>Event (E):</strong> Any subset of Sample Space S.</p>
+<p>E.g., Getting even number on die: $E = \{2, 4, 6\}$.</p>
+</div>
+
+<div class="slide">
+<p><strong>Types:</strong></p>
+<p>Impossible: $\phi$ (e.g. 7 on a die).</p>
+<p>Sure: $S$ (e.g. number < 7).</p>
+<p>Simple: Single element.</p>
+<p>Compound: More than one element.</p>
+</div>
+
+<button onclick="prev('events')">← Back</button>
+<button onclick="next('events')">Next →</button>
+
+<div class="math">
+<strong>Mutually Exclusive</strong><br>
+$A \cap B = \phi$. Events cannot happen together.
+</div>
+
+<button class="lab-btn" onclick="toggleLab('ev-lab')">Where to use – Problem Lab</button>
+<div id="ev-lab" class="subjective-ans">
+<p><strong>Events in Die Roll:</strong></p>
+<p>A: Odd number $\{1, 3, 5\}$.</p>
+<p>B: Multiple of 3 $\{3, 6\}$.</p>
+<p>$A \cap B = \{3\}$. Not mutually exclusive.</p>
+</div>
+
+<h3>Checkpoints</h3>
+<div class="mcq">
+<p>1. Impossible event probability:<br>
+<button onclick="tick(this,'axioms')">0</button>
+<button>1</button></p>
+
+<p>2. A subset of sample space is:<br>
+<button onclick="tick(this)">Event</button>
+<button>Outcome</button></p>
+</div>
+
+</div>
+</section>
+
+<section id="axioms" class="locked">
+<div class="concept">
+<h2>Axiomatic Approach</h2>
+
+<input type="hidden" id="axioms-i" value="0">
+
+<div class="slide">
+<p><strong>Definition:</strong> $P(E)$ is a number such that:</p>
+<p>1. $0 \le P(E) \le 1$.</p>
+<p>2. $P(S) = 1$.</p>
+<p>3. If A and B disjoint, $P(A \cup B) = P(A) + P(B)$.</p>
+</div>
+
+<div class="slide">
+<p><strong>Classical Formula (Equally Likely):</strong></p>
+<p>$P(E) = \frac{\text{Number of outcomes in E}}{\text{Total outcomes in S}} = \frac{n(E)}{n(S)}$.</p>
+</div>
+
+<button onclick="prev('axioms')">← Back</button>
+<button onclick="next('axioms')">Next →</button>
+
+<div class="math">
+<strong>Probability of 'Not A'</strong><br>
+$P(A') = 1 - P(A)$.
+</div>
+
+<button class="lab-btn" onclick="toggleLab('ax-lab')">Where to use – Problem Lab</button>
+<div id="ax-lab" class="subjective-ans">
+<p><strong>Prob. of getting sum 7 with 2 dice:</strong></p>
+<p>$n(S) = 36$.</p>
+<p>$E = \{(1,6), (2,5), (3,4), (4,3), (5,2), (6,1)\}$. $n(E)=6$.</p>
+<p>$P(E) = 6/36 = 1/6$.</p>
+</div>
+
+<h3>Checkpoints</h3>
+<div class="mcq">
+<p>1. Max value of probability:<br>
+<button onclick="tick(this,'algebra')">1</button>
+<button>100</button></p>
+
+<p>2. Sum of probabilities of all simple events:<br>
+<button onclick="tick(this)">1</button>
+<button>0</button></p>
+</div>
+
+</div>
+</section>
+
+<section id="algebra" class="locked">
+<div class="concept">
+<h2>Algebra of Probability</h2>
+
+<input type="hidden" id="algebra-i" value="0">
+
+<div class="slide">
+<p><strong>Addition Theorem:</strong></p>
+<p>$P(A \cup B) = P(A) + P(B) - P(A \cap B)$.</p>
+<p>Prob(A or B) = Prob(A) + Prob(B) - Prob(Both).</p>
+</div>
+
+<div class="slide">
+<p><strong>Mutually Exclusive Events:</strong></p>
+<p>$P(A \cap B) = 0$.</p>
+<p>$P(A \cup B) = P(A) + P(B)$.</p>
+</div>
+
+<button onclick="prev('algebra')">← Back</button>
+<button onclick="next('algebra')">Next →</button>
+
+<div class="math">
+<strong>Logic</strong><br>
+"OR" means Union ($\cup$). "AND" means Intersection ($\cap$).
+</div>
+
+<button class="lab-btn" onclick="toggleLab('alg-lab')">Where to use – Problem Lab</button>
+<div id="alg-lab" class="subjective-ans">
+<p><strong>Card Problem:</strong></p>
+<p>Prob(King or Queen) from 52 cards.</p>
+<p>Events are disjoint (Card can't be both King and Queen).</p>
+<p>$P(K) = 4/52, P(Q) = 4/52$.</p>
+<p>$P(K \cup Q) = 8/52 = 2/13$.</p>
+</div>
+
+<h3>Checkpoints</h3>
+<div class="mcq">
+<p>1. $P(A \text{ or } B)$ is:<br>
+<button onclick="tick(this,'tips')">P(A ∪ B)</button>
+<button>P(A ∩ B)</button></p>
+
+<p>2. For mutually exclusive events $P(A \cap B)$ is:<br>
+<button onclick="tick(this)">0</button>
+<button>1</button></p>
+</div>
+
+</div>
+</section>
+
+<section id="tips" class="locked">
+<div class="concept">
+<h2>Tips & Tricks – Probability</h2>
+
+<input type="hidden" id="tips-i" value="0">
+
+<div class="slide">
+<p><strong>At Least One:</strong></p>
+<p>$P(\text{At least one}) = 1 - P(\text{None})$.</p>
+</div>
+
+<div class="slide">
+<p><strong>Cards (52):</strong></p>
+<p>Suits: 13 each (Diamond, Heart, Club, Spade).</p>
+<p>Face Cards: 12 (J, Q, K in 4 suits).</p>
+</div>
+
+<div class="slide">
+<p><strong>Coins:</strong></p>
+<p>$n$ coins $\implies 2^n$ outcomes.</p>
+<p>2 coins: 4. 3 coins: 8.</p>
+</div>
+
+<button onclick="prev('tips')">← Back</button>
+<button onclick="next('tips')">Next →</button>
+
+<div class="math">
+<strong>Check</strong><br>
+Probability can never be negative or greater than 1.
+</div>
+
+</div>
+</section>
+
+<script>
+show("tips",0);
+</script>
+
+<footer>
+<p>Proceed to exercises.</p>
+<a href="exercise.html"><button>Go to Exercises →</button></a>
+</footer>
+
+<script>
+["basics","events","axioms","algebra","tips"].forEach(id=>show(id,0));
+</script>
+
+</body>
+</html>

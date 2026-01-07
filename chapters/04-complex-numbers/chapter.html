@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Complex Numbers | Chapter 04</title>
+
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[','\\]']],
+    processEscapes: true
+  },
+  chtml: {
+    scale: 1.05,
+    matchFontHeight: true
+  }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/style.css">
+
+<style>
+.slide { display:none; }
+.subjective-ans {
+  display:none;
+  margin-top:1rem;
+  padding:1.5rem;
+  background:#f8fafc;
+  border-left:5px solid var(--primary);
+  border-radius:8px;
+}
+.lab-btn { background:var(--secondary); margin-top:1rem; }
+.mcq button { margin-right:0.5rem; }
+.mcq .correct { color:green; font-weight:600; }
+.math { overflow-x:auto; }
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Complex Numbers</h1>
+<p>Imaginary i → Algebra → Argand Plane → Polar Form</p>
+</header>
+
+<nav>
+<a href="#intro">Introduction</a>
+<a href="#algebra">Algebra</a>
+<a href="#argand">Argand Plane</a>
+<a href="#quadratic">Quadratics</a>
+</nav>
+
+<script>
+function show(section,i){
+  const slides=document.querySelectorAll(`#${section} .slide`);
+  slides.forEach(s=>s.style.display="none");
+  slides[i].style.display="block";
+  document.getElementById(section+"-i").value=i;
+}
+function next(section){
+  let i=+document.getElementById(section+"-i").value;
+  const slides=document.querySelectorAll(`#${section} .slide`);
+  if(i<slides.length-1) show(section,i+1);
+}
+function prev(section){
+  let i=+document.getElementById(section+"-i").value;
+  if(i>0) show(section,i-1);
+}
+function tick(btn,unlockId){
+  btn.innerHTML="✔ Correct";
+  btn.classList.add("correct");
+  if(unlockId) document.getElementById(unlockId).classList.remove("locked");
+}
+function toggleLab(id){
+  const el=document.getElementById(id);
+  el.style.display = el.style.display==="block" ? "none" : "block";
+}
+</script>
+
+<section id="intro">
+<div class="concept">
+<h2>The Imaginary Unit</h2>
+
+<input type="hidden" id="intro-i" value="0">
+
+<div class="slide">
+<p><strong>Definition:</strong> $i = \sqrt{-1}$.</p>
+<p>A complex number $z = a + ib$, where $a$ is real part, $b$ is imaginary part.</p>
+</div>
+
+<div class="slide">
+<p><strong>Powers of $i$:</strong></p>
+<p>$i^1 = i$</p>
+<p>$i^2 = -1$</p>
+<p>$i^3 = -i$</p>
+<p>$i^4 = 1$</p>
+<p>Pattern repeats every 4 powers.</p>
+</div>
+
+<button onclick="prev('intro')">← Back</button>
+<button onclick="next('intro')">Next →</button>
+
+<div class="math">
+<strong>Key Concepts</strong><br>
+$Re(z) = a, Im(z) = b$.<br>
+Two complex numbers are equal if their real and imaginary parts are separately equal.
+</div>
+
+<button class="lab-btn" onclick="toggleLab('intro-lab')">Where to use – Problem Lab</button>
+<div id="intro-lab" class="subjective-ans">
+<p><strong>Simplifying Powers:</strong></p>
+<p><strong>1. $i^{257}$:</strong> Divide 257 by 4. Remainder is 1. So $i^{257} = i^1 = i$.</p>
+<p><strong>2. Solving $4x + i(3x-y) = 3 + i(-6)$:</strong> Equate real: $4x=3 \implies x=3/4$. Equate imaginary: $3x-y = -6$. Substitute $x$ to find $y$.</p>
+</div>
+
+<h3>Checkpoints</h3>
+<div class="mcq">
+<p>1. Value of $i^2$:<br>
+<button onclick="tick(this,'algebra')">-1</button>
+<button>1</button></p>
+
+<p>2. If $z=2+3i$, $Im(z)$ is:<br>
+<button onclick="tick(this)">3</button>
+<button>2</button></p>
+</div>
+
+</div>
+</section>
+
+<section id="algebra" class="locked">
+<div class="concept">
+<h2>Algebra of Complex Numbers</h2>
+
+<input type="hidden" id="algebra-i" value="0">
+
+<div class="slide">
+<p><strong>Addition/Subtraction:</strong></p>
+<p>Add real to real, imaginary to imaginary.</p>
+<p>$(a+ib) + (c+id) = (a+c) + i(b+d)$.</p>
+</div>
+
+<div class="slide">
+<p><strong>Multiplication:</strong></p>
+<p>Use foil method and $i^2 = -1$.</p>
+<p>$(a+ib)(c+id) = (ac-bd) + i(ad+bc)$.</p>
+</div>
+
+<div class="slide">
+<p><strong>Conjugate ($\bar{z}$):</strong></p>
+<p>If $z = a+ib$, then $\bar{z} = a-ib$.</p>
+<p>$z\bar{z} = a^2 + b^2$.</p>
+</div>
+
+<div class="slide">
+<p><strong>Modulus ($|z|$):</strong></p>
+<p>Distance from origin. $|z| = \sqrt{a^2+b^2}$.</p>
+</div>
+
+<button onclick="prev('algebra')">← Back</button>
+<button onclick="next('algebra')">Next →</button>
+
+<div class="math">
+<strong>Inverse</strong><br>
+Multiplicative Inverse $z^{-1} = \frac{\bar{z}}{|z|^2}$.
+</div>
+
+<button class="lab-btn" onclick="toggleLab('alg-lab')">Where to use – Problem Lab</button>
+<div id="alg-lab" class="subjective-ans">
+<p><strong>Division:</strong></p>
+<p><strong>1. $\frac{1}{1+i}$:</strong> Multiply top and bottom by conjugate $1-i$.</p>
+<p>Numerator: $1-i$. Denominator: $(1+i)(1-i) = 1^2 - i^2 = 1 - (-1) = 2$.</p>
+<p>Result: $\frac{1}{2} - \frac{1}{2}i$.</p>
+</div>
+
+<h3>Checkpoints</h3>
+<div class="mcq">
+<p>1. Conjugate of $3-4i$ is:<br>
+<button onclick="tick(this,'argand')">3+4i</button>
+<button>-3-4i</button></p>
+
+<p>2. Modulus of $3+4i$ is:<br>
+<button onclick="tick(this)">5</button>
+<button>25</button></p>
+</div>
+
+</div>
+</section>
+
+<section id="argand" class="locked">
+<div class="concept">
+<h2>Argand Plane & Polar Form</h2>
+
+<input type="hidden" id="argand-i" value="0">
+
+<div class="slide">
+<p><strong>Argand Plane:</strong></p>
+<p>X-axis: Real axis. Y-axis: Imaginary axis.</p>
+<p>Point $P(a,b)$ represents $z = a+ib$.</p>
+</div>
+
+<div class="slide">
+<p><strong>Polar Representation:</strong></p>
+<p>$z = r(\cos \theta + i\sin \theta)$.</p>
+<p>$r = |z|$ (Modulus).</p>
+<p>$\theta = \arg(z)$ (Argument).</p>
+</div>
+
+<div class="slide">
+<p><strong>Finding Argument:</strong></p>
+<p>Let $\tan \alpha = |b/a|$. Find quadrant.</p>
+<p>I: $\theta = \alpha$. II: $\theta = \pi - \alpha$.</p>
+<p>III: $\theta = -(\pi - \alpha)$ or $\pi + \alpha$. IV: $\theta = -\alpha$.</p>
+</div>
+
+<button onclick="prev('argand')">← Back</button>
+<button onclick="next('argand')">Next →</button>
+
+<div class="math">
+<strong>Formula</strong><br>
+$x = r\cos\theta$<br>
+$y = r\sin\theta$
+</div>
+
+<button class="lab-btn" onclick="toggleLab('polar-lab')">Where to use – Problem Lab</button>
+<div id="polar-lab" class="subjective-ans">
+<p><strong>Convert to Polar: $1 + i\sqrt{3}$</strong></p>
+<p>$r = \sqrt{1^2 + (\sqrt{3})^2} = \sqrt{4} = 2$.</p>
+<p>$\tan \alpha = |\sqrt{3}/1| = \sqrt{3} \implies \alpha = \pi/3$.</p>
+<p>Point $(1, \sqrt{3})$ is in I Quad. So $\theta = \pi/3$.</p>
+<p>Result: $2(\cos \frac{\pi}{3} + i\sin \frac{\pi}{3})$.</p>
+</div>
+
+<h3>Checkpoints</h3>
+<div class="mcq">
+<p>1. Argument of $i$ is:<br>
+<button onclick="tick(this,'quadratic')">π/2</button>
+<button>0</button></p>
+
+<p>2. Polar form uses:<br>
+<button onclick="tick(this)">r and θ</button>
+<button>x and y</button></p>
+</div>
+
+</div>
+</section>
+
+<section id="quadratic" class="locked">
+<div class="concept">
+<h2>Quadratic Equations</h2>
+
+<input type="hidden" id="quadratic-i" value="0">
+
+<div class="slide">
+<p><strong>Problem:</strong> $ax^2 + bx + c = 0$ when Discriminant $D < 0$.</p>
+</div>
+
+<div class="slide">
+<p><strong>Solution:</strong></p>
+<p>$x = \frac{-b \pm \sqrt{D}}{2a}$.</p>
+<p>If $D = -k$ (where $k>0$), then $\sqrt{D} = \sqrt{-k} = i\sqrt{k}$.</p>
+</div>
+
+<button onclick="prev('quadratic')">← Back</button>
+<button onclick="next('quadratic')">Next →</button>
+
+<div class="math">
+<strong>Formula</strong><br>
+Roots come in conjugate pairs for real coefficients.<br>
+$x = \frac{-b \pm i\sqrt{|D|}}{2a}$
+</div>
+
+<button class="lab-btn" onclick="toggleLab('quad-lab')">Where to use – Problem Lab</button>
+<div id="quad-lab" class="subjective-ans">
+<p><strong>Solve $x^2 + 2 = 0$:</strong></p>
+<p>$x^2 = -2$.</p>
+<p>$x = \pm \sqrt{-2} = \pm i\sqrt{2}$.</p>
+<hr>
+<p><strong>Solve $x^2 + x + 1 = 0$:</strong></p>
+<p>$D = 1^2 - 4(1)(1) = -3$.</p>
+<p>$x = \frac{-1 \pm \sqrt{-3}}{2} = \frac{-1 \pm i\sqrt{3}}{2}$.</p>
+</div>
+
+<h3>Checkpoints</h3>
+<div class="mcq">
+<p>1. $\sqrt{-9}$ is:<br>
+<button onclick="tick(this,'tips')">3i</button>
+<button>-3</button></p>
+
+<p>2. Roots of $x^2+1=0$ are:<br>
+<button onclick="tick(this)">±i</button>
+<button>±1</button></p>
+</div>
+
+</div>
+</section>
+
+<section id="tips" class="locked">
+<div class="concept">
+<h2>Tips & Tricks – Complex Numbers</h2>
+
+<input type="hidden" id="tips-i" value="0">
+
+<div class="slide">
+<p><strong>Modulus Properties:</strong></p>
+<p>$|z_1 z_2| = |z_1| |z_2|$</p>
+<p>$|\frac{z_1}{z_2}| = \frac{|z_1|}{|z_2|}$</p>
+</div>
+
+<div class="slide">
+<p><strong>Conjugate Properties:</strong></p>
+<p>$\overline{z_1 + z_2} = \bar{z}_1 + \bar{z}_2$</p>
+<p>$\overline{z_1 z_2} = \bar{z}_1 \bar{z}_2$</p>
+</div>
+
+<div class="slide">
+<p><strong>Argument Tricks:</strong></p>
+<p>Draw the point to find the correct quadrant.</p>
+<p>Don't blindly rely on $\tan^{-1}(y/x)$.</p>
+</div>
+
+<button onclick="prev('tips')">← Back</button>
+<button onclick="next('tips')">Next →</button>
+
+<div class="math">
+<strong>Shortcut</strong><br>
+Multiplicative inverse of $z$: Just find conjugate and divide by modulus squared.
+</div>
+
+</div>
+</section>
+
+<script>
+show("tips",0);
+</script>
+
+<footer>
+<p>Proceed to exercises.</p>
+<a href="exercise.html"><button>Go to Exercises →</button></a>
+</footer>
+
+<script>
+["intro","algebra","argand","quadratic","tips"].forEach(id=>show(id,0));
+</script>
+
+</body>
+</html>

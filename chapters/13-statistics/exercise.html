@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercises | Statistics</title>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* Subjective Section Styles */
+        .subjective-ans {
+            display: none;
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            border: 1px dashed var(--primary);
+            font-size: 1.1rem;
+        }
+        .ans-toggle {
+            display: inline-block;
+            margin-top: 10px;
+            color: var(--primary);
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        /* Quiz Overlay & Card */
+        #quiz-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(30, 41, 59, 0.98);
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 20px;
+        }
+        .quiz-card {
+            background: var(--card);
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2.5rem;
+            border-radius: 20px;
+            position: relative;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        /* Close Icon Styling */
+        .close-quiz {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            font-size: 2rem;
+            color: var(--muted);
+            cursor: pointer;
+            border: none;
+            background: none;
+            line-height: 1;
+            transition: color 0.2s;
+        }
+        .close-quiz:hover { color: var(--text); }
+
+        /* Option Button Visibility Fix */
+        .option-btn {
+            display: block;
+            width: 100%;
+            text-align: left;
+            background: #ffffff;
+            color: var(--text);
+            border: 1px solid #e2e8f0;
+            padding: 1.2rem;
+            margin: 0.8rem 0;
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.2s;
+        }
+        .option-btn:hover:not(:disabled) {
+            background: #f1f5f9;
+            border-color: var(--primary);
+        }
+
+        /* Correct/Wrong States */
+        .correct { background: #dcfce7 !important; border-color: #22c55e !important; color: #166534 !important; }
+        .wrong { background: #fee2e2 !important; border-color: #ef4444 !important; color: #991b1b !important; }
+
+        .quiz-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+            gap: 1rem;
+        }
+
+        .nav-btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Chapter 13: Practice Exercises</h1>
+</header>
+
+<nav>
+    <a href="landing.html">← Back</a>
+    <a href="chapter.html">Concepts</a>
+    <a href="exercise.html" style="border-bottom: 2px solid var(--primary);">Exercises</a>
+</nav>
+
+<section>
+    <div class="concept">
+        <div class="step">Check Point (NCERT & Exemplar)</div>
+        <h2>Subjective Questions</h2>
+
+        <div class="question-box" style="margin-bottom: 2.5rem;">
+            <p><strong>Q1.</strong> Find the mean deviation about the mean for the data: 4, 7, 8, 9, 10, 12, 13, 17.</p>
+            <span class="ans-toggle" onclick="toggleAns('ans1')">Show Answer</span>
+            <div id="ans1" class="subjective-ans">
+                <strong>Solution:</strong> Sum = 80, n = 8. Mean $\bar{x} = 10$. <br> Deviations: $|4-10|=6, 3, 2, 1, 0, 2, 3, 7$. <br> Sum of Dev = 24. $M.D. = 24/8 = 3$.
+            </div>
+        </div>
+
+        <div class="question-box" style="margin-bottom: 2.5rem;">
+            <p><strong>Q2.</strong> Find the variance of first 10 multiples of 3.</p>
+            <span class="ans-toggle" onclick="toggleAns('ans2')">Show Answer</span>
+            <div id="ans2" class="subjective-ans">
+                <strong>Solution:</strong> Data: 3, 6, ..., 30. Mean $\bar{x} = \frac{3 \times 55}{10} = 16.5$. <br> Using $\sigma^2 = \frac{\sum x^2}{n} - (\bar{x})^2$. <br> $\sum (3k)^2 = 9 \sum k^2 = 9 \times 385 = 3465$. <br> $\sigma^2 = \frac{3465}{10} - (16.5)^2 = 346.5 - 272.25 = 74.25$.
+            </div>
+        </div>
+
+        <div class="question-box" style="margin-bottom: 2.5rem;">
+            <p><strong>Q3.</strong> If the coefficient of variation is 50% and standard deviation is 20, find the mean.</p>
+            <span class="ans-toggle" onclick="toggleAns('ans3')">Show Answer</span>
+            <div id="ans3" class="subjective-ans">
+                <strong>Solution:</strong> $C.V. = \frac{\sigma}{\bar{x}} \times 100$. <br> $50 = \frac{20}{\bar{x}} \times 100$. <br> $\bar{x} = \frac{2000}{50} = 40$.
+            </div>
+        </div>
+
+        <div class="question-box" style="margin-bottom: 2.5rem;">
+            <p><strong>Q4.</strong> The variance of 20 observations is 5. If each observation is multiplied by 2, find the new variance.</p>
+            <span class="ans-toggle" onclick="toggleAns('ans4')">Show Answer</span>
+            <div id="ans4" class="subjective-ans">
+                <strong>Solution:</strong> New Variance = $k^2 \times$ Old Variance. <br> $2^2 \times 5 = 4 \times 5 = 20$.
+            </div>
+        </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 3rem;">
+        <button class="primary-btn" style="padding: 1rem 2.5rem;" onclick="startQuiz()">Take Mastery Test</button>
+    </div>
+</section>
+
+<div id="quiz-overlay">
+    <div class="quiz-card">
+        <button class="close-quiz" onclick="closeQuiz()">&times;</button>
+        <div id="quiz-body">
+            <div class="step" id="quiz-progress"></div>
+            <h3 id="quiz-question" style="margin: 1.5rem 0;"></h3>
+            <div id="quiz-options"></div>
+            <div id="quiz-feedback" class="think" style="display:none; margin-top:1.5rem;"></div>
+            <div class="quiz-nav">
+                <button id="prev-btn" class="nav-btn" style="background:var(--muted); color:white; border:none;" onclick="prevQuestion()">Previous</button>
+                <button id="next-btn" class="nav-btn" style="display:none; background:var(--primary); color:white; border:none;" onclick="nextQuestion()">Next Question</button>
+            </div>
+        </div>
+        <div id="quiz-results" style="display:none; text-align:center;">
+            <h2>Mastery Complete!</h2>
+            <div class="math" id="final-score" style="font-size: 2.5rem; color:var(--primary); margin: 1.5rem 0;"></div>
+            <button class="primary-btn" onclick="location.reload()">Restart Practice</button>
+        </div>
+    </div>
+</div>
+
+<script>
+function toggleAns(id) {
+    const el = document.getElementById(id);
+    el.style.display = (el.style.display === 'block') ? 'none' : 'block';
+}
+
+const questions = [
+    { q: "Mean deviation is minimum when measured from:", a: ["Median", "Mean", "Mode", "Zero"], correct: 0, step: "Property of Median." },
+    { q: "Variance of first n natural numbers:", a: ["$(n^2-1)/12$", "$n^2/12$", "$(n+1)/12$", "n"], correct: 0, step: "Standard result." },
+    { q: "If each observation is increased by 5, variance:", a: ["Remains same", "Increases by 5", "Increases by 25", "Doubles"], correct: 0, step: "Variance independent of origin." },
+    { q: "Square of Standard Deviation is:", a: ["Variance", "Mean", "Mode", "Range"], correct: 0, step: "Definition." },
+    { q: "Formula for C.V.:", a: ["$(\\sigma/\\bar{x}) \\times 100$", "$(\\bar{x}/\\sigma) \\times 100$", "$\\sigma/\\bar{x}$", "None"], correct: 0, step: "Standard formula." },
+    { q: "Range of 1, 2, 3, 4, 5:", a: ["4", "5", "1", "3"], correct: 0, step: "5-1=4." },
+    { q: "Sum of squares of deviations is minimum from:", a: ["Mean", "Median", "Mode", "Origin"], correct: 0, step: "Property of Mean." },
+    { q: "Variance is independent of change of:", a: ["Origin", "Scale", "Both", "None"], correct: 0, step: "Only origin." },
+    { q: "If C.V. of A is 10 and B is 20, which is more consistent?", a: ["A", "B", "Both same", "Cannot say"], correct: 0, step: "Lower CV = Consistent." },
+    { q: "Standard deviation of constant sequence 5, 5, 5:", a: ["0", "5", "25", "1"], correct: 0, step: "No spread." },
+    { q: "Mean deviation is always:", a: ["Positive", "Negative", "Zero", "Imaginary"], correct: 0, step: "Absolute differences." },
+    { q: "If $\\bar{x}=10, \\sigma=2$, then C.V. is:", a: ["20", "5", "0.2", "2"], correct: 0, step: "$(2/10)*100 = 20$." },
+    { q: "Root mean square deviation is:", a: ["Standard Deviation", "Mean Deviation", "Variance", "Range"], correct: 0, step: "Definition." },
+    { q: "Variance of $2x_i$ is:", a: ["$4 \\times Var(x)$", "$2 \\times Var(x)$", "Var(x)", "Var(x)+2"], correct: 0, step: "Scale property." },
+    { q: "Sum of $(x_i - \\bar{x})$ is:", a: ["0", "1", "n", "Infinite"], correct: 0, step: "Property of Mean." },
+    { q: "Which measure uses only extreme values?", a: ["Range", "Mean Deviation", "Variance", "Mode"], correct: 0, step: "Max - Min." },
+    { q: "Unit of variance is:", a: ["Square of unit of data", "Unit of data", "Unitless", "None"], correct: 0, step: "Squared." },
+    { q: "For comparison of two groups, we use:", a: ["C.V.", "Mean", "Variance", "Range"], correct: 0, step: "Relative measure." },
+    { q: "If all observations are same, variance is:", a: ["0", "1", "Mean", "Infinite"], correct: 0, step: "No dispersion." },
+    { q: "SD is affected by change of:", a: ["Scale", "Origin", "Neither", "Both"], correct: 0, step: "Only scale." }
+];
+
+let curIdx = 0; let score = 0; let userAnswers = new Array(questions.length).fill(null);
+
+function startQuiz() { document.getElementById('quiz-overlay').style.display = 'block'; document.body.style.overflow = 'hidden'; showQuestion(); }
+function closeQuiz() { document.getElementById('quiz-overlay').style.display = 'none'; document.body.style.overflow = 'auto'; }
+
+function showQuestion() {
+    const data = questions[curIdx];
+    document.getElementById('quiz-progress').innerText = `Question ${curIdx + 1} of 20`;
+    document.getElementById('quiz-question').innerHTML = data.q;
+    const optionsDiv = document.getElementById('quiz-options');
+    optionsDiv.innerHTML = '';
+    document.getElementById('prev-btn').style.visibility = (curIdx === 0) ? 'hidden' : 'visible';
+    document.getElementById('next-btn').style.display = (userAnswers[curIdx] !== null) ? 'block' : 'none';
+    const feedback = document.getElementById('quiz-feedback');
+    if (userAnswers[curIdx] !== null) { feedback.style.display = 'block'; feedback.innerHTML = `<strong>Explanation:</strong> ${data.step}`; }
+    else { feedback.style.display = 'none'; }
+    data.a.forEach((opt, i) => {
+        const btn = document.createElement('button'); btn.className = 'option-btn'; btn.innerHTML = opt;
+        if (userAnswers[curIdx] !== null) { btn.disabled = true; if (i === data.correct) btn.classList.add('correct'); if (i === userAnswers[curIdx] && i !== data.correct) btn.classList.add('wrong'); }
+        btn.onclick = () => { userAnswers[curIdx] = i; if (i === data.correct) score++; showQuestion(); };
+        optionsDiv.appendChild(btn);
+    });
+    MathJax.typeset();
+}
+
+function nextQuestion() {
+    if (curIdx < questions.length - 1) { curIdx++; showQuestion(); }
+    else { document.getElementById('quiz-body').style.display = 'none'; document.getElementById('quiz-results').style.display = 'block'; document.getElementById('final-score').innerText = `${score} / 20`; }
+}
+function prevQuestion() { if (curIdx > 0) { curIdx--; showQuestion(); } }
+</script>
+</body>
+</html>

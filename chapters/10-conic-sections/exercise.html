@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercises | Conic Sections</title>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* Subjective Section Styles */
+        .subjective-ans {
+            display: none;
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            border: 1px dashed var(--primary);
+            font-size: 1.1rem;
+        }
+        .ans-toggle {
+            display: inline-block;
+            margin-top: 10px;
+            color: var(--primary);
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        /* Quiz Overlay & Card */
+        #quiz-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(30, 41, 59, 0.98);
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 20px;
+        }
+        .quiz-card {
+            background: var(--card);
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2.5rem;
+            border-radius: 20px;
+            position: relative;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        /* Close Icon Styling */
+        .close-quiz {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            font-size: 2rem;
+            color: var(--muted);
+            cursor: pointer;
+            border: none;
+            background: none;
+            line-height: 1;
+            transition: color 0.2s;
+        }
+        .close-quiz:hover { color: var(--text); }
+
+        /* Option Button Visibility Fix */
+        .option-btn {
+            display: block;
+            width: 100%;
+            text-align: left;
+            background: #ffffff;
+            color: var(--text);
+            border: 1px solid #e2e8f0;
+            padding: 1.2rem;
+            margin: 0.8rem 0;
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.2s;
+        }
+        .option-btn:hover:not(:disabled) {
+            background: #f1f5f9;
+            border-color: var(--primary);
+        }
+
+        /* Correct/Wrong States */
+        .correct { background: #dcfce7 !important; border-color: #22c55e !important; color: #166534 !important; }
+        .wrong { background: #fee2e2 !important; border-color: #ef4444 !important; color: #991b1b !important; }
+
+        .quiz-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+            gap: 1rem;
+        }
+
+        .nav-btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Chapter 10: Practice Exercises</h1>
+</header>
+
+<nav>
+    <a href="landing.html">← Back</a>
+    <a href="chapter.html">Concepts</a>
+    <a href="exercise.html" style="border-bottom: 2px solid var(--primary);">Exercises</a>
+</nav>
+
+<section>
+    <div class="concept">
+        <div class="step">Check Point (NCERT & Exemplar)</div>
+        <h2>Subjective Questions</h2>
+
+        <div class="question-box" style="margin-bottom: 2.5rem;">
+            <p><strong>Q1.</strong> Find the equation of the circle with center $(-2, 3)$ and radius 4.</p>
+            <span class="ans-toggle" onclick="toggleAns('ans1')">Show Answer</span>
+            <div id="ans1" class="subjective-ans">
+                <strong>Solution:</strong> $(x - (-2))^2 + (y - 3)^2 = 4^2$. <br> $(x+2)^2 + (y-3)^2 = 16 \implies x^2+y^2+4x-6y-3=0$.
+            </div>
+        </div>
+
+        <div class="question-box" style="margin-bottom: 2.5rem;">
+            <p><strong>Q2.</strong> Find the focus and directrix of the parabola $x^2 = -16y$.</p>
+            <span class="ans-toggle" onclick="toggleAns('ans2')">Show Answer</span>
+            <div id="ans2" class="subjective-ans">
+                <strong>Solution:</strong> Form $x^2 = -4ay \implies 4a=16 \implies a=4$. <br> Downward parabola. Focus $(0, -4)$. Directrix $y=4$.
+            </div>
+        </div>
+
+        <div class="question-box" style="margin-bottom: 2.5rem;">
+            <p><strong>Q3.</strong> Find the eccentricity of the ellipse $9x^2 + 4y^2 = 36$.</p>
+            <span class="ans-toggle" onclick="toggleAns('ans3')">Show Answer</span>
+            <div id="ans3" class="subjective-ans">
+                <strong>Solution:</strong> Divide by 36: $\frac{x^2}{4} + \frac{y^2}{9} = 1$. <br> $a^2=9$ (under y), $b^2=4$. Vertical ellipse. <br> $c = \sqrt{9-4} = \sqrt{5}$. $e = c/a = \sqrt{5}/3$.
+            </div>
+        </div>
+
+        <div class="question-box" style="margin-bottom: 2.5rem;">
+            <p><strong>Q4.</strong> Find the coordinates of foci for hyperbola $y^2 - 16x^2 = 16$.</p>
+            <span class="ans-toggle" onclick="toggleAns('ans4')">Show Answer</span>
+            <div id="ans4" class="subjective-ans">
+                <strong>Solution:</strong> $\frac{y^2}{16} - \frac{x^2}{1} = 1$. Vertical hyperbola. <br> $a^2=16, b^2=1$. $c^2 = 16+1=17 \implies c=\sqrt{17}$. <br> Foci $(0, \pm \sqrt{17})$.
+            </div>
+        </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 3rem;">
+        <button class="primary-btn" style="padding: 1rem 2.5rem;" onclick="startQuiz()">Take Mastery Test</button>
+    </div>
+</section>
+
+<div id="quiz-overlay">
+    <div class="quiz-card">
+        <button class="close-quiz" onclick="closeQuiz()">&times;</button>
+        <div id="quiz-body">
+            <div class="step" id="quiz-progress"></div>
+            <h3 id="quiz-question" style="margin: 1.5rem 0;"></h3>
+            <div id="quiz-options"></div>
+            <div id="quiz-feedback" class="think" style="display:none; margin-top:1.5rem;"></div>
+            <div class="quiz-nav">
+                <button id="prev-btn" class="nav-btn" style="background:var(--muted); color:white; border:none;" onclick="prevQuestion()">Previous</button>
+                <button id="next-btn" class="nav-btn" style="display:none; background:var(--primary); color:white; border:none;" onclick="nextQuestion()">Next Question</button>
+            </div>
+        </div>
+        <div id="quiz-results" style="display:none; text-align:center;">
+            <h2>Mastery Complete!</h2>
+            <div class="math" id="final-score" style="font-size: 2.5rem; color:var(--primary); margin: 1.5rem 0;"></div>
+            <button class="primary-btn" onclick="location.reload()">Restart Practice</button>
+        </div>
+    </div>
+</div>
+
+<script>
+function toggleAns(id) {
+    const el = document.getElementById(id);
+    el.style.display = (el.style.display === 'block') ? 'none' : 'block';
+}
+
+const questions = [
+    { q: "Equation of circle with center (0,0) and radius r:", a: ["$x^2+y^2=r^2$", "$x^2-y^2=r^2$", "$x+y=r$", "None"], correct: 0, step: "Standard form." },
+    { q: "Focus of $y^2 = 4x$:", a: ["(1,0)", "(0,1)", "(4,0)", "(0,4)"], correct: 0, step: "4a=4 => a=1." },
+    { q: "Eccentricity of parabola:", a: ["1", "0", "<1", ">1"], correct: 0, step: "Definition." },
+    { q: "Length of major axis of ellipse $x^2/16 + y^2/9 = 1$:", a: ["8", "4", "3", "6"], correct: 0, step: "2a = 2(4) = 8." },
+    { q: "Locus of points with constant sum of distances from two points:", a: ["Ellipse", "Hyperbola", "Parabola", "Circle"], correct: 0, step: "Definition of Ellipse." },
+    { q: "Eccentricity of hyperbola is:", a: [">1", "<1", "1", "0"], correct: 0, step: "c/a > 1 since c > a." },
+    { q: "Directrix of $x^2 = -4ay$ is:", a: ["$y=a$", "$y=-a$", "$x=a$", "$x=-a$"], correct: 0, step: "Horizontal line above origin." },
+    { q: "Relation for ellipse:", a: ["$c^2=a^2-b^2$", "$c^2=a^2+b^2$", "$b^2=a^2+c^2$", "None"], correct: 0, step: "Pythagorean relation." },
+    { q: "Circle is a conic section with eccentricity:", a: ["0", "1", "Infinite", "0.5"], correct: 0, step: "Limiting case of ellipse." },
+    { q: "Length of Latus Rectum of $y^2=12x$:", a: ["12", "3", "6", "4"], correct: 0, step: "4a=12." },
+    { q: "Foci of hyperbola lie on:", a: ["Transverse axis", "Conjugate axis", "Directrix", "Asymptotes"], correct: 0, step: "Main axis." },
+    { q: "Equation $x^2 - y^2 = 1$ represents:", a: ["Hyperbola", "Circle", "Ellipse", "Parabola"], correct: 0, step: "Rectangular hyperbola." },
+    { q: "Distance between foci of ellipse:", a: ["2c", "2a", "2b", "c"], correct: 0, step: "From -c to c." },
+    { q: "General equation of second degree $ax^2+by^2+2hxy...$ represents circle if:", a: ["a=b, h=0", "a!=b", "h!=0", "a=0"], correct: 0, step: "Condition for circle." },
+    { q: "Vertex of parabola $(y-1)^2 = 4(x-2)$:", a: ["(2,1)", "(1,2)", "(0,0)", "(-2,-1)"], correct: 0, step: "(h,k) form." },
+    { q: "If $e=0.5$, conic is:", a: ["Ellipse", "Parabola", "Hyperbola", "Circle"], correct: 0, step: "e < 1." },
+    { q: "Number of foci in a parabola:", a: ["1", "2", "0", "Infinite"], correct: 0, step: "Single focus." },
+    { q: "Which conic has asymptotes?", a: ["Hyperbola", "Ellipse", "Parabola", "Circle"], correct: 0, step: "Lines approached at infinity." },
+    { q: "Shape of Earth's orbit:", a: ["Ellipse", "Circle", "Parabola", "Hyperbola"], correct: 0, step: "Kepler's Law." },
+    { q: "Midpoint of foci is called:", a: ["Center", "Vertex", "Focus", "Origin"], correct: 0, step: "Symmetry center." }
+];
+
+let curIdx = 0; let score = 0; let userAnswers = new Array(questions.length).fill(null);
+
+function startQuiz() { document.getElementById('quiz-overlay').style.display = 'block'; document.body.style.overflow = 'hidden'; showQuestion(); }
+function closeQuiz() { document.getElementById('quiz-overlay').style.display = 'none'; document.body.style.overflow = 'auto'; }
+
+function showQuestion() {
+    const data = questions[curIdx];
+    document.getElementById('quiz-progress').innerText = `Question ${curIdx + 1} of 20`;
+    document.getElementById('quiz-question').innerHTML = data.q;
+    const optionsDiv = document.getElementById('quiz-options');
+    optionsDiv.innerHTML = '';
+    document.getElementById('prev-btn').style.visibility = (curIdx === 0) ? 'hidden' : 'visible';
+    document.getElementById('next-btn').style.display = (userAnswers[curIdx] !== null) ? 'block' : 'none';
+    const feedback = document.getElementById('quiz-feedback');
+    if (userAnswers[curIdx] !== null) { feedback.style.display = 'block'; feedback.innerHTML = `<strong>Explanation:</strong> ${data.step}`; }
+    else { feedback.style.display = 'none'; }
+    data.a.forEach((opt, i) => {
+        const btn = document.createElement('button'); btn.className = 'option-btn'; btn.innerHTML = opt;
+        if (userAnswers[curIdx] !== null) { btn.disabled = true; if (i === data.correct) btn.classList.add('correct'); if (i === userAnswers[curIdx] && i !== data.correct) btn.classList.add('wrong'); }
+        btn.onclick = () => { userAnswers[curIdx] = i; if (i === data.correct) score++; showQuestion(); };
+        optionsDiv.appendChild(btn);
+    });
+    MathJax.typeset();
+}
+
+function nextQuestion() {
+    if (curIdx < questions.length - 1) { curIdx++; showQuestion(); }
+    else { document.getElementById('quiz-body').style.display = 'none'; document.getElementById('quiz-results').style.display = 'block'; document.getElementById('final-score').innerText = `${score} / 20`; }
+}
+function prevQuestion() { if (curIdx > 0) { curIdx--; showQuestion(); } }
+</script>
+</body>
+</html>

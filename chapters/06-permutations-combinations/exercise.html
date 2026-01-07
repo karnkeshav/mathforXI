@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercises | Permutations & Combinations</title>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* Subjective Section Styles */
+        .subjective-ans {
+            display: none;
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            border: 1px dashed var(--primary);
+            font-size: 1.1rem;
+        }
+        .ans-toggle {
+            display: inline-block;
+            margin-top: 10px;
+            color: var(--primary);
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        /* Quiz Overlay & Card */
+        #quiz-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(30, 41, 59, 0.98);
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 20px;
+        }
+        .quiz-card {
+            background: var(--card);
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2.5rem;
+            border-radius: 20px;
+            position: relative;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        /* Close Icon Styling */
+        .close-quiz {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            font-size: 2rem;
+            color: var(--muted);
+            cursor: pointer;
+            border: none;
+            background: none;
+            line-height: 1;
+            transition: color 0.2s;
+        }
+        .close-quiz:hover { color: var(--text); }
+
+        /* Option Button Visibility Fix */
+        .option-btn {
+            display: block;
+            width: 100%;
+            text-align: left;
+            background: #ffffff;
+            color: var(--text);
+            border: 1px solid #e2e8f0;
+            padding: 1.2rem;
+            margin: 0.8rem 0;
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.2s;
+        }
+        .option-btn:hover:not(:disabled) {
+            background: #f1f5f9;
+            border-color: var(--primary);
+        }
+
+        /* Correct/Wrong States */
+        .correct { background: #dcfce7 !important; border-color: #22c55e !important; color: #166534 !important; }
+        .wrong { background: #fee2e2 !important; border-color: #ef4444 !important; color: #991b1b !important; }
+
+        .quiz-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+            gap: 1rem;
+        }
+
+        .nav-btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Chapter 06: Practice Exercises</h1>
+</header>
+
+<nav>
+    <a href="landing.html">← Back</a>
+    <a href="chapter.html">Concepts</a>
+    <a href="exercise.html" style="border-bottom: 2px solid var(--primary);">Exercises</a>
+</nav>
+
+<section>
+    <div class="concept">
+        <div class="step">Check Point (NCERT & Exemplar)</div>
+        <h2>Subjective Questions</h2>
+
+        <div class="question-box" style="margin-bottom: 2.5rem;">
+            <p><strong>Q1.</strong> How many 3-digit numbers can be formed from the digits 1, 2, 3, 4 and 5 assuming that repetition of digits is allowed?</p>
+            <span class="ans-toggle" onclick="toggleAns('ans1')">Show Answer</span>
+            <div id="ans1" class="subjective-ans">
+                <strong>Solution:</strong> 3 places: _ _ _. Each place has 5 options. <br> Total ways = $5 \times 5 \times 5 = 125$.
+            </div>
+        </div>
+
+        <div class="question-box" style="margin-bottom: 2.5rem;">
+            <p><strong>Q2.</strong> Find the value of $n$ such that $^nP_5 = 42 \times ^nP_3$.</p>
+            <span class="ans-toggle" onclick="toggleAns('ans2')">Show Answer</span>
+            <div id="ans2" class="subjective-ans">
+                <strong>Solution:</strong> $\frac{n!}{(n-5)!} = 42 \frac{n!}{(n-3)!}$. <br> $(n-3)(n-4) = 42 \implies n^2-7n+12=42 \implies n^2-7n-30=0$. <br> $(n-10)(n+3)=0$. Since $n>0$, $n=10$.
+            </div>
+        </div>
+
+        <div class="question-box" style="margin-bottom: 2.5rem;">
+            <p><strong>Q3.</strong> In how many ways can a team of 3 boys and 3 girls be selected from 5 boys and 4 girls?</p>
+            <span class="ans-toggle" onclick="toggleAns('ans3')">Show Answer</span>
+            <div id="ans3" class="subjective-ans">
+                <strong>Solution:</strong> Selection of boys: $^5C_3$. Selection of girls: $^4C_3$. <br> Total ways: $^5C_3 \times ^4C_3 = 10 \times 4 = 40$.
+            </div>
+        </div>
+
+        <div class="question-box" style="margin-bottom: 2.5rem;">
+            <p><strong>Q4.</strong> How many words can be formed from the letters of the word "DAUGHTER" so that vowels always come together?</p>
+            <span class="ans-toggle" onclick="toggleAns('ans4')">Show Answer</span>
+            <div id="ans4" class="subjective-ans">
+                <strong>Solution:</strong> Vowels: A, U, E (3). Consonants: D, G, H, T, R (5). <br> Treat (AUE) as 1 unit. Total units: 5+1=6. Arrange 6 units: $6!$. Arrange vowels inside: $3!$. <br> Total: $6! \times 3! = 720 \times 6 = 4320$.
+            </div>
+        </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 3rem;">
+        <button class="primary-btn" style="padding: 1rem 2.5rem;" onclick="startQuiz()">Take Mastery Test</button>
+    </div>
+</section>
+
+<div id="quiz-overlay">
+    <div class="quiz-card">
+        <button class="close-quiz" onclick="closeQuiz()">&times;</button>
+        <div id="quiz-body">
+            <div class="step" id="quiz-progress"></div>
+            <h3 id="quiz-question" style="margin: 1.5rem 0;"></h3>
+            <div id="quiz-options"></div>
+            <div id="quiz-feedback" class="think" style="display:none; margin-top:1.5rem;"></div>
+            <div class="quiz-nav">
+                <button id="prev-btn" class="nav-btn" style="background:var(--muted); color:white; border:none;" onclick="prevQuestion()">Previous</button>
+                <button id="next-btn" class="nav-btn" style="display:none; background:var(--primary); color:white; border:none;" onclick="nextQuestion()">Next Question</button>
+            </div>
+        </div>
+        <div id="quiz-results" style="display:none; text-align:center;">
+            <h2>Mastery Complete!</h2>
+            <div class="math" id="final-score" style="font-size: 2.5rem; color:var(--primary); margin: 1.5rem 0;"></div>
+            <button class="primary-btn" onclick="location.reload()">Restart Practice</button>
+        </div>
+    </div>
+</div>
+
+<script>
+function toggleAns(id) {
+    const el = document.getElementById(id);
+    el.style.display = (el.style.display === 'block') ? 'none' : 'block';
+}
+
+const questions = [
+    { q: "$5! = $", a: ["120", "24", "720", "5"], correct: 0, step: "$5 \\times 4 \\times 3 \\times 2 \\times 1 = 120$." },
+    { q: "Value of $^nP_n$:", a: ["1", "n", "n!", "0"], correct: 2, step: "Arranging n items in n places." },
+    { q: "Value of $^nC_0$:", a: ["n", "1", "0", "n!"], correct: 1, step: "Choosing nothing is 1 way." },
+    { q: "Number of ways to arrange letters of 'CAT':", a: ["3", "6", "9", "1"], correct: 1, step: "$3! = 6$." },
+    { q: "Relation between $^nP_r$ and $^nC_r$:", a: ["$^nP_r = ^nC_r \\times r!$", "$^nC_r = ^nP_r \\times r!$", "Equal", "None"], correct: 0, step: "Standard relation." },
+    { q: "Ways to select 2 people from 4:", a: ["4", "6", "12", "8"], correct: 1, step: "$^4C_2 = 6$." },
+    { q: "Number of diagonals in a hexagon:", a: ["6", "9", "12", "15"], correct: 1, step: "$^6C_2 - 6 = 15-6=9$." },
+    { q: "$^nC_r = ^nC_p \\implies$", a: ["$r=p$", "$r+p=n$", "Both A & B", "None"], correct: 2, step: "Property of combinations." },
+    { q: "Arrangements of 'MOM':", a: ["6", "3", "2", "1"], correct: 1, step: "$3!/2! = 3$." },
+    { q: "In combinations, order:", a: ["Matters", "Doesn't matter", "Sometimes", "Depends"], correct: 1, step: "Definition." },
+    { q: "Ways to select 1 captain and 1 vice-captain from 11:", a: ["110", "55", "121", "22"], correct: 0, step: "$11 \\times 10 = 110$." },
+    { q: "Value of $0!$:", a: ["0", "1", "Undefined", "n"], correct: 1, step: "Defined as 1." },
+    { q: "Handshakes between 5 people:", a: ["20", "10", "5", "25"], correct: 1, step: "$^5C_2 = 10$." },
+    { q: "Ways to answer 5 True/False questions:", a: ["10", "25", "32", "5"], correct: 2, step: "$2^5 = 32$." },
+    { q: "If $^nC_8 = ^nC_2$, then $n=$", a: ["10", "6", "16", "8"], correct: 0, step: "$n = 8+2 = 10$." },
+    { q: "Number of 2 digit numbers from 1,2,3 (no repeat):", a: ["9", "6", "3", "27"], correct: 1, step: "$3 \\times 2 = 6$." },
+    { q: "Circular permutation of 5 distinct items:", a: ["120", "24", "60", "12"], correct: 1, step: "$(n-1)! = 4! = 24$." },
+    { q: "$^{10}C_1 + ^{10}C_0 = $", a: ["10", "11", "9", "12"], correct: 1, step: "$10+1=11$." },
+    { q: "Ways to arrange 4 books on a shelf:", a: ["4", "16", "24", "10"], correct: 2, step: "$4! = 24$." },
+    { q: "Letters of word 'ALL' arranged:", a: ["6", "3", "2", "1"], correct: 1, step: "$3!/2! = 3$." }
+];
+
+let curIdx = 0; let score = 0; let userAnswers = new Array(questions.length).fill(null);
+
+function startQuiz() { document.getElementById('quiz-overlay').style.display = 'block'; document.body.style.overflow = 'hidden'; showQuestion(); }
+function closeQuiz() { document.getElementById('quiz-overlay').style.display = 'none'; document.body.style.overflow = 'auto'; }
+
+function showQuestion() {
+    const data = questions[curIdx];
+    document.getElementById('quiz-progress').innerText = `Question ${curIdx + 1} of 20`;
+    document.getElementById('quiz-question').innerHTML = data.q;
+    const optionsDiv = document.getElementById('quiz-options');
+    optionsDiv.innerHTML = '';
+    document.getElementById('prev-btn').style.visibility = (curIdx === 0) ? 'hidden' : 'visible';
+    document.getElementById('next-btn').style.display = (userAnswers[curIdx] !== null) ? 'block' : 'none';
+    const feedback = document.getElementById('quiz-feedback');
+    if (userAnswers[curIdx] !== null) { feedback.style.display = 'block'; feedback.innerHTML = `<strong>Explanation:</strong> ${data.step}`; }
+    else { feedback.style.display = 'none'; }
+    data.a.forEach((opt, i) => {
+        const btn = document.createElement('button'); btn.className = 'option-btn'; btn.innerHTML = opt;
+        if (userAnswers[curIdx] !== null) { btn.disabled = true; if (i === data.correct) btn.classList.add('correct'); if (i === userAnswers[curIdx] && i !== data.correct) btn.classList.add('wrong'); }
+        btn.onclick = () => { userAnswers[curIdx] = i; if (i === data.correct) score++; showQuestion(); };
+        optionsDiv.appendChild(btn);
+    });
+    MathJax.typeset();
+}
+
+function nextQuestion() {
+    if (curIdx < questions.length - 1) { curIdx++; showQuestion(); }
+    else { document.getElementById('quiz-body').style.display = 'none'; document.getElementById('quiz-results').style.display = 'block'; document.getElementById('final-score').innerText = `${score} / 20`; }
+}
+function prevQuestion() { if (curIdx > 0) { curIdx--; showQuestion(); } }
+</script>
+</body>
+</html>

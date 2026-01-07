@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3D Geometry | Chapter 11</title>
+
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[','\\]']],
+    processEscapes: true
+  },
+  chtml: {
+    scale: 1.05,
+    matchFontHeight: true
+  }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/style.css">
+
+<style>
+.slide { display:none; }
+.subjective-ans {
+  display:none;
+  margin-top:1rem;
+  padding:1.5rem;
+  background:#f8fafc;
+  border-left:5px solid var(--primary);
+  border-radius:8px;
+}
+.lab-btn { background:var(--secondary); margin-top:1rem; }
+.mcq button { margin-right:0.5rem; }
+.mcq .correct { color:green; font-weight:600; }
+.math { overflow-x:auto; }
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>3D Geometry</h1>
+<p>Axes → Octants → Distance → Section Formula</p>
+</header>
+
+<nav>
+<a href="#intro">Octants</a>
+<a href="#distance">Distance</a>
+<a href="#section">Section Formula</a>
+</nav>
+
+<script>
+function show(section,i){
+  const slides=document.querySelectorAll(`#${section} .slide`);
+  slides.forEach(s=>s.style.display="none");
+  slides[i].style.display="block";
+  document.getElementById(section+"-i").value=i;
+}
+function next(section){
+  let i=+document.getElementById(section+"-i").value;
+  const slides=document.querySelectorAll(`#${section} .slide`);
+  if(i<slides.length-1) show(section,i+1);
+}
+function prev(section){
+  let i=+document.getElementById(section+"-i").value;
+  if(i>0) show(section,i-1);
+}
+function tick(btn,unlockId){
+  btn.innerHTML="✔ Correct";
+  btn.classList.add("correct");
+  if(unlockId) document.getElementById(unlockId).classList.remove("locked");
+}
+function toggleLab(id){
+  const el=document.getElementById(id);
+  el.style.display = el.style.display==="block" ? "none" : "block";
+}
+</script>
+
+<section id="intro">
+<div class="concept">
+<h2>Coordinates & Octants</h2>
+
+<input type="hidden" id="intro-i" value="0">
+
+<div class="slide">
+<p><strong>3 Axes:</strong> X, Y, Z. They are mutually perpendicular.</p>
+<p><strong>3 Planes:</strong> XY, YZ, ZX planes.</p>
+</div>
+
+<div class="slide">
+<p><strong>8 Octants:</strong></p>
+<p>Determined by signs of x, y, z.</p>
+<p>I: (+, +, +), II: (-, +, +), ..., VIII: (+, -, -).</p>
+</div>
+
+<div class="slide">
+<p><strong>Coordinates of Point P:</strong> $(x, y, z)$.</p>
+<p>On X-axis: $(x, 0, 0)$.</p>
+<p>In XY-plane: $(x, y, 0)$.</p>
+</div>
+
+<button onclick="prev('intro')">← Back</button>
+<button onclick="next('intro')">Next →</button>
+
+<div class="math">
+<strong>Sign Convention</strong><br>
+Z is positive above XY plane, negative below.
+</div>
+
+<button class="lab-btn" onclick="toggleLab('intro-lab')">Where to use – Problem Lab</button>
+<div id="intro-lab" class="subjective-ans">
+<p><strong>Identify Octant of $(-3, 1, -2)$:</strong></p>
+<p>x is negative, y is positive, z is negative.</p>
+<p>This corresponds to Octant VI.</p>
+</div>
+
+<h3>Checkpoints</h3>
+<div class="mcq">
+<p>1. Point on Y-axis is of form:<br>
+<button onclick="tick(this,'distance')">(0, y, 0)</button>
+<button>(y, 0, 0)</button></p>
+
+<p>2. Number of octants in 3D space:<br>
+<button onclick="tick(this)">8</button>
+<button>4</button></p>
+</div>
+
+</div>
+</section>
+
+<section id="distance" class="locked">
+<div class="concept">
+<h2>Distance Formula</h2>
+
+<input type="hidden" id="distance-i" value="0">
+
+<div class="slide">
+<p><strong>Formula:</strong></p>
+<p>Distance between $P(x_1, y_1, z_1)$ and $Q(x_2, y_2, z_2)$:</p>
+<p>$PQ = \sqrt{(x_2-x_1)^2 + (y_2-y_1)^2 + (z_2-z_1)^2}$.</p>
+</div>
+
+<div class="slide">
+<p><strong>Distance from Origin:</strong></p>
+<p>$OP = \sqrt{x^2 + y^2 + z^2}$.</p>
+</div>
+
+<button onclick="prev('distance')">← Back</button>
+<button onclick="next('distance')">Next →</button>
+
+<div class="math">
+<strong>Analogy</strong><br>
+It's just the 2D formula with an extra $z^2$ term added inside square root.
+</div>
+
+<button class="lab-btn" onclick="toggleLab('dist-lab')">Where to use – Problem Lab</button>
+<div id="dist-lab" class="subjective-ans">
+<p><strong>Distance between $(1, -3, 4)$ and $(-4, 1, 2)$:</strong></p>
+<p>$\Delta x = -5, \Delta y = 4, \Delta z = -2$.</p>
+<p>$d = \sqrt{(-5)^2 + 4^2 + (-2)^2} = \sqrt{25 + 16 + 4} = \sqrt{45} = 3\sqrt{5}$.</p>
+</div>
+
+<h3>Checkpoints</h3>
+<div class="mcq">
+<p>1. Distance of (1, 2, 2) from origin:<br>
+<button onclick="tick(this,'section')">3</button>
+<button>9</button></p>
+
+<p>2. Formula uses:<br>
+<button onclick="tick(this)">Square root</button>
+<button>Cube root</button></p>
+</div>
+
+</div>
+</section>
+
+<section id="section" class="locked">
+<div class="concept">
+<h2>Section Formula</h2>
+
+<input type="hidden" id="section-i" value="0">
+
+<div class="slide">
+<p><strong>Internal Division ($m:n$):</strong></p>
+<p>$x = \frac{mx_2 + nx_1}{m+n}$</p>
+<p>$y = \frac{my_2 + ny_1}{m+n}$</p>
+<p>$z = \frac{mz_2 + nz_1}{m+n}$</p>
+</div>
+
+<div class="slide">
+<p><strong>External Division ($m:n$):</strong></p>
+<p>Replace $+$ with $-$ in numerator and denominator.</p>
+</div>
+
+<div class="slide">
+<p><strong>Midpoint Formula:</strong></p>
+<p>$(\frac{x_1+x_2}{2}, \frac{y_1+y_2}{2}, \frac{z_1+z_2}{2})$.</p>
+</div>
+
+<button onclick="prev('section')">← Back</button>
+<button onclick="next('section')">Next →</button>
+
+<div class="math">
+<strong>Centroid of Triangle</strong><br>
+$G = (\frac{x_1+x_2+x_3}{3}, \frac{y_1+y_2+y_3}{3}, \frac{z_1+z_2+z_3}{3})$.
+</div>
+
+<button class="lab-btn" onclick="toggleLab('sect-lab')">Where to use – Problem Lab</button>
+<div id="sect-lab" class="subjective-ans">
+<p><strong>Midpoint of $(2, 3, 4)$ and $(4, 1, -2)$:</strong></p>
+<p>$x = (2+4)/2 = 3$.</p>
+<p>$y = (3+1)/2 = 2$.</p>
+<p>$z = (4-2)/2 = 1$.</p>
+<p>Point: $(3, 2, 1)$.</p>
+</div>
+
+<h3>Checkpoints</h3>
+<div class="mcq">
+<p>1. Ratio for midpoint is:<br>
+<button onclick="tick(this,'tips')">1:1</button>
+<button>1:2</button></p>
+
+<p>2. Centroid divides median in ratio:<br>
+<button onclick="tick(this)">2:1</button>
+<button>1:1</button></p>
+</div>
+
+</div>
+</section>
+
+<section id="tips" class="locked">
+<div class="concept">
+<h2>Tips & Tricks – 3D Geometry</h2>
+
+<input type="hidden" id="tips-i" value="0">
+
+<div class="slide">
+<p><strong>Collinearity:</strong></p>
+<p>Three points A, B, C are collinear if:</p>
+<p>$AB + BC = AC$ (using distance formula).</p>
+</div>
+
+<div class="slide">
+<p><strong>Distance from Axes:</strong></p>
+<p>Distance of $(x, y, z)$ from X-axis is $\sqrt{y^2+z^2}$.</p>
+<p>From Y-axis is $\sqrt{x^2+z^2}$.</p>
+<p>From Z-axis is $\sqrt{x^2+y^2}$.</p>
+</div>
+
+<div class="slide">
+<p><strong>Coordinates of Centroid:</strong></p>
+<p>Simply average the coordinates of vertices.</p>
+</div>
+
+<button onclick="prev('tips')">← Back</button>
+<button onclick="next('tips')">Next →</button>
+
+<div class="math">
+<strong>Shortcut</strong><br>
+To show parallelogram, show midpoints of diagonals coincide.
+</div>
+
+</div>
+</section>
+
+<script>
+show("tips",0);
+</script>
+
+<footer>
+<p>Proceed to exercises.</p>
+<a href="exercise.html"><button>Go to Exercises →</button></a>
+</footer>
+
+<script>
+["intro","distance","section","tips"].forEach(id=>show(id,0));
+</script>
+
+</body>
+</html>
