@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercises | Trigonometric Functions</title>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>
+        .subjective-ans { display: none; background: #f8fafc; padding: 1.5rem; border-radius: 8px; border: 1px dashed var(--primary); }
+        .ans-toggle { color: var(--primary); font-weight: 600; cursor: pointer; text-decoration: underline; }
+        #quiz-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(30, 41, 59, 0.98); z-index: 1000; overflow-y: auto; padding: 20px; }
+        .quiz-card { background: var(--card); max-width: 800px; margin: 2rem auto; padding: 2.5rem; border-radius: 20px; position: relative; }
+        .option-btn { display: block; width: 100%; text-align: left; background: #ffffff; border: 1px solid #e2e8f0; padding: 1.2rem; margin: 0.8rem 0; border-radius: 10px; cursor: pointer; }
+        .correct { background: #dcfce7 !important; border-color: #22c55e !important; }
+        .wrong { background: #fee2e2 !important; border-color: #ef4444 !important; }
+    </style>
+</head>
+<body>
+<header><h1>Chapter 3: Practice Exercises</h1></header>
+<section>
+    <div class="concept">
+        <h2>Subjective Questions</h2>
+        <div class="question-box">
+            [cite_start]<p><strong>Q1.</strong> Convert $40^\circ 20'$ into radian measure[cite: 2934].</p>
+            <span class="ans-toggle" onclick="toggleAns('ans1')">Show Answer</span>
+            [cite_start]<div id="ans1" class="subjective-ans"><strong>Solution:</strong> $40^\circ 20' = 40 \frac{1}{3}^\circ = \frac{121}{3} \times \frac{\pi}{180} = \frac{121\pi}{540}$ rad[cite: 2937].</div>
+        </div>
+        <div class="question-box">
+            [cite_start]<p><strong>Q2.</strong> Find the value of $\tan \frac{\pi}{8}$[cite: 3633].</p>
+            <span class="ans-toggle" onclick="toggleAns('ans2')">Show Answer</span>
+            <div id="ans2" class="subjective-ans"><strong>Solution:</strong> Let $x = \pi/8$. Use $\tan 2x = \frac{2\tan x}{1-\tan^2 x}$. [cite_start]Solving gives $\sqrt{2}-1$[cite: 3654].</div>
+        </div>
+    </div>
+    <div style="text-align: center; margin-top: 3rem;"><button onclick="startQuiz()">Take Mastery Test</button></div>
+</section>
+
+<div id="quiz-overlay">
+    <div class="quiz-card">
+        <div id="quiz-body">
+            <h3 id="quiz-question"></h3>
+            <div id="quiz-options"></div>
+            <button onclick="nextQuestion()">Next Question</button>
+        </div>
+    </div>
+</div>
+
+<script>
+function toggleAns(id) { const el = document.getElementById(id); el.style.display = (el.style.display === 'block') ? 'none' : 'block'; }
+const questions = [
+    { q: "Value of $\\sin(31\\pi/3)$ is:", a: ["1/2", "$\\sqrt{3}/2$", "0", "1"], correct: 1 },
+    { q: "$\\sin(-x)$ equals:", a: ["$\\sin x$", "$\\cos x$", "$-\\sin x$", "0"], correct: 2 },
+    { q: "General solution for $\\sin \\theta = 0$ is:", a: ["$n\\pi$", "$(2n+1)\\pi/2$", "$2n\\pi$", "0"], correct: 0 }
+];
+let curIdx = 0;
+function startQuiz() { document.getElementById('quiz-overlay').style.display = 'block'; showQuestion(); }
+function showQuestion() {
+    const data = questions[curIdx];
+    document.getElementById('quiz-question').innerHTML = data.q;
+    const optDiv = document.getElementById('quiz-options');
+    optDiv.innerHTML = '';
+    data.a.forEach((opt, i) => {
+        const btn = document.createElement('button'); btn.className = 'option-btn'; btn.innerHTML = opt;
+        btn.onclick = () => { if(i===data.correct) btn.classList.add('correct'); else btn.classList.add('wrong'); };
+        optDiv.appendChild(btn);
+    });
+    MathJax.typeset();
+}
+function nextQuestion() { if(curIdx < questions.length - 1) { curIdx++; showQuestion(); } else { alert("Quiz Finished!"); location.reload(); } }
+</script>
+</body>
+</html>
